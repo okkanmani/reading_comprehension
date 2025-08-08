@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reading Comprehension — 5th Grade Challenge</title>
+  <style>
+    :root{--bg:#f7f9fc;--card:#fff;--accent:#0b66ff;--muted:#6b7280}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; margin:0; background:var(--bg); color:#111}
+    .app{max-width:1100px;margin:28px auto;padding:18px}
+    header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    h1{font-size:20px;margin:0}
+    .card{background:var(--card);border-radius:12px;box-shadow:0 6px 18px rgba(12,20,40,0.06);padding:18px}
+    .layout{display:grid;grid-template-columns:1fr 420px;gap:18px}
+    .left{overflow:auto;height:68vh;padding:14px}
+    .right{overflow:auto;height:68vh;padding:18px}
+    .question{margin-bottom:12px;padding:10px;border-radius:8px;background:#fbfdff}
+    .qtext{font-weight:600;margin-bottom:6px}
+    .muted{color:var(--muted);font-size:20px}
+    .passage{line-height:1.6;white-space:pre-wrap}
+    .controls{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+    button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#e5e7eb;color:#111}
+    .result{margin-top:10px;padding:10px;border-radius:8px}
+    .correct{background:#ecfdf5;color:#064e3b}
+    .incorrect{background:#fff1f2;color:#7f1d1d}
+    .small{font-size:13px}
+    label.option{display:block;padding:6px;margin:4px 0;border-radius:6px;cursor:pointer}
+    input[type=radio]{margin-right:8px}
+    footer{margin-top:14px;font-size:13px;color:var(--muted)}
+    @media (max-width:900px){.layout{grid-template-columns:1fr;}.left{height:40vh}.right{height:40vh}}
+  </style>
+</head>
+<body>
+  <div class="app card">
+    <header>
+      <h1>Reading Comprehension — 5th Grade (Challenging)</h1>
+      <div class="muted">4 passages • 5 questions each • Vocabulary question in each set</div>
+    </header>
+
+    <div id="main" class="layout">
+      <div class="left card">
+        <div class="muted" id="passageHeader">Passage 1 of 4</div>
+        <div class="passage" id="passageText"></div>
+        <div class="controls">
+          <button id="prevBtn" class="secondary">Previous</button>
+          <button id="submitBtn">Submit</button>
+          <button id="nextBtn">Next</button>
+        </div>
+        <div id="feedbackArea"></div>        
+      </div>
+      <div class="right card"  id="questionsContainer">
+        <!-- Questions rendered here -->        
+      </div>
+    </div>
+
+    <footer class="muted">Tip: Answer with care — these passages are intentionally challenging for advanced 5th graders.</footer>
+  </div>
+
+<script>
+const passages = [
+  {
+    title: 'World Wars — A Big Turning Point',
+    text: `The first half of the twentieth century was a time of extraordinary upheaval. Two great wars reshaped nations, borders, and how people thought about power. World War I began in 1914 after a chain of events that included rival alliances, rapid arms build-up, and a single assassination in Sarajevo. The war dragged on for four long years. Soldiers lived in trenches for months, facing mud, cold, and the fear of attack. New technology — like tanks, airplanes, and chemical weapons — changed how battles were fought. When the war ended in 1918, maps of Europe were redrawn. Empires that had stood for centuries were broken apart.
+
+But the peace that followed was fragile. Harsh terms in treaties and economic troubles left many people angry and desperate. In the 1930s, these conditions helped a new kind of leader rise to power who promised to restore his country's pride and strength. This eventually led to World War II, which started in 1939 and became even larger and more devastating than the first. The war was fought on many continents, involved more countries, and caused terrible loss. It also showed how modern industrial machines could be used for war on a massive scale. The Holocaust — the planned, systematic murder of millions — was one of the greatest tragedies of the war.
+
+After 1945, the world tried to make a safer order. International organizations were created to help countries talk instead of fight. But the two most powerful nations then, the United States and the Soviet Union, disagreed on how the world should be governed. Their rivalry began a long period called the Cold War, when each side built weapons and tried to spread its ideas without fighting directly in most cases. Thinking about these wars helps us understand how choices made by leaders and ordinary people can reshape history — sometimes for better, and sometimes for worse.`,
+    questions: [
+      {q:'What was one cause that led to World War I according to the passage?', choices:['A single assassination','The invention of tanks','The Cold War','The Holocaust'], a:0},
+      {q:'Which new technologies were mentioned as changing how battles were fought in World War I?', choices:['Television and radio','Tanks, airplanes, and chemical weapons','Computers and satellites','Nuclear bombs and rockets'], a:1},
+      {q:'Why was the peace after World War I described as fragile?', choices:['Because leaders were very friendly','Because harsh treaty terms and economic troubles caused anger','Because there were no international organizations','Because the war had not really ended'], a:1},
+      {q:'What does the passage imply happened after World War II?', choices:['The world became peaceful forever','A Cold War rivalry started between two powerful nations','Technology was no longer used in war','All empires returned to power'], a:1},
+      {q:'Vocabulary — In the passage, what does the word "upheaval" most nearly mean?', choices:['A type of weapon','A sudden or violent change','A peaceful agreement','A small celebration'], a:1}
+    ]
+  },
+  {
+    title: 'A Highland Tribe — The Kamba People',
+    text: `In the rocky highlands where plateaus rise and rains come in short seasons, a people called the Kamba have long lived with careful balance. (Note: these Kamba are a fictionalized, classroom-friendly composite inspired by real highland groups; the goal is cultural understanding rather than strict anthropology.) Their lives depend on knowing the land: which grasses hold moisture, which streams run full after a storm, and where the best grazing can be found. Families often live in compound clusters, and elders teach younger members stories that record seasons, journeys, and the names of plants.
+
+The Kamba's economy mixes farming and herding. They grow crops like millet and sorghum, which can survive drier years, and keep goats and cattle. Herds are not only sources of milk and meat; animals are also a form of savings. During good rainy years, families may trade or marry to redistribute animals so that no one goes without. Social life is guided by rituals — short public ceremonies that mark planting, harvest, or the coming of a new child. Music accompanies many occasions; drums and flutes provide steady rhythms while singers call out lines that others repeat.
+
+Education happens both by example and by story. Rather than formal classrooms, children learn by watching adults tend fields, mend tools, and recall past droughts so they will know how to survive difficult seasons. Decision-making can be communal: village councils discuss land access and resolve disputes. Respect for elders is strong because they hold knowledge that took years to build. At the same time, the Kamba are not isolated: they may travel to markets in towns to sell grain or to buy salt, cloth, or tools. Learning how to adapt — to move animals at the right time, to store grain safely, and to read weather patterns — is what keeps the community thriving through change.`,
+    questions: [
+      {q:'Which two activities are central to the Kamba economy?', choices:['Fishing and shipbuilding','Farming and herding','Mining and factory work','Hunting and trading sea shells'], a:1},
+      {q:'Why are animals considered a form of savings for the Kamba?', choices:['Because they can be hidden easily','Because animals provide milk and can be traded or redistributed','Because animals do not need food','Because animals can be used as coins'], a:1},
+      {q:'How do children in the Kamba community mainly learn important skills?', choices:['By reading textbooks','By watching adults and listening to stories','By studying in large schools','By watching television shows'], a:1},
+      {q:'What role do village councils play according to the passage?', choices:['They build houses','They decide crop prices in other countries','They discuss land access and resolve disputes','They teach music to children'], a:2},
+      {q:'Vocabulary — The word "communal" in the passage most nearly means:', choices:['Shared by the community','Very secret','Related to cooking','Expensive to buy'], a:0}
+    ]
+  },
+  {
+    title: 'When Mutants Took Over — A Short Fiction',
+    text: `People used the word "mutant" at first like it was a rumor — a cartoonish label for anyone who looked noticeably different. Then small things started to happen that made the whole world stop and listen. Crops in certain fields grew in twisted shapes. City lights dimmed when certain electronic devices failed nearby. Animals seemed to understand each other in new ways. At first, scientists argued and governments tried to deny that anything extraordinary was occurring.
+
+But the changes spread. Mutations were not always dangerous; sometimes they gave someone sharper night vision or the ability to coax plant roots to grow faster. Other times mutations made ordinary actions unpredictable. The story follows Lila, a young engineer who woke one morning to find the radio in her apartment speaking her name. Lila discovered that a small group of mutants had organized a peaceful council and wanted to create spaces where people with different gifts could live safely. That sounded hopeful — until competing groups formed that had more aggressive plans.
+
+What followed was not a single battle but a long rearrangement of power. Cities developed zones where abilities were regulated. Work changed: some factories needed hands that were lighter, some farms needed people who could encourage crops to grow in poor soil. Laws had to be written about fairness: who could use a gift in public? How do you protect people who are vulnerable? The new world required new kinds of empathy. Some people remembered fear and built walls; others learned how to share resources and make new kinds of art. In the end, the book suggests, when the world changes, the hardest part is not the strange powers themselves but learning how to live together when old rules no longer fit.`,
+    questions: [
+      {q:'At the start of the passage, how did people treat the idea of mutants?', choices:['They believed immediately','They treated it like a rumor or label','They celebrated mutants openly','They had always known about mutants'], a:1},
+      {q:'Which character is the passage mainly following?', choices:['A scientist named Marco','A farmer named Toma','A young engineer named Lila','An elder named Kamba'], a:2},
+      {q:'What is one positive effect of some mutations in the story?', choices:['They always caused destruction','They gave sharper night vision or helped plant growth','They made people forget how to speak','They caused permanent darkness'], a:1},
+      {q:'What new challenges did societies face after mutations spread?', choices:['Deciding how to regulate abilities and protect the vulnerable','Choosing new school colors','Learning to fly airplanes','Making everyone live in the countryside'], a:0},
+      {q:'Vocabulary — In the passage, the word "empathy" most nearly means:', choices:['The ability to build machines','The skill of drawing maps','The ability to understand and share others\' feelings','A type of legal ruling'], a:2}
+    ]
+  },
+  {
+    title: 'Exoplanets — New Worlds Around Other Stars',
+    text: `For centuries people believed that Earth was the only place with life. Over the last few decades, astronomers have found thousands of planets orbiting other stars — planets we call exoplanets. Some are huge gas giants, far larger than Jupiter; others are small and rocky like Earth. To find these worlds, scientists use clever methods. One common technique notices when a planet passes in front of its star and makes the star appear a tiny bit dimmer. Another watches how a star wobbles slightly because of the pull from an orbiting planet.
+
+Exoplanets are exciting because they show the variety of planetary systems. Some stars have planets packed very close in, where temperatures would be scorching. Others have wide gaps and cold worlds far from their star. Scientists look especially for planets in a star's "habitable zone" — the region where liquid water might exist. Liquid water is important because on Earth it is essential for life as we know it.
+
+But being in the habitable zone does not guarantee life. Other things matter: the planet's atmosphere, its magnetic field, and the stability of its star. Some stars are very active and blast strong radiation that could strip away atmospheres. Still, discoveries continue. Telescopes on Earth and in space study exoplanet atmospheres by examining starlight that has passed through them. Scientists search for molecules like water vapor, methane, or oxygen that might hint at biological activity. Every new world found teaches us that the universe makes planets in many surprising ways, and that our solar system is only one small example of what is possible.`,
+    questions: [
+      {q:'What is an exoplanet?', choices:['A planet that orbits the Sun','A planet that orbits another star','A very large comet','A kind of galaxy'], a:1},
+      {q:'Which two methods are mentioned for detecting exoplanets?', choices:['Microscope viewing and plate tectonics','Detecting dimming when a planet passes and observing a star\'s wobble','Measuring plant growth and listening to radio shows','Counting meteorites and measuring tides'], a:1},
+      {q:'What is the "habitable zone"?', choices:['A place where planets are made','The region where liquid water might exist','A safe zone around a telescope','A region inside Earths core'], a:1},
+      {q:'Why doesn\'t being in the habitable zone guarantee life?', choices:['Because the planet might have no atmosphere or a violent star nearby','Because scientists do not like the planet','Because the planet will always be too cold','Because stars in habitable zones are rare'], a:0},
+      {q:'Vocabulary — The word "atmosphere" in the passage most nearly means:', choices:['The weather and air surrounding a planet','A large rock on the surface','A kind of telescope','A type of star'], a:0}
+    ]
+  }
+];
+
+let page = 0;
+
+const qsContainer = document.getElementById('questionsContainer');
+const passageTextEl = document.getElementById('passageText');
+const passageHeader = document.getElementById('passageHeader');
+const feedbackArea = document.getElementById('feedbackArea');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+
+function renderPage(idx){
+  const p = passages[idx];
+  passageHeader.textContent = `Passage ${idx+1} of ${passages.length} — ${p.title}`;
+  passageTextEl.textContent = p.text;
+  feedbackArea.innerHTML = '';
+  qsContainer.innerHTML = '';
+  p.questions.forEach((q,i)=>{
+    const div = document.createElement('div');
+    div.className = 'question';
+    const qtext = document.createElement('div'); qtext.className='qtext'; qtext.textContent = `Q${i+1}. ${q.q}`;
+    div.appendChild(qtext);
+    q.choices.forEach((c,j)=>{
+      const id = `p${idx}q${i}c${j}`;
+      const label = document.createElement('label'); label.className='option';
+      label.htmlFor = id;
+      label.innerHTML = `<input type="radio" name="q${i}" id="${id}" value="${j}"> ${c}`;
+      div.appendChild(label);
+    });
+    qsContainer.appendChild(div);
+  });
+  // buttons state
+  prevBtn.disabled = (idx===0);
+  nextBtn.disabled = (idx===passages.length-1);
+}
+
+function gradePage(idx){
+  const p = passages[idx];
+  let score = 0; let total = p.questions.length;
+  const details = [];
+  p.questions.forEach((q,i)=>{
+    const radios = document.getElementsByName(`q${i}`);
+    let chosen = null;
+    for(const r of radios) if(r.checked) chosen = Number(r.value);
+    const correct = q.a;
+    const correctText = q.choices[correct];
+    if(chosen === null){
+      details.push({i, status:'unanswered', correct:correctText});
+    } else if(chosen === correct){
+      score++;
+      details.push({i, status:'correct'});
+    } else {
+      details.push({i, status:'wrong', chosenText: q.choices[chosen], correct:correctText});
+    }
+  });
+  return {score,total,details};
+}
+
+submitBtn.addEventListener('click', ()=>{
+  const res = gradePage(page);
+  feedbackArea.innerHTML = '';
+  const box = document.createElement('div');
+  box.className = 'result';
+  box.innerHTML = `<strong>Score: ${res.score} / ${res.total}</strong>`;
+  res.details.forEach(d=>{
+    const p = document.createElement('div');
+    p.className = 'small';
+    if(d.status==='correct'){
+      p.textContent = `Q${d.i+1}: Correct`;
+      p.classList.add('correct');
+    } else if(d.status==='wrong'){
+      p.textContent = `Q${d.i+1}: Incorrect — your answer: "${d.chosenText}"; correct: "${d.correct}"`;
+      p.classList.add('incorrect');
+    } else {
+      p.textContent = `Q${d.i+1}: Unanswered — correct: "${d.correct}"`;
+      p.classList.add('incorrect');
+    }
+    feedbackArea.appendChild(p);
+  });
+  feedbackArea.prepend(box);
+});
+
+prevBtn.addEventListener('click', ()=>{ if(page>0){ page--; renderPage(page);} });
+nextBtn.addEventListener('click', ()=>{ if(page<passages.length-1){ page++; renderPage(page);} });
+
+// initialize
+renderPage(page);
+
+</script>
+</body>
+</html>
