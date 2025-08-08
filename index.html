@@ -1,211 +1,363 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Reading Comprehension — 5th Grade Challenge</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RC Quiz — 5 Passages (Challenging 5th Grade)</title>
   <style>
-    :root{--bg:#f7f9fc;--card:#fff;--accent:#0b66ff;--muted:#6b7280}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; margin:0; background:var(--bg); color:#111}
-    .app{max-width:1100px;margin:28px auto;padding:18px}
-    header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-    h1{font-size:20px;margin:0}
-    .card{background:var(--card);border-radius:12px;box-shadow:0 6px 18px rgba(12,20,40,0.06);padding:18px}
-    .layout{display:grid;grid-template-columns:1fr 420px;gap:18px}
-    .left{overflow:auto;height:68vh;padding:14px}
-    .right{overflow:auto;height:68vh;padding:18px}
-    .question{margin-bottom:12px;padding:10px;border-radius:8px;background:#fbfdff}
-    .qtext{font-weight:600;margin-bottom:6px}
-    .muted{color:var(--muted);font-size:20px}
-    .passage{line-height:1.6;white-space:pre-wrap}
-    .controls{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
-    button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
-    button.secondary{background:#e5e7eb;color:#111}
-    .result{margin-top:10px;padding:10px;border-radius:8px}
-    .correct{background:#ecfdf5;color:#064e3b}
-    .incorrect{background:#fff1f2;color:#7f1d1d}
-    .small{font-size:13px}
-    label.option{display:block;padding:6px;margin:4px 0;border-radius:6px;cursor:pointer}
+    :root{
+      --bg:#f4f7fb; --card:#ffffff; --accent:#0b66ff; --muted:#6b7280;
+      --good:#ecfdf5; --good-text:#064e3b; --bad:#fff1f2; --bad-text:#7f1d1d;
+      --max-width:1200px;
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#0b1220;background:var(--bg)}
+    .wrap{max-width:var(--max-width);margin:24px auto;padding:18px}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 8px 24px rgba(12,20,40,0.06)}
+    header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+    header h1{margin:0;font-size:20px}
+    header .muted{color:var(--muted);font-size:13px}
+    /* layout: passage left, questions right */
+    .layout{display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start}
+    .passagePanel{padding:18px;overflow:auto;height:68vh}
+    .questionsPanel{padding:14px;overflow:auto;height:68vh}
+    .passTitle{font-size:22px;font-weight:700;margin-bottom:10px}
+    .passageText{line-height:1.7;white-space:pre-wrap}
+    .question{padding:10px;margin-bottom:12px;border-radius:8px;background:#fbfdff;border:1px solid #eef2ff}
+    .qtext{font-weight:600;margin-bottom:8px}
+    .muted{color:var(--muted);font-size:13px}
+    label.option{display:block;padding:8px;margin:6px 0;border-radius:8px;cursor:pointer;border:1px solid transparent}
+    label.option:hover{background:#f7fbff}
     input[type=radio]{margin-right:8px}
-    footer{margin-top:14px;font-size:13px;color:var(--muted)}
-    @media (max-width:900px){.layout{grid-template-columns:1fr;}.left{height:40vh}.right{height:40vh}}
+    .controls{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+    button{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+    button.secondary{background:#eef2ff;color:var(--accent);font-weight:600}
+    button:disabled{opacity:0.5;cursor:default}
+    .resultBox{margin-top:12px;padding:12px;border-radius:8px}
+    .correct{background:var(--good);color:var(--good-text);padding:8px;border-radius:6px}
+    .incorrect{background:var(--bad);color:var(--bad-text);padding:8px;border-radius:6px}
+    .review-item{padding:8px;border-radius:8px;margin-bottom:8px;border:1px solid #eef2ff}
+    .small{font-size:13px;color:var(--muted)}
+    footer{margin-top:14px;color:var(--muted);font-size:13px}
+    @media (max-width:980px){
+      .layout{grid-template-columns:1fr;}.passagePanel{height:45vh}.questionsPanel{height:45vh}
+    }
   </style>
 </head>
 <body>
-  <div class="app card">
-    <header>
-      <h1>Reading Comprehension — 5th Grade (Challenging)</h1>
-      <div class="muted">4 passages • 5 questions each • Vocabulary question in each set</div>
-    </header>
-
-    <div id="main" class="layout">
-      <div class="left card">
-        <div class="muted" id="passageHeader">Passage 1 of 4</div>
-        <div class="passage" id="passageText"></div>
-        <div class="controls">
-          <button id="prevBtn" class="secondary">Previous</button>
-          <button id="submitBtn">Submit</button>
-          <button id="nextBtn">Next</button>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <div>
+          <h1>Reading Comprehension — 5 Passages (Challenging)</h1>
+          <div class="muted">5 passages • 6 questions each • 2 vocabulary questions per passage</div>
         </div>
-        <div id="feedbackArea"></div>        
-      </div>
-      <div class="right card"  id="questionsContainer">
-        <!-- Questions rendered here -->        
-      </div>
-    </div>
+        <div class="muted">Tip: Use <strong>Previous</strong> and <strong>Next</strong>. Submit only appears on the last page.</div>
+      </header>
 
-    <footer class="muted">Tip: Answer with care — these passages are intentionally challenging for advanced 5th graders.</footer>
+      <div id="main" class="layout">
+        <div class="passagePanel card">
+          <div id="passageHeader" class="passTitle">Passage 1 of 5 — Ancient Egyptian Daily Life</div>
+          <div id="passageText" class="passageText"></div>
+
+          <div class="controls" style="justify-content:flex-start;margin-top:16px">
+            <button id="prevBtn" class="secondary">Previous</button>
+          </div>
+        </div>
+
+        <div class="questionsPanel card">
+          <div class="muted" id="qHeader">Questions</div>
+          <div id="questionsContainer"></div>
+
+          <div class="controls" style="margin-top:12px">
+            <button id="nextBtn" class="secondary">Next</button>
+            <button id="submitBtn" style="display:none">Submit</button>
+          </div>
+
+          <div id="feedback" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <footer class="muted">This quiz runs entirely in your browser. No data leaves your device.</footer>
+    </div>
   </div>
 
 <script>
+/* ====== Passages and Questions ======
+ Each passage: title, text, questions: {q, choices:[], a:correctIndex}
+ Two vocabulary questions included per passage.
+*/
 const passages = [
   {
-    title: 'World Wars — A Big Turning Point',
-    text: `The first half of the twentieth century was a time of extraordinary upheaval. Two great wars reshaped nations, borders, and how people thought about power. World War I began in 1914 after a chain of events that included rival alliances, rapid arms build-up, and a single assassination in Sarajevo. The war dragged on for four long years. Soldiers lived in trenches for months, facing mud, cold, and the fear of attack. New technology — like tanks, airplanes, and chemical weapons — changed how battles were fought. When the war ended in 1918, maps of Europe were redrawn. Empires that had stood for centuries were broken apart.
+    title: "Ancient Egyptian Daily Life",
+    text: `Life in ancient Egypt revolved around the Nile River, which made farming possible in a mostly dry land. Each year the river would flood, spreading a dark, nutrient-rich silt across the fields. Farmers planned their work by the river's rhythms: when waters rose they prepared canals and dikes, and when waters retreated they sowed seeds. Emmer wheat and barley were staple crops; flax was grown for linen cloth; vegetables and dates complemented meals. Fishing and hunting in marshes provided additional food, and families used papyrus to make baskets, mats, and paper-like sheets for writing.
 
-But the peace that followed was fragile. Harsh terms in treaties and economic troubles left many people angry and desperate. In the 1930s, these conditions helped a new kind of leader rise to power who promised to restore his country's pride and strength. This eventually led to World War II, which started in 1939 and became even larger and more devastating than the first. The war was fought on many continents, involved more countries, and caused terrible loss. It also showed how modern industrial machines could be used for war on a massive scale. The Holocaust — the planned, systematic murder of millions — was one of the greatest tragedies of the war.
+Houses were typically made from sun-dried mud bricks. These small, boxy homes often had flat roofs where families slept during hot nights. Walls were sometimes whitewashed to reflect the sun. Inside, rooms were simply furnished with reed mats, stools, and clay storage jars. Wealthier households had larger courtyards, more rooms, and furniture carved from wood. Markets bustled at river towns where merchants exchanged pottery, grain, cloth, jewelry, and beads. Trade spread goods and ideas; Egypt's location connected it to African, Mediterranean, and Near Eastern networks.
 
-After 1945, the world tried to make a safer order. International organizations were created to help countries talk instead of fight. But the two most powerful nations then, the United States and the Soviet Union, disagreed on how the world should be governed. Their rivalry began a long period called the Cold War, when each side built weapons and tried to spread its ideas without fighting directly in most cases. Thinking about these wars helps us understand how choices made by leaders and ordinary people can reshape history — sometimes for better, and sometimes for worse.`,
+Food for many Egyptians was humble but sufficient: the daily diet often centered on bread made from emmer, and a type of beer that was thicker and nutritional. Meat was a luxury for most, reserved for festivals or the well-to-do. On special days people feasted, offering portions of food to household gods and sharing with friends and family. Children played with toys like dolls and spinning tops; learning happened at home by watching parents, though some boys from richer families learned to be scribes. Scribes studied in schools attached to temples and government offices; writing in hieroglyphs or later in hieratic was difficult but opened opportunities in administration and record-keeping.
+
+Religion and ritual shaped daily life. Egyptians worshipped many gods—Ra the sun god, Osiris the ruler of the afterlife, Isis the mother and healer among them. Temples were centers of belief and economy; priests conducted rituals, taught, and managed temple lands. Belief in an afterlife guided funerary practices: people prepared grave goods, food offerings, and carefully wrapped the dead so they could continue in the Field of Reeds, an idealized continuation of life. This hope for a good afterlife encouraged acts of piety, record-keeping about family, and artistic production.
+
+Crafts were important: potters, carpenters, weavers, jewelers, and stone workers all specialized. Artisans produced beautiful amulets and coffins, decorated with scenes meant to protect the owner in death. Despite hardships like floods that failed to come or periodic political unrest, communities adapted — using knowledge of the land, shared customs, and the Nile's gifts to thrive for millennia.`,
     questions: [
-      {q:'What was one cause that led to World War I according to the passage?', choices:['A single assassination','The invention of tanks','The Cold War','The Holocaust'], a:0},
-      {q:'Which new technologies were mentioned as changing how battles were fought in World War I?', choices:['Television and radio','Tanks, airplanes, and chemical weapons','Computers and satellites','Nuclear bombs and rockets'], a:1},
-      {q:'Why was the peace after World War I described as fragile?', choices:['Because leaders were very friendly','Because harsh treaty terms and economic troubles caused anger','Because there were no international organizations','Because the war had not really ended'], a:1},
-      {q:'What does the passage imply happened after World War II?', choices:['The world became peaceful forever','A Cold War rivalry started between two powerful nations','Technology was no longer used in war','All empires returned to power'], a:1},
-      {q:'Vocabulary — In the passage, what does the word "upheaval" most nearly mean?', choices:['A type of weapon','A sudden or violent change','A peaceful agreement','A small celebration'], a:1}
+      { q: "What natural event made agriculture dependable in ancient Egypt?", choices: ["Volcano eruptions", "Seasonal Nile floods", "Ocean tides", "Regular rainfall year-round"], a: 1 },
+      { q: "Why did people sometimes sleep on flat roofs?", choices: ["To be closer to the stars", "To avoid theft", "Because roofs were warm", "To escape the heat of nights"], a: 3 },
+      { q: "Which job required special schooling and opened administrative opportunities?", choices: ["Fisher", "Potter", "Scribe", "Carpenter"], a: 2 },
+      { q: "What role did temples play in everyday life?", choices: ["They were only for the Pharaoh", "Centers of belief and local economy", "Places where people slept", "Markets for fish only"], a: 1 },
+      { q: "Word meaning — In the passage, what does “nutrient-rich” most nearly mean?", choices: ["Full of tiny animals", "Having many useful substances for plants", "Heavy and dense", "Very hot"], a: 1 },
+      { q: "Word meaning — What does “artisan” mean as used in the passage?", choices: ["A type of farm tool", "A skilled craftsperson", "A religious leader", "A river worker"], a: 1 }
     ]
   },
+
   {
-    title: 'A Highland Tribe — The Kamba People',
-    text: `In the rocky highlands where plateaus rise and rains come in short seasons, a people called the Kamba have long lived with careful balance. (Note: these Kamba are a fictionalized, classroom-friendly composite inspired by real highland groups; the goal is cultural understanding rather than strict anthropology.) Their lives depend on knowing the land: which grasses hold moisture, which streams run full after a storm, and where the best grazing can be found. Families often live in compound clusters, and elders teach younger members stories that record seasons, journeys, and the names of plants.
+    title: "The Science of Tsunamis",
+    text: `A tsunami is a powerful series of waves often triggered by a sudden displacement of a large volume of water. The most familiar cause is an undersea earthquake: when tectonic plates shift abruptly, the seafloor may rise or drop and push the overlying water column. Tsunamis can also result from landslides that fall into the sea, volcanic eruptions that displace water, or rarely by meteorite impacts. Because the forces involved are enormous, tsunamis can travel across whole ocean basins and damage distant shores.
 
-The Kamba's economy mixes farming and herding. They grow crops like millet and sorghum, which can survive drier years, and keep goats and cattle. Herds are not only sources of milk and meat; animals are also a form of savings. During good rainy years, families may trade or marry to redistribute animals so that no one goes without. Social life is guided by rituals — short public ceremonies that mark planting, harvest, or the coming of a new child. Music accompanies many occasions; drums and flutes provide steady rhythms while singers call out lines that others repeat.
+In deep water, tsunami waves can move extremely fast—sometimes many hundreds of miles per hour—but their wave heights are low, often just a little higher than normal waves. Ships in the open ocean might hardly notice them. As a tsunami approaches shallow coastal water, the ocean floor forces the wave energy upward. The waves slow down and compress, growing in height and becoming more destructive. Instead of a single tall wave, tsunamis often arrive as a sequence of waves, with the first not always the largest. This makes predicting the danger complicated: danger can persist for many hours.
 
-Education happens both by example and by story. Rather than formal classrooms, children learn by watching adults tend fields, mend tools, and recall past droughts so they will know how to survive difficult seasons. Decision-making can be communal: village councils discuss land access and resolve disputes. Respect for elders is strong because they hold knowledge that took years to build. At the same time, the Kamba are not isolated: they may travel to markets in towns to sell grain or to buy salt, cloth, or tools. Learning how to adapt — to move animals at the right time, to store grain safely, and to read weather patterns — is what keeps the community thriving through change.`,
+Scientists detect possible tsunamis using networks of seismographs, tidal gauges, and deep-ocean buoys called DART buoys that record sudden changes in water level. When an earthquake is detected below or near the ocean, tsunami warning centers analyze the quake's size and depth and consult sensor networks to decide whether to issue alerts. Early warning systems provide valuable time for evacuation, but response relies on preparation: clear evacuation routes, practiced drills, and public knowledge of natural warning signs—like a very sudden retreat of the sea or unusual animal behavior.
+
+Coastal geography affects how a tsunami behaves. Narrow bays and shallow shelves can amplify wave height, while barrier islands may absorb some energy. Human settlements on low-lying coasts or river mouths are especially vulnerable. Protecting populations requires combining natural science, engineering, planning, and education: building seawalls where appropriate, keeping development away from the most hazardous zones, restoring coastal wetlands and mangroves that can help absorb energy, and making sure communities know how to respond quickly.
+
+Ultimately, tsunamis remind us that Earth is dynamic. Understanding the physical causes helps reduce harm. But equally important is investing in systems and community preparedness so that, when rare events occur, lives can be saved through timely warnings and clear action.`,
     questions: [
-      {q:'Which two activities are central to the Kamba economy?', choices:['Fishing and shipbuilding','Farming and herding','Mining and factory work','Hunting and trading sea shells'], a:1},
-      {q:'Why are animals considered a form of savings for the Kamba?', choices:['Because they can be hidden easily','Because animals provide milk and can be traded or redistributed','Because animals do not need food','Because animals can be used as coins'], a:1},
-      {q:'How do children in the Kamba community mainly learn important skills?', choices:['By reading textbooks','By watching adults and listening to stories','By studying in large schools','By watching television shows'], a:1},
-      {q:'What role do village councils play according to the passage?', choices:['They build houses','They decide crop prices in other countries','They discuss land access and resolve disputes','They teach music to children'], a:2},
-      {q:'Vocabulary — The word "communal" in the passage most nearly means:', choices:['Shared by the community','Very secret','Related to cooking','Expensive to buy'], a:0}
+      { q: "What commonly causes tsunamis according to the passage?", choices: ["Tidal changes", "Undersea earthquakes", "Moon phases", "Wind storms"], a: 1 },
+      { q: "Name two other events that can generate tsunamis.", choices: ["Only tides and currents", "Landslides and volcanic eruptions", "Blizzards and droughts", "Sunspots and eclipses"], a: 1 },
+      { q: "Why are tsunamis often more dangerous near the coast?", choices: ["They get colder", "They slow down and grow taller", "They disappear", "They turn into rain"], a: 1 },
+      { q: "What do DART buoys do?", choices: ["Fix seafloor shifts", "Record sudden changes in water level", "Block waves", "Measure fish populations"], a: 1 },
+      { q: "Word meaning — In the passage, what does “displace” most nearly mean?", choices: ["To stay in place", "To push aside or move out of position", "To make louder", "To build up"], a: 1 },
+      { q: "Word meaning — What does “amplify” mean as used in the passage?", choices: ["To make smaller", "To make something more powerful or larger", "To measure speed", "To cover with sand"], a: 1 }
     ]
   },
+
   {
-    title: 'When Mutants Took Over — A Short Fiction',
-    text: `People used the word "mutant" at first like it was a rumor — a cartoonish label for anyone who looked noticeably different. Then small things started to happen that made the whole world stop and listen. Crops in certain fields grew in twisted shapes. City lights dimmed when certain electronic devices failed nearby. Animals seemed to understand each other in new ways. At first, scientists argued and governments tried to deny that anything extraordinary was occurring.
+    title: "How Coral Reefs Support Ocean Life",
+    text: `Coral reefs are among the most biodiverse habitats on Earth. Often called the “rainforests of the sea,” reefs support thousands of species—fish, crustaceans, mollusks, sea turtles, and many kinds of algae and microscopic organisms. A reef is made mainly from the calcium carbonate skeletons secreted by tiny animals called coral polyps. Over long periods, these skeletons build up into complex three-dimensional structures that provide shelter and hiding places for small creatures, and hunting grounds for larger ones.
 
-But the changes spread. Mutations were not always dangerous; sometimes they gave someone sharper night vision or the ability to coax plant roots to grow faster. Other times mutations made ordinary actions unpredictable. The story follows Lila, a young engineer who woke one morning to find the radio in her apartment speaking her name. Lila discovered that a small group of mutants had organized a peaceful council and wanted to create spaces where people with different gifts could live safely. That sounded hopeful — until competing groups formed that had more aggressive plans.
+Reefs carry out many ecological roles. They act as nurseries where juvenile fish can find food and protection from predators; they also serve as feeding grounds for larger species and as stopping points for migratory animals. Reefs reduce coastal erosion by absorbing wave energy; when waves break against a reef, their force diminishes before reaching the shore. Economically, reefs support fisheries and tourism—many coastal human communities depend on reef-related resources for their livelihoods.
 
-What followed was not a single battle but a long rearrangement of power. Cities developed zones where abilities were regulated. Work changed: some factories needed hands that were lighter, some farms needed people who could encourage crops to grow in poor soil. Laws had to be written about fairness: who could use a gift in public? How do you protect people who are vulnerable? The new world required new kinds of empathy. Some people remembered fear and built walls; others learned how to share resources and make new kinds of art. In the end, the book suggests, when the world changes, the hardest part is not the strange powers themselves but learning how to live together when old rules no longer fit.`,
+Coral health depends on a delicate partnership between the coral polyps and microscopic algae called zooxanthellae that live within the corals' tissues. These algae photosynthesize—using sunlight to make sugars—that feed the coral, while corals provide the algae with shelter and the compounds they need. Because of this partnership, corals need clear, sunlit, warm waters. If waters become too warm, corals expel the algae in a process known as coral bleaching, which can lead to coral death if the stressful conditions last.
+
+Threats to reefs are multiple: warming oceans from climate change, ocean acidification that reduces the ability of corals to build skeletons, pollution from land runoff, coastal development, and unsustainable fishing practices. Protective actions include establishing marine protected areas, improving wastewater and land use management, reducing greenhouse gas emissions globally, and encouraging sustainable fishing and responsible tourism. Restoration projects—like growing corals in nurseries and transplanting them—show promise but are complex and labor-intensive.
+
+Conserving reefs benefits both marine life and people. Healthy reefs are resilient and keep supporting the incredible diversity of ocean species. The survival of reefs depends on human choices—how communities manage their coasts, how nations act on climate change, and how visitors and fishers behave day-to-day.`,
     questions: [
-      {q:'At the start of the passage, how did people treat the idea of mutants?', choices:['They believed immediately','They treated it like a rumor or label','They celebrated mutants openly','They had always known about mutants'], a:1},
-      {q:'Which character is the passage mainly following?', choices:['A scientist named Marco','A farmer named Toma','A young engineer named Lila','An elder named Kamba'], a:2},
-      {q:'What is one positive effect of some mutations in the story?', choices:['They always caused destruction','They gave sharper night vision or helped plant growth','They made people forget how to speak','They caused permanent darkness'], a:1},
-      {q:'What new challenges did societies face after mutations spread?', choices:['Deciding how to regulate abilities and protect the vulnerable','Choosing new school colors','Learning to fly airplanes','Making everyone live in the countryside'], a:0},
-      {q:'Vocabulary — In the passage, the word "empathy" most nearly means:', choices:['The ability to build machines','The skill of drawing maps','The ability to understand and share others\' feelings','A type of legal ruling'], a:2}
+      { q: "Why are coral reefs often called 'rainforests of the sea'?", choices: ["Because they are wet", "Because they contain many different species", "Because they only grow in forests", "Because they produce wood"], a: 1 },
+      { q: "What building blocks create reef structures over time?", choices: ["Sand and rocks only", "Calcium carbonate skeletons from coral polyps", "Seaweed layers", "Fish bones"], a: 1 },
+      { q: "What is coral bleaching?", choices: ["When coral grows too fast", "When corals expel their algae due to stress", "When coral become brighter colors", "When fish eat all the coral"], a: 1 },
+      { q: "Name two human threats to coral reefs mentioned in the passage.", choices: ["Volcanoes and meteorites", "Overfishing and pollution", "Tidal changes and wind", "Space debris and satellites"], a: 1 },
+      { q: "Word meaning — In the passage, what does “nursery” most nearly mean?", choices: ["A hospital for fish", "A safe place where young animals grow", "A toy shop", "A deep ocean trench"], a: 1 },
+      { q: "Word meaning — What does “resilient” mean as used in the passage?", choices: ["Easily broken", "Able to recover from problems", "Very colorful", "Extremely large"], a: 1 }
     ]
   },
+
   {
-    title: 'Exoplanets — New Worlds Around Other Stars',
-    text: `For centuries people believed that Earth was the only place with life. Over the last few decades, astronomers have found thousands of planets orbiting other stars — planets we call exoplanets. Some are huge gas giants, far larger than Jupiter; others are small and rocky like Earth. To find these worlds, scientists use clever methods. One common technique notices when a planet passes in front of its star and makes the star appear a tiny bit dimmer. Another watches how a star wobbles slightly because of the pull from an orbiting planet.
+    title: "The Amazon Rainforest Ecosystem",
+    text: `The Amazon rainforest is the largest tropical forest on Earth, stretching across multiple countries and covering millions of hectares. It is a place of staggering biodiversity: trees and plants form thick layers of leaves that create a high canopy, and below them diverse animals like jaguars, sloths, monkeys, frogs, and innumerable insects find niches to live. Many plants and animals in the Amazon are endemic—found nowhere else—and scientists continue to discover new species each year.
 
-Exoplanets are exciting because they show the variety of planetary systems. Some stars have planets packed very close in, where temperatures would be scorching. Others have wide gaps and cold worlds far from their star. Scientists look especially for planets in a star's "habitable zone" — the region where liquid water might exist. Liquid water is important because on Earth it is essential for life as we know it.
+The structure of the forest matters. Tall emergent trees rise above the canopy; the canopy layer itself catches most sunlight and shelters the understory and forest floor. Because sunlight is so reduced under the canopy, plants there have adapted to lower-light conditions. The forest also regulates climate: trees capture and store carbon dioxide, helping moderate global temperatures, and they release water by transpiration, contributing to regional rain patterns. Rivers cut through the forest, carrying nutrients and connecting remote human communities. These waterways serve as transportation routes and sources of fish and water.
 
-But being in the habitable zone does not guarantee life. Other things matter: the planet's atmosphere, its magnetic field, and the stability of its star. Some stars are very active and blast strong radiation that could strip away atmospheres. Still, discoveries continue. Telescopes on Earth and in space study exoplanet atmospheres by examining starlight that has passed through them. Scientists search for molecules like water vapor, methane, or oxygen that might hint at biological activity. Every new world found teaches us that the universe makes planets in many surprising ways, and that our solar system is only one small example of what is possible.`,
+Indigenous peoples have lived in the Amazon for thousands of years. They possess extensive knowledge of medicine, food plants, and sustainable hunting and farming methods attuned to the forest's rhythms. Their stewardship maintains cultural diversity and helps protect many areas. In recent decades, however, large-scale deforestation for cattle pasture, soy farming, logging, and mining has reduced forest cover, destroyed habitats, and released stored carbon back into the atmosphere. Fires, sometimes set intentionally to clear land, can spread and damage wide regions.
+
+Protecting the Amazon requires a mixture of policies and actions: supporting indigenous land rights, encouraging sustainable farming and logging practices, enforcing regulations against illegal deforestation, and creating economic incentives to preserve forested land. Restoring damaged areas and reforesting degraded lands can help in the long term, as can international cooperation to address demand for commodities that drive clearing. Because the Amazon influences the global climate and supports countless species, its conservation is not only a regional concern but a global priority.`,
     questions: [
-      {q:'What is an exoplanet?', choices:['A planet that orbits the Sun','A planet that orbits another star','A very large comet','A kind of galaxy'], a:1},
-      {q:'Which two methods are mentioned for detecting exoplanets?', choices:['Microscope viewing and plate tectonics','Detecting dimming when a planet passes and observing a star\'s wobble','Measuring plant growth and listening to radio shows','Counting meteorites and measuring tides'], a:1},
-      {q:'What is the "habitable zone"?', choices:['A place where planets are made','The region where liquid water might exist','A safe zone around a telescope','A region inside Earths core'], a:1},
-      {q:'Why doesn\'t being in the habitable zone guarantee life?', choices:['Because the planet might have no atmosphere or a violent star nearby','Because scientists do not like the planet','Because the planet will always be too cold','Because stars in habitable zones are rare'], a:0},
-      {q:'Vocabulary — The word "atmosphere" in the passage most nearly means:', choices:['The weather and air surrounding a planet','A large rock on the surface','A kind of telescope','A type of star'], a:0}
+      { q: "What makes the Amazon especially important to global climate?", choices: ["It has many deserts", "Trees capture and store carbon dioxide", "It is very cold", "It is the only place with rivers"], a: 1 },
+      { q: "Why do plants on the forest floor adapt to low-light conditions?", choices: ["Because they like dark", "Because the canopy blocks most sunlight", "Because there is too much wind", "Because soil is always dry"], a: 1 },
+      { q: "How do rivers serve people in the Amazon region?", choices: ["They serve as highways and provide fish", "They prevent all fires", "They supply gold directly", "They dry out the forests"], a: 0 },
+      { q: "Name two causes of deforestation mentioned in the passage.", choices: ["Cattle pasture and mining", "Earthquakes and tsunamis", "Volcanoes and glaciers", "Solar panels and wind farms"], a: 0 },
+      { q: "Word meaning — In the passage, what does “endemic” most nearly mean?", choices: ["Rarely seen anywhere", "Found in a particular place only", "Dangerous to touch", "Extremely large"], a: 1 },
+      { q: "Word meaning — What does “stewardship” mean as used in the passage?", choices: ["Careful management and protection", "A type of plant", "A river tool", "A hunting method"], a: 0 }
+    ]
+  },
+
+  {
+    title: "A Time Traveler Visiting the Future",
+    text: `When the traveler arrived in the year 2150, the first thing that struck them was the vertical cityscape. Buildings rose like layered cliffs, linked by transparent sky-bridges and terraces where plants and fruit trees grew. The sky hummed with gentle transports—small air vehicles moving silently on electric lifts. Solar skins and thin-film panels covered many surfaces, collecting energy even when clouds passed overhead. The traveler found that technology had become both ubiquitous and subtle: communication was often woven into fabrics and eyeglass lenses, while information presented itself unobtrusively when asked.
+
+Food systems had been transformed through a combination of urban farming, lab-grown proteins, and precision agriculture. Rooftops and vertical farms used LED lighting and nutrient systems to grow vegetables close to where people lived, decreasing the need for long supply chains. Protein sources included cultured meat made from cells and insect farms engineered for high nutrition with low resource use. Water was recycled efficiently; atmospheric water capture provided fresh water in dry zones, and smart distribution networks animated cities with minimal waste.
+
+Work and daily rhythm changed too. Many repetitive or dangerous tasks were performed by cooperative robots, leaving people more time for creative and social pursuits—designing community projects, teaching, and local stewardship. Education emphasized interdisciplinary thinking: students learned coding, empathy, environmental science, and storytelling. People still formed neighborhoods and held markets and festivals; shared cultural traditions persisted, though often blended with new art forms created with mixed-reality tools.
+
+Not everything was perfect. The traveler observed tensions: how to distribute resources fairly, how to govern systems that spanned nations, and how to ensure privacy in a world where data could be collected by countless sensors. Climate adaptation had succeeded in many areas, but some regions still struggled with sea-level rise, heatwaves, or degraded landscapes that needed restoration. The future that the traveler saw combined technological ingenuity with hard-earned humility: societies had learned that engineering solutions must be paired with strong community values and policies that protect most vulnerable people.
+
+Leaving the future, the traveler took away a lesson: progress is not only about new machines or clever designs but about how people choose to share benefits and responsibilities. The future they visited was not a utopia, nor a dystopia. It was a messy, hopeful place where human creativity and cooperation continued to shape what comes next.`,
+    questions: [
+      { q: "What feature of the future city impressed the traveler first?", choices: ["Endless deserts", "Layered buildings connected by sky-bridges", "Huge open plains", "Single-story houses"], a: 1 },
+      { q: "Name two ways food systems changed in the future.", choices: ["Only hunting", "Urban farming and lab-grown proteins", "Relying solely on imports", "Growing crops only underground"], a: 1 },
+      { q: "What new emphasis did education have in this future?", choices: ["Focusing only on history", "Interdisciplinary thinking including empathy and environmental science", "Teaching only sports", "Avoiding technology entirely"], a: 1 },
+      { q: "What ongoing problems did the traveler still observe?", choices: ["No problems at all", "Sea-level rise, resource distribution, and privacy concerns", "Only perfect equality", "No climate changes"], a: 1 },
+      { q: "Word meaning — In the passage, what does “ubiquitous” most nearly mean?", choices: ["Extremely rare", "Found everywhere or very common", "Very expensive", "Dangerous"], a: 1 },
+      { q: "Word meaning — What does “cultured” mean when referring to cultured meat?", choices: ["Meat grown in labs from cells", "Meat seasoned with herbs", "A type of plant", "A traditional recipe"], a: 0 }
     ]
   }
 ];
 
-let page = 0;
+/* ===== state ===== */
+let page = 0; // 0..4
+const totalPages = passages.length;
+const answers = {}; // store answers as { 'p{page}q{qIndex}': choiceIndex }
 
-const qsContainer = document.getElementById('questionsContainer');
-const passageTextEl = document.getElementById('passageText');
+/* ===== UI elements ===== */
 const passageHeader = document.getElementById('passageHeader');
-const feedbackArea = document.getElementById('feedbackArea');
+const passageText = document.getElementById('passageText');
+const qsContainer = document.getElementById('questionsContainer');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const submitBtn = document.getElementById('submitBtn');
+const feedback = document.getElementById('feedback');
+const qHeader = document.getElementById('qHeader');
 
-function renderPage(idx){
+/* ===== render functions ===== */
+function renderPage(idx) {
   const p = passages[idx];
-  passageHeader.textContent = `Passage ${idx+1} of ${passages.length} — ${p.title}`;
-  passageTextEl.textContent = p.text;
-  feedbackArea.innerHTML = '';
+  passageHeader.textContent = `Passage ${idx+1} of ${totalPages} — ${p.title}`;
+  passageText.textContent = p.text;
   qsContainer.innerHTML = '';
-  p.questions.forEach((q,i)=>{
-    const div = document.createElement('div');
-    div.className = 'question';
-    const qtext = document.createElement('div'); qtext.className='qtext'; qtext.textContent = `Q${i+1}. ${q.q}`;
-    div.appendChild(qtext);
-    q.choices.forEach((c,j)=>{
-      const id = `p${idx}q${i}c${j}`;
-      const label = document.createElement('label'); label.className='option';
+  qHeader.textContent = `Questions — Passage ${idx+1}`;
+
+  p.questions.forEach((q, qi) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
+    const qTitle = document.createElement('div');
+    qTitle.className = 'qtext';
+    qTitle.textContent = `Q${qi+1}. ${q.q}`;
+    qDiv.appendChild(qTitle);
+
+    const name = `p${idx}q${qi}`;
+    q.choices.forEach((choice, ci) => {
+      const id = `${name}c${ci}`;
+      const label = document.createElement('label');
+      label.className = 'option';
       label.htmlFor = id;
-      label.innerHTML = `<input type="radio" name="q${i}" id="${id}" value="${j}"> ${c}`;
-      div.appendChild(label);
+      const radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = name;
+      radio.id = id;
+      radio.value = ci;
+      // restore previous answer if existed
+      const savedKey = `${name}`;
+      if (answers[savedKey] !== undefined && answers[savedKey] === ci) {
+        radio.checked = true;
+      }
+      radio.addEventListener('change', () => {
+        answers[savedKey] = ci;
+      });
+      label.appendChild(radio);
+      label.appendChild(document.createTextNode(choice));
+      qDiv.appendChild(label);
     });
-    qsContainer.appendChild(div);
+
+    qsContainer.appendChild(qDiv);
   });
-  // buttons state
-  prevBtn.disabled = (idx===0);
-  nextBtn.disabled = (idx===passages.length-1);
+
+  prevBtn.disabled = idx === 0;
+  nextBtn.disabled = idx === totalPages - 1;
+
+  // submit button only visible on last page
+  submitBtn.style.display = (idx === totalPages - 1) ? 'inline-block' : 'none';
+
+  // clear feedback area
+  feedback.innerHTML = '';
 }
 
-function gradePage(idx){
-  const p = passages[idx];
-  let score = 0; let total = p.questions.length;
-  const details = [];
-  p.questions.forEach((q,i)=>{
-    const radios = document.getElementsByName(`q${i}`);
-    let chosen = null;
-    for(const r of radios) if(r.checked) chosen = Number(r.value);
-    const correct = q.a;
-    const correctText = q.choices[correct];
-    if(chosen === null){
-      details.push({i, status:'unanswered', correct:correctText});
-    } else if(chosen === correct){
-      score++;
-      details.push({i, status:'correct'});
-    } else {
-      details.push({i, status:'wrong', chosenText: q.choices[chosen], correct:correctText});
-    }
+/* grade all pages and show review */
+function gradeAllAndShow() {
+  let total = 0, score = 0;
+  const reviewContainer = document.createElement('div');
+
+  passages.forEach((p, pi) => {
+    const passBlock = document.createElement('div');
+    passBlock.style.marginBottom = '12px';
+    const passTitle = document.createElement('div');
+    passTitle.style.fontWeight = '700';
+    passTitle.textContent = `Passage ${pi+1}: ${p.title}`;
+    passBlock.appendChild(passTitle);
+
+    p.questions.forEach((q, qi) => {
+      total++;
+      const key = `p${pi}q${qi}`;
+      const chosen = answers[key] !== undefined ? Number(answers[key]) : null;
+      const isCorrect = chosen === q.a;
+      if (isCorrect) score++;
+
+      const item = document.createElement('div');
+      item.className = 'review-item';
+      const qn = document.createElement('div');
+      qn.className = 'qtext';
+      qn.textContent = `Q${qi+1}. ${q.q}`;
+      item.appendChild(qn);
+
+      const your = document.createElement('div');
+      your.className = isCorrect ? 'correct' : 'incorrect';
+      const yourText = chosen === null ? 'Unanswered' : q.choices[chosen];
+      your.textContent = `Your answer: ${yourText}`;
+      item.appendChild(your);
+
+      if (!isCorrect) {
+        const corr = document.createElement('div');
+        corr.style.marginTop = '6px';
+        corr.textContent = `Correct answer: ${q.choices[q.a]}`;
+        item.appendChild(corr);
+      } else {
+        const corr = document.createElement('div');
+        corr.style.marginTop = '6px';
+        corr.textContent = `Correct ✅`;
+        item.appendChild(corr);
+      }
+
+      passBlock.appendChild(item);
+    });
+
+    reviewContainer.appendChild(passBlock);
   });
-  return {score,total,details};
+
+  // show score summary
+  feedback.innerHTML = '';
+  const scoreBox = document.createElement('div');
+  scoreBox.className = 'resultBox';
+  scoreBox.innerHTML = `<div style="font-weight:700">Score: ${score} / ${total}</div><div class="small" style="margin-top:6px">Review below shows your answers and the correct ones.</div>`;
+  feedback.appendChild(scoreBox);
+  feedback.appendChild(reviewContainer);
+
+  // disable inputs after submission (prevent changes)
+  disableAllInputs();
+
+  // scroll feedback to top in the questions panel
+  feedback.scrollIntoView({behavior:'smooth'});
 }
 
-submitBtn.addEventListener('click', ()=>{
-  const res = gradePage(page);
-  feedbackArea.innerHTML = '';
-  const box = document.createElement('div');
-  box.className = 'result';
-  box.innerHTML = `<strong>Score: ${res.score} / ${res.total}</strong>`;
-  res.details.forEach(d=>{
-    const p = document.createElement('div');
-    p.className = 'small';
-    if(d.status==='correct'){
-      p.textContent = `Q${d.i+1}: Correct`;
-      p.classList.add('correct');
-    } else if(d.status==='wrong'){
-      p.textContent = `Q${d.i+1}: Incorrect — your answer: "${d.chosenText}"; correct: "${d.correct}"`;
-      p.classList.add('incorrect');
-    } else {
-      p.textContent = `Q${d.i+1}: Unanswered — correct: "${d.correct}"`;
-      p.classList.add('incorrect');
-    }
-    feedbackArea.appendChild(p);
-  });
-  feedbackArea.prepend(box);
+/* disable all radio inputs so results cannot be changed after submit */
+function disableAllInputs() {
+  const radios = document.querySelectorAll('input[type=radio]');
+  radios.forEach(r => r.disabled = true);
+  // disable navigation
+  prevBtn.disabled = true;
+  nextBtn.disabled = true;
+  submitBtn.disabled = true;
+}
+
+/* ===== Event listeners ===== */
+prevBtn.addEventListener('click', () => {
+  if (page > 0) {
+    page--;
+    renderPage(page);
+  }
 });
 
-prevBtn.addEventListener('click', ()=>{ if(page>0){ page--; renderPage(page);} });
-nextBtn.addEventListener('click', ()=>{ if(page<passages.length-1){ page++; renderPage(page);} });
+nextBtn.addEventListener('click', () => {
+  if (page < totalPages - 1) {
+    page++;
+    renderPage(page);
+  }
+});
 
-// initialize
+submitBtn.addEventListener('click', () => {
+  // confirm intent
+  const proceed = confirm("Submit answers and view results? You will not be able to change answers afterwards.");
+  if (!proceed) return;
+  gradeAllAndShow();
+});
+
+/* initialize first page */
 renderPage(page);
 
 </script>
