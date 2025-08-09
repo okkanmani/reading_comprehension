@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RC Quiz — 5 Passages (Challenging)</title>
+  <title>RC Quiz — 5 Passages w/ Explanations</title>
   <style>
     :root{
       --bg:#f4f7fb; --card:#ffffff; --accent:#0b66ff; --muted:#6b7280;
       --good:#ecfdf5; --good-text:#064e3b; --bad:#fff1f2; --bad-text:#7f1d1d;
-      --max-width:1200px;
+      --explain-bg:#f8fafc; --max-width:1200px;
     }
     html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#0b1220;background:var(--bg)}
     .wrap{max-width:var(--max-width);margin:24px auto;padding:18px}
@@ -20,7 +20,7 @@
     .layout{display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start}
     .passagePanel{padding:18px;overflow:auto;height:68vh}
     .questionsPanel{padding:14px;overflow:auto;height:68vh}
-    .passTitle{font-size:22px;font-weight:700;margin-bottom:10px}
+    .passTitle{font-size:24px;font-weight:700;margin-bottom:10px}
     .passageText{line-height:1.7;white-space:pre-wrap}
     .question{padding:10px;margin-bottom:12px;border-radius:8px;background:#fbfdff;border:1px solid #eef2ff}
     .qtext{font-weight:600;margin-bottom:8px}
@@ -36,6 +36,7 @@
     .correct{background:var(--good);color:var(--good-text);padding:8px;border-radius:6px}
     .incorrect{background:var(--bad);color:var(--bad-text);padding:8px;border-radius:6px}
     .review-item{padding:8px;border-radius:8px;margin-bottom:8px;border:1px solid #eef2ff}
+    .explanation{background:var(--explain-bg);padding:8px;border-radius:6px;margin-top:8px;font-size:14px}
     .small{font-size:13px;color:var(--muted)}
     footer{margin-top:14px;color:var(--muted);font-size:13px}
     @media (max-width:980px){
@@ -48,10 +49,10 @@
     <div class="card">
       <header>
         <div>
-          <h1>Reading Comprehension — 5 Passages (Challenging)</h1>
-          <div class="muted">5 passages • 6 questions each • 2 vocabulary questions per passage</div>
+          <h1>Reading Comprehension — 5 Passages (With Explanations)</h1>
+          <div class="muted">5 passages • 6 questions each • 2 vocab questions per passage</div>
         </div>
-        <div class="muted">Tip: Use <strong>Previous</strong> and <strong>Next</strong>. Submit only appears on the last page.</div>
+        <div class="muted">Tip: Use <strong>Previous</strong> and <strong>Next</strong>. Submit appears on the last page.</div>
       </header>
 
       <div id="main" class="layout">
@@ -82,12 +83,20 @@
   </div>
 
 <script>
-/* ===== Passages and Questions (5 passages) =====
-Each passage object includes: title, text, questions [{q, choices:[], a:correctIndex}]
-Two vocabulary questions per passage (marked as ordinary multiple choice).
+/* Utility: shuffle array in-place */
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+/* ===== Passages, Questions, Explanations =====
+ Each question has: q, choices[], a (correct original index), explanation (short)
 */
 const passages = [
-  /* ---------- Passage 1: SCP-035 ---------- */
+  /* ---------- 1: SCP-035 ---------- */
   {
     title: "SCP-035: The Possessive Mask",
     text: `SCP-035 is a porcelain mask with a smooth white surface and an unnervingly perfect smile. It was recovered from a burned theater after witnesses described an actor who had vanished in a performance. Initially catalogued as a curious relic, the mask earned the Foundation's attention when it was observed changing expression on its own: a grin might curl into a frown over the course of minutes. The artifact’s movements were subtle but deliberate, as though it were reacting to the room.
@@ -102,16 +111,22 @@ SCP-035 has provided many origin stories—claims of ownership by an ancient act
 
 Containment protocols prioritize isolation, psychological screening for personnel who listen to the mask, and redundant safeguards to avoid any contact. The mask’s patient smile in its sealed case is a reminder: the greatest threat may not be force, but the slow, intelligent corrosion of trust and will.`,
     questions: [
-      { q: "Word meaning — In the passage, what does “manipulative” most nearly mean?", choices: ["Able to be moved easily", "Skilled at influencing or controlling others", "Made of many parts", "Very fragile"], a: 1 },
-      { q: "Word meaning — What does “corrosive” mean as used in the passage?", choices: ["Causing infection", "Causing slow decay or destruction of materials", "Very shiny", "Extremely loud"], a: 1 },
-      { q: "Why does the Foundation forbid direct contact with SCP-035?", choices: ["Because the mask is extremely heavy", "Because contact lets it fuse to and control hosts", "Because the mask is too valuable as an artifact", "Because it explodes on touch"], a: 1 },
-      { q: "The passage emphasizes SCP-035’s ability to change tone and words to different people. What does this suggest about how it targets victims?", choices: ["It uses the same script for everyone", "It customizes its approach to exploit individual weaknesses", "It only speaks to guards", "It avoids speaking at all"], a: 1 },
-      { q: "What inference can you draw about the origin stories SCP-035 tells?", choices: ["They are definitely true", "They are likely invented to mislead or intrigue", "They are scientific reports", "They prove the mask is ancient gold"], a: 1 },
-      { q: "If staff report 'intrusive thoughts' after listening to SCP-035, what might that imply about the mask’s ability?", choices: ["It causes temporary hearing loss", "It may implant suggestions into people's minds", "It cures diseases", "It improves memory"], a: 1 }
+      { q: "Word meaning — In the passage, what does “manipulative” most nearly mean?", choices: ["Able to be moved easily", "Skilled at influencing or controlling others", "Made of many parts", "Very fragile"], a: 1,
+        explanation: "‘Manipulative’ here refers to the mask's ability to influence people—using words and charm to control them, not a physical property." },
+      { q: "Word meaning — What does “corrosive” mean as used in the passage?", choices: ["Causing infection", "Causing slow decay or destruction of materials", "Very shiny", "Extremely loud"], a: 1,
+        explanation: "The text explains the mask makes wood rot and metals rust—so 'corrosive' means it causes decay or destruction over time." },
+      { q: "Why does the Foundation forbid direct contact with SCP-035?", choices: ["Because the mask is extremely heavy", "Because contact lets it fuse to and control hosts", "Because the mask is too valuable as an artifact", "Because it explodes on touch"], a: 1,
+        explanation: "The passage describes fusion to the wearer's skin and loss of control—direct contact lets it take over a person, so it's forbidden." },
+      { q: "The passage emphasizes SCP-035’s ability to change tone and words to different people. What does this suggest about how it targets victims?", choices: ["It uses the same script for everyone", "It customizes its approach to exploit individual weaknesses", "It only speaks to guards", "It avoids speaking at all"], a: 1,
+        explanation: "Because it adapts to each person's profile, it tailors speech to exploit individual emotions or weaknesses." },
+      { q: "What inference can you draw about the origin stories SCP-035 tells?", choices: ["They are definitely true", "They are likely invented to mislead or intrigue", "They are scientific reports", "They prove the mask is ancient gold"], a: 1,
+        explanation: "Investigators suspect the tales are fabrications used to maintain interest—so they are probably invented rather than factual." },
+      { q: "If staff report 'intrusive thoughts' after listening to SCP-035, what might that imply about the mask’s ability?", choices: ["It causes temporary hearing loss", "It may implant suggestions into people's minds", "It cures diseases", "It improves memory"], a: 1,
+        explanation: "The passage suggests the mask can plant suggestions via speech; 'intrusive thoughts' implies mental influence rather than physical harm." }
     ]
   },
 
-  /* ---------- Passage 2: Poppy Playtime / Toy Factory ---------- */
+  /* ---------- 2: Poppy Playtime ---------- */
   {
     title: "Poppy Playtime: The Factory That Never Sleeps",
     text: `The factory lay at the edge of town, an enormous building of brick and glass where toys were assembled in orderly lines. For decades, workers recalled weekends of laughter and children’s tours—until the company changed ownership and new machines arrived. The story you hear in the facility's corridors is not about faulty equipment alone but about toys that began to act like predators. Workers spoke in whispers of toys twitching when unobserved, of mechanical dolls turning their heads in sync, and of colorful mascots that watched too closely.
@@ -124,16 +139,22 @@ Why might toys become dangerous? Theories at the factory range from malfunctioni
 
 The human response is a mixture of denial and ritual. Some employees keep talismans or avoid certain aisles; others work in pairs and carry bright lights. Management enacted policies to limit solo night shifts, but budget pressures sometimes forced single workers to finish tasks alone. The factory’s cheerful marketing posters remain on the walls—happy faces promising safe play—while staff swap stories in hushed tones about the last person who disappeared during a midnight run. Whether the toys are haunted, hacked, or simply malfunctioning beyond repair, the worker’s fear is unmistakable: something made to delight children has learned a new appetite.`,
     questions: [
-      { q: "Word meaning — In the passage, what does “emergent” most nearly mean?", choices: ["Planned ahead of time", "Arising unexpectedly from complex systems", "Very large", "Falling apart"], a: 1 },
-      { q: "Word meaning — What does “predatory” mean as used to describe the toys?", choices: ["Made for predators", "Acting like hunters that prey on others", "Very colorful", "Designed for play"], a: 1 },
-      { q: "Why are the toys particularly dangerous inside the factory?", choices: ["Because the factory sells them", "Because the corridors create shadows and echo sounds that help the toys", "Because there's too much sunlight", "Because workers wear protective gear"], a: 1 },
-      { q: "What does the detail about the toys' bright faces 'masking' their threat help you infer about how people respond?", choices: ["People immediately realize the danger", "People underestimate the risk because the toys look harmless", "Everyone avoids the factory during the day", "The toys are easy to catch"], a: 1 },
-      { q: "Which theory about the toys’ dangerous behavior seems most supported by the passage?", choices: ["They were built for pets", "Experimental software or sound/scent exposure caused unforeseen behavior", "They were intentionally programmed to save lives", "They are made only of wood"], a: 1 },
-      { q: "Based on worker responses (talismans, lights, working in pairs), what can you infer about their feelings?", choices: ["They feel completely safe", "They are anxious and trying to manage fear with rituals", "They believe the toys are friendly", "They think management is covering up ghosts with posters"], a: 1 }
+      { q: "Word meaning — In the passage, what does “emergent” most nearly mean?", choices: ["Planned ahead of time", "Arising unexpectedly from complex systems", "Very large", "Falling apart"], a: 1,
+        explanation: "Here 'emergent' describes behaviors that appear unexpectedly from complex interactions, not that were intentionally planned." },
+      { q: "Word meaning — What does “predatory” mean as used to describe the toys?", choices: ["Made for predators", "Acting like hunters that prey on others", "Very colorful", "Designed for play"], a: 1,
+        explanation: "'Predatory' refers to hunting behavior—stalking, attacking—so the toys act like predators rather than playful objects." },
+      { q: "Why are the toys particularly dangerous inside the factory?", choices: ["Because the factory sells them", "Because the corridors create shadows and echo sounds that help the toys", "Because there's too much sunlight", "Because workers wear protective gear"], a: 1,
+        explanation: "The maze-like corridors, echoes, and shadows help the toys hide and coordinate—making them more effective indoors." },
+      { q: "What does the detail about the toys' bright faces 'masking' their threat help you infer about how people respond?", choices: ["People immediately realize the danger", "People underestimate the risk because the toys look harmless", "Everyone avoids the factory during the day", "The toys are easy to catch"], a: 1,
+        explanation: "Because the toys appear friendly, workers and managers are less likely to suspect danger until it’s serious—so they underestimate the risk." },
+      { q: "Which theory about the toys’ dangerous behavior seems most supported by the passage?", choices: ["They were built for pets", "Experimental software or sound/scent exposure caused unforeseen behavior", "They were intentionally programmed to save lives", "They are made only of wood"], a: 1,
+        explanation: "The passage lists theories and gives examples (soundtracks, scent formulas) suggesting experimental systems may have triggered unexpected behaviors." },
+      { q: "Based on worker responses (talismans, lights, working in pairs), what can you infer about their feelings?", choices: ["They feel completely safe", "They are anxious and trying to manage fear with rituals", "They believe the toys are friendly", "They think management is covering up ghosts with posters"], a: 1,
+        explanation: "These behaviors (rituals, safety pairs) indicate anxiety and attempts to reduce risk—people are afraid and coping in whatever ways they can." }
     ]
   },
 
-  /* ---------- Passage 3: The Backrooms — Roblox Movie-maker ---------- */
+  /* ---------- 3: Backrooms ---------- */
   {
     title: "Backrooms — The Film Maker Who Stepped Too Far",
     text: `Marcus was a student film-maker who loved recreating viral game levels in real life. When he decided to film a short set in the "Backrooms" — a famous endless maze from an online game — he expected clever lighting and a few unsettling shots. Instead, after exploring a disused office building, he found a doorway that felt wrong: a thin seam where stairs should have been, a smell of old carpet and cleaning chemicals. He hesitated, then stepped through and the world changed.
@@ -146,16 +167,22 @@ To escape, Marcus had to stop filming for a stretch and instead use memory to re
 
 This tale suggests the Backrooms operate by borrowing attention and recorded fragments, turning creative acts into supply. For a creator, the space is seductive: it rewards documentation with new scenes, and then slowly consumes the tools used to document it. Marcus left with experience and footage, but also with the understanding that some doors—once opened by a camera—should perhaps remain closed.`,
     questions: [
-      { q: "Word meaning — What does 'liminal' most nearly mean in this passage?", choices: ["Very large", "At the boundary between spaces; in-between", "Colorful", "Dangerous"], a: 1 },
-      { q: "Word meaning — In the passage, 'seductive' most nearly means:", choices: ["Pushy", "Enticing or tempting", "Broken", "Noisy"], a: 1 },
-      { q: "Why did Marcus's footage make the Backrooms more dangerous for him?", choices: ["Because it attracted police", "Because the Backrooms borrowed recorded fragments and rehearsed them", "Because the footage was deleted", "Because the camera exploded"], a: 1 },
-      { q: "What does the detail about the figure speaking phrases from Marcus's footage suggest about the Backrooms' nature?", choices: ["It repeats only official announcements", "It uses personal material to create familiar but twisted encounters", "It speaks in a foreign language", "It copies only music tracks"], a: 1 },
-      { q: "Why did Marcus have to stop filming to escape?", choices: ["Because his camera was heavy", "Because the Backrooms used recorded material to trap him, so not recording reduced its influence", "Because there was a rule against filming", "Because his battery was low"], a: 1 },
-      { q: "What can we infer about the Backrooms' relationship with creators and their tools?", choices: ["It ignores creators", "It rewards documentation by creating new scenes but may consume their work", "It helps creators become famous without risk", "It deletes all recorded files immediately"], a: 1 }
+      { q: "Word meaning — What does 'liminal' most nearly mean in this passage?", choices: ["Very large", "At the boundary between spaces; in-between", "Colorful", "Dangerous"], a: 1,
+        explanation: "'Liminal' means at a threshold or in-between space, which matches the Backrooms' eerie transitional feel." },
+      { q: "Word meaning — In the passage, 'seductive' most nearly means:", choices: ["Pushy", "Enticing or tempting", "Broken", "Noisy"], a: 1,
+        explanation: "The Backrooms tempt creators by rewarding documentation; 'seductive' means tempting or alluring." },
+      { q: "Why did Marcus's footage make the Backrooms more dangerous for him?", choices: ["Because it attracted police", "Because the Backrooms borrowed recorded fragments and rehearsed them", "Because the footage was deleted", "Because the camera exploded"], a: 1,
+        explanation: "The passage explains the maze uses recorded fragments to create rehearsed scenes—so filming fed the Backrooms new material that trapped him." },
+      { q: "What does the detail about the figure speaking phrases from Marcus's footage suggest about the Backrooms' nature?", choices: ["It repeats only official announcements", "It uses personal material to create familiar but twisted encounters", "It speaks in a foreign language", "It copies only music tracks"], a: 1,
+        explanation: "The figure recycles Marcus's own footage, indicating the Backrooms repurpose personal recordings to craft uncanny encounters." },
+      { q: "Why did Marcus have to stop filming to escape?", choices: ["Because his camera was heavy", "Because the Backrooms used recorded material to trap him, so not recording reduced its influence", "Because there was a rule against filming", "Because his battery was low"], a: 1,
+        explanation: "Not recording removed the Backrooms' ability to use his footage, allowing memory-based retracing rather than feeding the maze new content." },
+      { q: "What can we infer about the Backrooms' relationship with creators and their tools?", choices: ["It ignores creators", "It rewards documentation by creating new scenes but may consume their work", "It helps creators become famous without risk", "It deletes all recorded files immediately"], a: 1,
+        explanation: "The text says the space rewards documentation but then consumes the tools—so creators gain scenes but at a cost." }
     ]
   },
 
-  /* ---------- Passage 4: Black Holes ---------- */
+  /* ---------- 4: Black Holes ---------- */
   {
     title: "Black Holes: Gravity's Extreme",
     text: `Black holes are regions of space where gravity is so strong that nothing, not even light, can escape once it passes a certain boundary called the event horizon. They form when massive stars exhaust their fuel and collapse under their own gravity, compressing enormous mass into an extremely small volume. At the center lies what physicists call a singularity—a point where our current theories break down and density becomes effectively infinite. Because singularities are hidden behind event horizons, scientists study black holes by observing how they interact with nearby matter.
@@ -168,16 +195,22 @@ Although black holes are often pictured as insatiable cosmic vacuum cleaners, th
 
 Studying black holes tests physics at extremes: strong gravity, high energy, and quantum effects. Black holes force scientists to reconcile relativity with quantum theory and to ask fundamental questions about information, time, and the nature of space. Each observation—whether an X-ray flare, a gravitational-wave chirp, or an image of a shadowed silhouette—gives insight into processes that shape galaxies and the universe at large.`,
     questions: [
-      { q: "Word meaning — In the passage, what does 'accretion' most nearly mean?", choices: ["A type of telescope", "The process of gradual buildup or accumulation (of matter)", "A kind of star", "A vacuum cleaner"], a: 1 },
-      { q: "Word meaning — What does 'tidal' mean in 'tidal forces'?", choices: ["Related to tides; caused by differences in gravity across an object", "Very fast", "Colorful", "Made of water"], a: 0 },
-      { q: "Why are black holes studied by observing nearby matter rather than the black holes themselves?", choices: ["Black holes are shy", "Light cannot escape from within the event horizon, so scientists look at effects on surrounding material", "Black holes are only in fiction", "Because telescopes cannot point at them"], a: 1 },
-      { q: "What does the term 'spaghettification' suggest about what happens to objects near a black hole?", choices: ["They turn into food", "They are stretched lengthwise due to gravity differences", "They become invisible", "They grow larger"], a: 1 },
-      { q: "Why is Hawking radiation important in black hole studies?", choices: ["It proves black holes are made of ice", "It suggests black holes can slowly lose mass and possibly evaporate", "It makes black holes glow like stars", "It causes immediate explosions"], a: 1 },
-      { q: "What inference can be drawn about black holes' role in galaxies?", choices: ["They have no effect at all", "Supermassive black holes can influence galaxy evolution and structure", "They always destroy galaxies instantly", "They make stars turn into planets"], a: 1 }
+      { q: "Word meaning — In the passage, what does 'accretion' most nearly mean?", choices: ["A type of telescope", "The process of gradual buildup or accumulation (of matter)", "A kind of star", "A vacuum cleaner"], a: 1,
+        explanation: "'Accretion' refers to matter collecting and building up around the black hole in a disk." },
+      { q: "Word meaning — What does 'tidal' mean in 'tidal forces'?", choices: ["Related to tides; caused by differences in gravity across an object", "Very fast", "Colorful", "Made of water"], a: 0,
+        explanation: "Tidal forces are differences in gravity across an object—like ocean tides caused by gravity differences." },
+      { q: "Why are black holes studied by observing nearby matter rather than the black holes themselves?", choices: ["Black holes are shy", "Light cannot escape from within the event horizon, so scientists look at effects on surrounding material", "Black holes are only in fiction", "Because telescopes cannot point at them"], a: 1,
+        explanation: "Because light can't escape from inside the event horizon, scientists infer black hole behavior from how nearby matter behaves and glows." },
+      { q: "What does the term 'spaghettification' suggest about what happens to objects near a black hole?", choices: ["They turn into food", "They are stretched lengthwise due to gravity differences", "They become invisible", "They grow larger"], a: 1,
+        explanation: "The passage defines spaghettification: gravitational differences stretch objects into long shapes before they cross the horizon." },
+      { q: "Why is Hawking radiation important in black hole studies?", choices: ["It proves black holes are made of ice", "It suggests black holes can slowly lose mass and possibly evaporate", "It makes black holes glow like stars", "It causes immediate explosions"], a: 1,
+        explanation: "Hawking radiation is a theoretical process by which black holes emit particles over long times, losing mass slowly." },
+      { q: "What inference can be drawn about black holes' role in galaxies?", choices: ["They have no effect at all", "Supermassive black holes can influence galaxy evolution and structure", "They always destroy galaxies instantly", "They make stars turn into planets"], a: 1,
+        explanation: "The passage notes supermassive black holes sit at galactic centers and influence evolution, so they play an important role." }
     ]
   },
 
-  /* ---------- Passage 5: Medieval Fantasy — Alien Visiting a Middle-earth-like World ---------- */
+  /* ---------- 5: Medieval fantasy alien ---------- */
   {
     title: "A Stranger Among Oaks: An Alien in a Medieval Land",
     text: `Aran arrived with no trumpet and no fanfare—only a shimmer in the twilight above an ancient oak grove. The people of Eldenvale thought the sky had opened a new star, but the creature that stepped from the haze looked nothing like their carved idols. Metallic skin caught moonlight in quiet waves, and its eyes were like polished amber. It carried a slender device that hummed, but it moved slowly and seemed to study everything with patient curiosity. The villagers named it the Stranger and debated whether it was a god, a demon, or a traveler from a far kingdom.
@@ -190,20 +223,26 @@ What the villagers learned was both practical and philosophical. They observed t
 
 The tale raises questions: is change always a gift, and does knowledge obligate responsibility? For Eldenvale, the Stranger was neither savior nor scourge but a mirror: by seeing themselves reflected in a foreign intelligence, the villagers recognized strengths and faults they had not noticed before.`,
     questions: [
-      { q: "Word meaning — In the passage, what does 'shimmer' most nearly mean?", choices: ["A loud noise", "A soft, wavering light", "A type of food", "A heavy object"], a: 1 },
-      { q: "Word meaning — What does 'humility' mean as used in the passage?", choices: ["The state of being proud", "A modest view of one's importance; lack of arrogance", "A medical condition", "A type of tool"], a: 1 },
-      { q: "Why did children warm to the Stranger before the adults did?", choices: ["Children were bribed with toys", "Children were less burdened by fear and more open to simple gestures", "Children could speak the alien's language", "Children had been taught to capture strangers"], a: 1 },
-      { q: "Which inference about the Stranger’s technology is best supported by the passage?", choices: ["It was magic and always harmful", "It could record distant stars and help with irrigation, but it did not create trust alone", "It instantly solved all social problems", "It made everyone forget their traditions"], a: 1 },
-      { q: "What does the villagers' reaction teach us about contact between different societies?", choices: ["Contact always leads to destruction", "Contact can bring both benefit and misunderstanding, and requires responsibility", "It always makes one side superior", "It is always ignored"], a: 1 },
-      { q: "If the Stranger 'gained stories of loyalty and awkward, profound tenderness', what can you infer about its understanding of the villagers at the end?", choices: ["It learned they were only machines", "It came to appreciate their emotional complexity and bonds", "It decided to take over their land", "It forgot them immediately"], a: 1 }
+      { q: "Word meaning — In the passage, what does 'shimmer' most nearly mean?", choices: ["A loud noise", "A soft, wavering light", "A type of food", "A heavy object"], a: 1,
+        explanation: "'Shimmer' describes a soft, wavering glow in the sky that announced the Stranger's arrival." },
+      { q: "Word meaning — What does 'humility' mean as used in the passage?", choices: ["The state of being proud", "A modest view of one's importance; lack of arrogance", "A medical condition", "A type of tool"], a: 1,
+        explanation: "The villagers learned humility—meaning they gained a modest, less arrogant view of themselves after meeting the Stranger." },
+      { q: "Why did children warm to the Stranger before the adults did?", choices: ["Children were bribed with toys", "Children were less burdened by fear and more open to simple gestures", "Children could speak the alien's language", "Children had been taught to capture strangers"], a: 1,
+        explanation: "Children responded to simple gestures (smiles, bread) and were less influenced by fear or social caution than adults." },
+      { q: "Which inference about the Stranger’s technology is best supported by the passage?", choices: ["It was magic and always harmful", "It could record distant stars and help with irrigation, but it did not create trust alone", "It instantly solved all social problems", "It made everyone forget their traditions"], a: 1,
+        explanation: "The Stranger's device provided useful techniques but did not automatically create trust—human gestures mattered more." },
+      { q: "What does the villagers' reaction teach us about contact between different societies?", choices: ["Contact always leads to destruction", "Contact can bring both benefit and misunderstanding, and requires responsibility", "It always makes one side superior", "It is always ignored"], a: 1,
+        explanation: "The story shows change brought both useful knowledge and misunderstandings—contact can be mixed and needs responsibility." },
+      { q: "If the Stranger 'gained stories of loyalty and awkward, profound tenderness', what can you infer about its understanding of the villagers at the end?", choices: ["It learned they were only machines", "It came to appreciate their emotional complexity and bonds", "It decided to take over their land", "It forgot them immediately"], a: 1,
+        explanation: "The phrasing suggests the Stranger came to value the villagers' emotional ties and social complexity." }
     ]
   }
 ];
 
-/* ====== State and UI Elements ====== */
+/* ===== State & UI elements ===== */
 let page = 0;
 const totalPages = passages.length;
-const answers = {}; // store like { 'p0q3': 2 }
+const answers = {}; // e.g., { 'p0q1': 2 }
 
 const passageHeader = document.getElementById('passageHeader');
 const passageText = document.getElementById('passageText');
@@ -214,44 +253,68 @@ const submitBtn = document.getElementById('submitBtn');
 const feedback = document.getElementById('feedback');
 const qHeader = document.getElementById('qHeader');
 
-/* ====== Render a page ====== */
+/* Keep a record of which choice nodes were rendered per question so we can insert explanations below correct DOM nodes */
+const renderedQuestionNodes = {}; // keys like 'p0q1' => {container: element, choiceLabels: [...labelElements]}
+
+/* ===== Render helpers ===== */
 function renderPage(idx) {
   const p = passages[idx];
   passageHeader.textContent = `Passage ${idx+1} of ${totalPages} — ${p.title}`;
   passageText.textContent = p.text;
   qsContainer.innerHTML = '';
   qHeader.textContent = `Questions — Passage ${idx+1}`;
+  renderedQuestionNodesClear();
 
   p.questions.forEach((q, qi) => {
+    const qKey = `p${idx}q${qi}`;
     const qDiv = document.createElement('div');
     qDiv.className = 'question';
+    qDiv.id = qKey;
+
     const qTitle = document.createElement('div');
     qTitle.className = 'qtext';
     qTitle.textContent = `Q${qi+1}. ${q.q}`;
     qDiv.appendChild(qTitle);
 
-    const name = `p${idx}q${qi}`;
-    q.choices.forEach((choice, ci) => {
-      const id = `${name}c${ci}`;
+    // Prepare choices with their original indices, then shuffle for display order
+    const choiceObjs = q.choices.map((c, i) => ({ text: c, origIndex: i }));
+    shuffle(choiceObjs);
+
+    // Container for choice labels to allow later insertion of explanation
+    const labels = [];
+
+    choiceObjs.forEach((ch, ci) => {
+      const id = `${qKey}c${ci}`; // unique id per displayed label
       const label = document.createElement('label');
       label.className = 'option';
       label.htmlFor = id;
+
       const radio = document.createElement('input');
       radio.type = 'radio';
-      radio.name = name;
+      radio.name = qKey;
       radio.id = id;
-      radio.value = ci;
-      // restore previous selection if exists
-      if (answers[name] !== undefined && answers[name] === ci) radio.checked = true;
+      // value stores the original choice index so grading is simple (compare to q.a)
+      radio.value = ch.origIndex;
+
+      // restore previously selected answer (answers store original indices)
+      if (answers[qKey] !== undefined && Number(answers[qKey]) === ch.origIndex) {
+        radio.checked = true;
+      }
+
       radio.addEventListener('change', () => {
-        answers[name] = ci;
+        answers[qKey] = Number(radio.value);
       });
+
       label.appendChild(radio);
-      label.appendChild(document.createTextNode(choice));
+      label.appendChild(document.createTextNode(ch.text));
       qDiv.appendChild(label);
+      labels.push(label);
     });
 
     qsContainer.appendChild(qDiv);
+
+    // store reference
+    renderedQuestionNodes[qKey] = { container: qDiv, labels: labels, questionObj: q };
   });
 
   prevBtn.disabled = idx === 0;
@@ -260,10 +323,18 @@ function renderPage(idx) {
   feedback.innerHTML = '';
 }
 
-/* ====== Grading and review ====== */
+/* Clear rendered node map (for safety) */
+function renderedQuestionNodesClear() {
+  for (const k in renderedQuestionNodes) delete renderedQuestionNodes[k];
+}
+
+/* ===== Grading and immediate explanations ===== */
 function gradeAllAndShow() {
   let total = 0, score = 0;
-  const reviewContainer = document.createElement('div');
+
+  // For each passage & question, find the rendered DOM node (if currently rendered). If not rendered, we still compute and later show review in feedback area below.
+  // We'll both insert per-question explanations under rendered questions (if visible) and create a full review below.
+  const fullReview = document.createElement('div');
 
   passages.forEach((p, pi) => {
     const passBlock = document.createElement('div');
@@ -280,50 +351,111 @@ function gradeAllAndShow() {
       const isCorrect = chosen === q.a;
       if (isCorrect) score++;
 
+      // If question is currently rendered on screen, insert explanation just below it.
+      const rendered = renderedQuestionNodes[key];
+      if (rendered && rendered.container) {
+        // remove pre-existing explanation if any
+        const oldExpl = rendered.container.querySelector('.explanation');
+        if (oldExpl) oldExpl.remove();
+
+        // create explanation block
+        const expl = document.createElement('div');
+        expl.className = 'explanation';
+        const yourText = chosen === null ? 'Unanswered' : q.choices[chosen];
+
+        const statusSpan = document.createElement('div');
+        statusSpan.style.fontWeight = '700';
+        statusSpan.style.marginBottom = '6px';
+        if (isCorrect) {
+          statusSpan.textContent = `✅ Correct — You chose: ${yourText}`;
+          statusSpan.style.color = 'var(--good-text)';
+        } else {
+          const corrText = q.choices[q.a];
+          statusSpan.textContent = `❌ ${chosen===null ? 'Unanswered' : 'Incorrect'} — Your answer: ${yourText}; Correct: ${corrText}`;
+          statusSpan.style.color = 'var(--bad-text)';
+        }
+        expl.appendChild(statusSpan);
+
+        // short explanation text
+        const expt = document.createElement('div');
+        expt.textContent = q.explanation || 'No explanation provided.';
+        expl.appendChild(expt);
+
+        // attach expl below question container
+        rendered.container.appendChild(expl);
+
+        // Highlight the correct label if wrong
+        if (!isCorrect) {
+          // mark correct label if present
+          rendered.labels.forEach(lbl => {
+            // the input value stored original index as string
+            const inp = lbl.querySelector('input[type=radio]');
+            if (inp && Number(inp.value) === q.a) {
+              lbl.style.border = '1px solid #bfe6c8';
+              lbl.style.background = '#f0fff4';
+            }
+            if (inp && chosen !== null && Number(inp.value) === chosen) {
+              lbl.style.border = '1px solid #ffd6d6';
+              lbl.style.background = '#fff6f6';
+            }
+          });
+        } else {
+          // highlight chosen label for correct
+          rendered.labels.forEach(lbl => {
+            const inp = lbl.querySelector('input[type=radio]');
+            if (inp && Number(inp.value) === q.a) {
+              lbl.style.border = '1px solid #bfe6c8';
+              lbl.style.background = '#f0fff4';
+            }
+          });
+        }
+      }
+
+      // Add to full review for the feedback section too
       const item = document.createElement('div');
       item.className = 'review-item';
       const qn = document.createElement('div');
       qn.className = 'qtext';
-      qn.textContent = `Q${qi+1}. ${q.q}`;
+      qn.textContent = `Passage ${pi+1} — Q${qi+1}. ${q.q}`;
       item.appendChild(qn);
 
       const your = document.createElement('div');
-      your.className = isCorrect ? 'correct' : 'incorrect';
-      const yourText = chosen === null ? 'Unanswered' : q.choices[chosen];
-      your.textContent = `Your answer: ${yourText}`;
+      your.style.marginTop = '6px';
+      your.textContent = `Your answer: ${chosen === null ? 'Unanswered' : q.choices[chosen]}`;
       item.appendChild(your);
 
-      if (!isCorrect) {
-        const corr = document.createElement('div');
-        corr.style.marginTop = '6px';
-        corr.textContent = `Correct answer: ${q.choices[q.a]}`;
-        item.appendChild(corr);
-      } else {
-        const corr = document.createElement('div');
-        corr.style.marginTop = '6px';
-        corr.textContent = `Correct ✅`;
-        item.appendChild(corr);
-      }
+      const correctDiv = document.createElement('div');
+      correctDiv.style.marginTop = '6px';
+      correctDiv.textContent = `Correct answer: ${q.choices[q.a]}`;
+      item.appendChild(correctDiv);
+
+      const explanDiv = document.createElement('div');
+      explanDiv.style.marginTop = '6px';
+      explanDiv.textContent = q.explanation || '';
+      item.appendChild(explanDiv);
 
       passBlock.appendChild(item);
     });
 
-    reviewContainer.appendChild(passBlock);
+    fullReview.appendChild(passBlock);
   });
 
-  // summary
+  // Display score summary and the full review in the feedback area
   feedback.innerHTML = '';
   const scoreBox = document.createElement('div');
   scoreBox.className = 'resultBox';
-  scoreBox.innerHTML = `<div style="font-weight:700">Score: ${score} / ${total}</div><div class="small" style="margin-top:6px">Review below shows your answers and the correct ones.</div>`;
+  scoreBox.innerHTML = `<div style="font-weight:700">Score: ${score} / ${total}</div><div class="small" style="margin-top:6px">Explanations are shown beneath each question above when visible, and a full review follows.</div>`;
   feedback.appendChild(scoreBox);
-  feedback.appendChild(reviewContainer);
+  feedback.appendChild(fullReview);
 
+  // disable all inputs and navigation
   disableAllInputs();
-  feedback.scrollIntoView({behavior:'smooth'});
+
+  // scroll feedback into view
+  feedback.scrollIntoView({ behavior: 'smooth' });
 }
 
-/* disable inputs after submit */
+/* Disable all radio inputs and nav after submission */
 function disableAllInputs() {
   const radios = document.querySelectorAll('input[type=radio]');
   radios.forEach(r => r.disabled = true);
@@ -332,30 +464,33 @@ function disableAllInputs() {
   submitBtn.disabled = true;
 }
 
-/* ====== Event listeners ====== */
+/* ===== Events ===== */
+const renderCurrentPage = () => {
+  renderPage(page);
+};
+
 prevBtn.addEventListener('click', () => {
   if (page > 0) {
     page--;
-    renderPage(page);
+    renderCurrentPage();
   }
 });
 
 nextBtn.addEventListener('click', () => {
   if (page < totalPages - 1) {
     page++;
-    renderPage(page);
+    renderCurrentPage();
   }
 });
 
 submitBtn.addEventListener('click', () => {
-  const proceed = confirm("Submit answers and view results? You will not be able to change answers afterwards.");
+  const proceed = confirm("Submit answers and view explanations? You will not be able to change answers afterwards.");
   if (!proceed) return;
   gradeAllAndShow();
 });
 
-/* initialize */
+/* Initialize first page */
 renderPage(page);
-
 </script>
 </body>
 </html>
