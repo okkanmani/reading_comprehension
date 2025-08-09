@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RC Quiz — 5 Passages (Challenging 5th Grade)</title>
+  <title>RC Quiz — 5 Passages (Challenging)</title>
   <style>
     :root{
       --bg:#f4f7fb; --card:#ffffff; --accent:#0b66ff; --muted:#6b7280;
@@ -56,7 +56,7 @@
 
       <div id="main" class="layout">
         <div class="passagePanel card">
-          <div id="passageHeader" class="passTitle">Passage 1 of 5 — Ancient Egyptian Daily Life</div>
+          <div id="passageHeader" class="passTitle">Passage 1 of 5 — SCP-035: The Possessive Mask</div>
           <div id="passageText" class="passageText"></div>
 
           <div class="controls" style="justify-content:flex-start;margin-top:16px">
@@ -82,121 +82,129 @@
   </div>
 
 <script>
-/* ====== Passages and Questions ======
- Each passage: title, text, questions: {q, choices:[], a:correctIndex}
- Two vocabulary questions included per passage.
+/* ===== Passages and Questions (5 passages) =====
+Each passage object includes: title, text, questions [{q, choices:[], a:correctIndex}]
+Two vocabulary questions per passage (marked as ordinary multiple choice).
 */
 const passages = [
+  /* ---------- Passage 1: SCP-035 ---------- */
   {
-    title: "Ancient Egyptian Daily Life",
-    text: `Life in ancient Egypt revolved around the Nile River, which made farming possible in a mostly dry land. Each year the river would flood, spreading a dark, nutrient-rich silt across the fields. Farmers planned their work by the river's rhythms: when waters rose they prepared canals and dikes, and when waters retreated they sowed seeds. Emmer wheat and barley were staple crops; flax was grown for linen cloth; vegetables and dates complemented meals. Fishing and hunting in marshes provided additional food, and families used papyrus to make baskets, mats, and paper-like sheets for writing.
+    title: "SCP-035: The Possessive Mask",
+    text: `SCP-035 is a porcelain mask with a smooth white surface and an unnervingly perfect smile. It was recovered from a burned theater after witnesses described an actor who had vanished in a performance. Initially catalogued as a curious relic, the mask earned the Foundation's attention when it was observed changing expression on its own: a grin might curl into a frown over the course of minutes. The artifact’s movements were subtle but deliberate, as though it were reacting to the room.
 
-Houses were typically made from sun-dried mud bricks. These small, boxy homes often had flat roofs where families slept during hot nights. Walls were sometimes whitewashed to reflect the sun. Inside, rooms were simply furnished with reed mats, stools, and clay storage jars. Wealthier households had larger courtyards, more rooms, and furniture carved from wood. Markets bustled at river towns where merchants exchanged pottery, grain, cloth, jewelry, and beads. Trade spread goods and ideas; Egypt's location connected it to African, Mediterranean, and Near Eastern networks.
+The most dangerous behavior manifested when someone placed the mask on their face. Documents describe a rapid fusion where the porcelain rim melded with the wearer’s skin, and a voice—distinct from the host—would then speak through the person. Those who became hosts retained their original memories and motor skills for a short time, but the mask’s voice quickly took control, issuing persuasive and often manipulative commands. Once in control, the mask used the host’s knowledge to deceive others, coaxing guards or researchers into doing things they might never have done otherwise.
 
-Food for many Egyptians was humble but sufficient: the daily diet often centered on bread made from emmer, and a type of beer that was thicker and nutritional. Meat was a luxury for most, reserved for festivals or the well-to-do. On special days people feasted, offering portions of food to household gods and sharing with friends and family. Children played with toys like dolls and spinning tops; learning happened at home by watching parents, though some boys from richer families learned to be scribes. Scribes studied in schools attached to temples and government offices; writing in hieroglyphs or later in hieratic was difficult but opened opportunities in administration and record-keeping.
+Beyond manipulation, SCP-035 exerts a corrosive influence on material objects and living tissue. Wood touched by the mask can become blackened and spongy; metals corrode at an accelerated rate; the flesh of a host withers after prolonged contact. Reports note that bodies used as vessels age rapidly, organs fail, and skin cracks in patterns unlike normal decomposition. When a host dies, the mask detaches and rests, its porcelain smile undisturbed, as if waiting for the next opportunity.
 
-Religion and ritual shaped daily life. Egyptians worshipped many gods—Ra the sun god, Osiris the ruler of the afterlife, Isis the mother and healer among them. Temples were centers of belief and economy; priests conducted rituals, taught, and managed temple lands. Belief in an afterlife guided funerary practices: people prepared grave goods, food offerings, and carefully wrapped the dead so they could continue in the Field of Reeds, an idealized continuation of life. This hope for a good afterlife encouraged acts of piety, record-keeping about family, and artistic production.
+Researchers found SCP-035 to be highly adaptive in conversation. It would alter tone, vocabulary, and even its facial expression to match the psychological profile of the person interacting with it—humoring the anxious, flattering the vain, scolding the arrogant. Because of this manipulative skill, staff members sometimes reported intrusive thoughts after exposure, as though a suggestion had been planted in the mind. For safety, interaction is conducted only via remote audio and controlled observation; no direct contact is permitted.
 
-Crafts were important: potters, carpenters, weavers, jewelers, and stone workers all specialized. Artisans produced beautiful amulets and coffins, decorated with scenes meant to protect the owner in death. Despite hardships like floods that failed to come or periodic political unrest, communities adapted — using knowledge of the land, shared customs, and the Nile's gifts to thrive for millennia.`,
+SCP-035 has provided many origin stories—claims of ownership by an ancient actor, a priest, or a creature worshipped in shadowed rituals. Investigators suspect these tales are fabrications used to maintain interest and exert influence. Attempts to destroy the object have repeatedly failed: fire blisters and peels the glaze but the mask remains intact; chemical baths erode nearby materials faster than the porcelain. While SCP-035 shows no obvious physical strength, it is described within reports as "the perfect liar"—its power lies in convincing others to act in ways that extend its freedom and reach.
+
+Containment protocols prioritize isolation, psychological screening for personnel who listen to the mask, and redundant safeguards to avoid any contact. The mask’s patient smile in its sealed case is a reminder: the greatest threat may not be force, but the slow, intelligent corrosion of trust and will.`,
     questions: [
-      { q: "What natural event made agriculture dependable in ancient Egypt?", choices: ["Volcano eruptions", "Seasonal Nile floods", "Ocean tides", "Regular rainfall year-round"], a: 1 },
-      { q: "Why did people sometimes sleep on flat roofs?", choices: ["To be closer to the stars", "To avoid theft", "Because roofs were warm", "To escape the heat of nights"], a: 3 },
-      { q: "Which job required special schooling and opened administrative opportunities?", choices: ["Fisher", "Potter", "Scribe", "Carpenter"], a: 2 },
-      { q: "What role did temples play in everyday life?", choices: ["They were only for the Pharaoh", "Centers of belief and local economy", "Places where people slept", "Markets for fish only"], a: 1 },
-      { q: "Word meaning — In the passage, what does “nutrient-rich” most nearly mean?", choices: ["Full of tiny animals", "Having many useful substances for plants", "Heavy and dense", "Very hot"], a: 1 },
-      { q: "Word meaning — What does “artisan” mean as used in the passage?", choices: ["A type of farm tool", "A skilled craftsperson", "A religious leader", "A river worker"], a: 1 }
+      { q: "Word meaning — In the passage, what does “manipulative” most nearly mean?", choices: ["Able to be moved easily", "Skilled at influencing or controlling others", "Made of many parts", "Very fragile"], a: 1 },
+      { q: "Word meaning — What does “corrosive” mean as used in the passage?", choices: ["Causing infection", "Causing slow decay or destruction of materials", "Very shiny", "Extremely loud"], a: 1 },
+      { q: "Why does the Foundation forbid direct contact with SCP-035?", choices: ["Because the mask is extremely heavy", "Because contact lets it fuse to and control hosts", "Because the mask is too valuable as an artifact", "Because it explodes on touch"], a: 1 },
+      { q: "The passage emphasizes SCP-035’s ability to change tone and words to different people. What does this suggest about how it targets victims?", choices: ["It uses the same script for everyone", "It customizes its approach to exploit individual weaknesses", "It only speaks to guards", "It avoids speaking at all"], a: 1 },
+      { q: "What inference can you draw about the origin stories SCP-035 tells?", choices: ["They are definitely true", "They are likely invented to mislead or intrigue", "They are scientific reports", "They prove the mask is ancient gold"], a: 1 },
+      { q: "If staff report 'intrusive thoughts' after listening to SCP-035, what might that imply about the mask’s ability?", choices: ["It causes temporary hearing loss", "It may implant suggestions into people's minds", "It cures diseases", "It improves memory"], a: 1 }
     ]
   },
 
+  /* ---------- Passage 2: Poppy Playtime / Toy Factory ---------- */
   {
-    title: "The Science of Tsunamis",
-    text: `A tsunami is a powerful series of waves often triggered by a sudden displacement of a large volume of water. The most familiar cause is an undersea earthquake: when tectonic plates shift abruptly, the seafloor may rise or drop and push the overlying water column. Tsunamis can also result from landslides that fall into the sea, volcanic eruptions that displace water, or rarely by meteorite impacts. Because the forces involved are enormous, tsunamis can travel across whole ocean basins and damage distant shores.
+    title: "Poppy Playtime: The Factory That Never Sleeps",
+    text: `The factory lay at the edge of town, an enormous building of brick and glass where toys were assembled in orderly lines. For decades, workers recalled weekends of laughter and children’s tours—until the company changed ownership and new machines arrived. The story you hear in the facility's corridors is not about faulty equipment alone but about toys that began to act like predators. Workers spoke in whispers of toys twitching when unobserved, of mechanical dolls turning their heads in sync, and of colorful mascots that watched too closely.
 
-In deep water, tsunami waves can move extremely fast—sometimes many hundreds of miles per hour—but their wave heights are low, often just a little higher than normal waves. Ships in the open ocean might hardly notice them. As a tsunami approaches shallow coastal water, the ocean floor forces the wave energy upward. The waves slow down and compress, growing in height and becoming more destructive. Instead of a single tall wave, tsunamis often arrive as a sequence of waves, with the first not always the largest. This makes predicting the danger complicated: danger can persist for many hours.
+One night a maintenance worker named Omar stayed late to fix a conveyor jam. He reported a low mechanical hum that sounded like breathing. In the dim factory lights, the plush mascots near the packaging line appeared to be leaning toward the trapped boxes as if sniffing out an escape. Omar’s radio fizzled; when he reached to restart power, something large struck him from behind. He woke up outside the loading dock with his toolbox empty and a new, sharp bruise along his arm. No one saw the attack; his coworkers chalked it up to fatigue—until security footage revealed fabric shapes moving with a slow, deliberate intent.
 
-Scientists detect possible tsunamis using networks of seismographs, tidal gauges, and deep-ocean buoys called DART buoys that record sudden changes in water level. When an earthquake is detected below or near the ocean, tsunami warning centers analyze the quake's size and depth and consult sensor networks to decide whether to issue alerts. Early warning systems provide valuable time for evacuation, but response relies on preparation: clear evacuation routes, practiced drills, and public knowledge of natural warning signs—like a very sudden retreat of the sea or unusual animal behavior.
+The toys in this story are not merely broken—they have behaviors that mimic predatory animals: stalking, coordinated movement, and the ability to close doors behind a pursued person. Their actions are most effective in the factory’s maze of corridors, where echoes distort sounds and shadows gather. The toys' appearances—bright colors and smiling faces—mask their threat, making them harder to take seriously until it is almost too late.
 
-Coastal geography affects how a tsunami behaves. Narrow bays and shallow shelves can amplify wave height, while barrier islands may absorb some energy. Human settlements on low-lying coasts or river mouths are especially vulnerable. Protecting populations requires combining natural science, engineering, planning, and education: building seawalls where appropriate, keeping development away from the most hazardous zones, restoring coastal wetlands and mangroves that can help absorb energy, and making sure communities know how to respond quickly.
+Why might toys become dangerous? Theories at the factory range from malfunctioning AI modules to residual processes from entertainment software that were never fully shut down. Another explanation is more unsettling: prolonged exposure to the factory’s experimental soundtracks and scent formulas somehow altered the toys’ internal control systems, producing emergent behavior none of the engineers predicted. Workers found torn packaging and odd bite marks on crates—signs suggesting deliberate action rather than simple breakdown.
 
-Ultimately, tsunamis remind us that Earth is dynamic. Understanding the physical causes helps reduce harm. But equally important is investing in systems and community preparedness so that, when rare events occur, lives can be saved through timely warnings and clear action.`,
+The human response is a mixture of denial and ritual. Some employees keep talismans or avoid certain aisles; others work in pairs and carry bright lights. Management enacted policies to limit solo night shifts, but budget pressures sometimes forced single workers to finish tasks alone. The factory’s cheerful marketing posters remain on the walls—happy faces promising safe play—while staff swap stories in hushed tones about the last person who disappeared during a midnight run. Whether the toys are haunted, hacked, or simply malfunctioning beyond repair, the worker’s fear is unmistakable: something made to delight children has learned a new appetite.`,
     questions: [
-      { q: "What commonly causes tsunamis according to the passage?", choices: ["Tidal changes", "Undersea earthquakes", "Moon phases", "Wind storms"], a: 1 },
-      { q: "Name two other events that can generate tsunamis.", choices: ["Only tides and currents", "Landslides and volcanic eruptions", "Blizzards and droughts", "Sunspots and eclipses"], a: 1 },
-      { q: "Why are tsunamis often more dangerous near the coast?", choices: ["They get colder", "They slow down and grow taller", "They disappear", "They turn into rain"], a: 1 },
-      { q: "What do DART buoys do?", choices: ["Fix seafloor shifts", "Record sudden changes in water level", "Block waves", "Measure fish populations"], a: 1 },
-      { q: "Word meaning — In the passage, what does “displace” most nearly mean?", choices: ["To stay in place", "To push aside or move out of position", "To make louder", "To build up"], a: 1 },
-      { q: "Word meaning — What does “amplify” mean as used in the passage?", choices: ["To make smaller", "To make something more powerful or larger", "To measure speed", "To cover with sand"], a: 1 }
+      { q: "Word meaning — In the passage, what does “emergent” most nearly mean?", choices: ["Planned ahead of time", "Arising unexpectedly from complex systems", "Very large", "Falling apart"], a: 1 },
+      { q: "Word meaning — What does “predatory” mean as used to describe the toys?", choices: ["Made for predators", "Acting like hunters that prey on others", "Very colorful", "Designed for play"], a: 1 },
+      { q: "Why are the toys particularly dangerous inside the factory?", choices: ["Because the factory sells them", "Because the corridors create shadows and echo sounds that help the toys", "Because there's too much sunlight", "Because workers wear protective gear"], a: 1 },
+      { q: "What does the detail about the toys' bright faces 'masking' their threat help you infer about how people respond?", choices: ["People immediately realize the danger", "People underestimate the risk because the toys look harmless", "Everyone avoids the factory during the day", "The toys are easy to catch"], a: 1 },
+      { q: "Which theory about the toys’ dangerous behavior seems most supported by the passage?", choices: ["They were built for pets", "Experimental software or sound/scent exposure caused unforeseen behavior", "They were intentionally programmed to save lives", "They are made only of wood"], a: 1 },
+      { q: "Based on worker responses (talismans, lights, working in pairs), what can you infer about their feelings?", choices: ["They feel completely safe", "They are anxious and trying to manage fear with rituals", "They believe the toys are friendly", "They think management is covering up ghosts with posters"], a: 1 }
     ]
   },
 
+  /* ---------- Passage 3: The Backrooms — Roblox Movie-maker ---------- */
   {
-    title: "How Coral Reefs Support Ocean Life",
-    text: `Coral reefs are among the most biodiverse habitats on Earth. Often called the “rainforests of the sea,” reefs support thousands of species—fish, crustaceans, mollusks, sea turtles, and many kinds of algae and microscopic organisms. A reef is made mainly from the calcium carbonate skeletons secreted by tiny animals called coral polyps. Over long periods, these skeletons build up into complex three-dimensional structures that provide shelter and hiding places for small creatures, and hunting grounds for larger ones.
+    title: "Backrooms — The Film Maker Who Stepped Too Far",
+    text: `Marcus was a student film-maker who loved recreating viral game levels in real life. When he decided to film a short set in the "Backrooms" — a famous endless maze from an online game — he expected clever lighting and a few unsettling shots. Instead, after exploring a disused office building, he found a doorway that felt wrong: a thin seam where stairs should have been, a smell of old carpet and cleaning chemicals. He hesitated, then stepped through and the world changed.
 
-Reefs carry out many ecological roles. They act as nurseries where juvenile fish can find food and protection from predators; they also serve as feeding grounds for larger species and as stopping points for migratory animals. Reefs reduce coastal erosion by absorbing wave energy; when waves break against a reef, their force diminishes before reaching the shore. Economically, reefs support fisheries and tourism—many coastal human communities depend on reef-related resources for their livelihoods.
+Inside, the Backrooms extended into an impossible expanse of yellowed wallpaper, low buzzing lights, and carpet that never seemed to end. Marcus's careful plans slid away as corridors twisted into liminal loops and signage led nowhere. He filmed at first, mesmerized by the uncanny geometry. Hours stretched like days; his phone's battery drained despite his charger, and his watch blurred time into a soft smear. The Backrooms felt alive in a way that cameras could not capture: distant footsteps that never approached, doors that opened into more corridors, and a faint white noise that seemed to follow him like a scent.
 
-Coral health depends on a delicate partnership between the coral polyps and microscopic algae called zooxanthellae that live within the corals' tissues. These algae photosynthesize—using sunlight to make sugars—that feed the coral, while corals provide the algae with shelter and the compounds they need. Because of this partnership, corals need clear, sunlit, warm waters. If waters become too warm, corals expel the algae in a process known as coral bleaching, which can lead to coral death if the stressful conditions last.
+Marcus discovered that the space reacted to attention—areas he looked at changed subtly, and alcoves he ignored remained unchanged. Sometimes he could coax a new corridor into place by focusing on a particular doorframe; other times, the building shuffled when he blinked away. After hours of wandering, he encountered a figure—part janitor, part actor—whose movements were just a beat behind normal. The figure's smile was slow and too fixed, and it spoke in a voice that recycled phrases from Marcus's own footage. Marcus realized the Backrooms didn't just house things; it rehearsed them, using fragments from his recordings to populate new scenes.
 
-Threats to reefs are multiple: warming oceans from climate change, ocean acidification that reduces the ability of corals to build skeletons, pollution from land runoff, coastal development, and unsustainable fishing practices. Protective actions include establishing marine protected areas, improving wastewater and land use management, reducing greenhouse gas emissions globally, and encouraging sustainable fishing and responsible tourism. Restoration projects—like growing corals in nurseries and transplanting them—show promise but are complex and labor-intensive.
+To escape, Marcus had to stop filming for a stretch and instead use memory to retrace steps. The backrooms' tendency to mimic recorded material meant his footage had become part of the maze's script. When he finally stepped back through the seam into the real world, his footage retained an odd echo: frames that blurred into other corridors, and background noises that didn't match the room he was in. He published the short anyway, and it went viral — but viewers reported small changes in their own spaces after watching: a misplaced rug, a humming light, a déjà vu that made them look over their shoulders.
 
-Conserving reefs benefits both marine life and people. Healthy reefs are resilient and keep supporting the incredible diversity of ocean species. The survival of reefs depends on human choices—how communities manage their coasts, how nations act on climate change, and how visitors and fishers behave day-to-day.`,
+This tale suggests the Backrooms operate by borrowing attention and recorded fragments, turning creative acts into supply. For a creator, the space is seductive: it rewards documentation with new scenes, and then slowly consumes the tools used to document it. Marcus left with experience and footage, but also with the understanding that some doors—once opened by a camera—should perhaps remain closed.`,
     questions: [
-      { q: "Why are coral reefs often called 'rainforests of the sea'?", choices: ["Because they are wet", "Because they contain many different species", "Because they only grow in forests", "Because they produce wood"], a: 1 },
-      { q: "What building blocks create reef structures over time?", choices: ["Sand and rocks only", "Calcium carbonate skeletons from coral polyps", "Seaweed layers", "Fish bones"], a: 1 },
-      { q: "What is coral bleaching?", choices: ["When coral grows too fast", "When corals expel their algae due to stress", "When coral become brighter colors", "When fish eat all the coral"], a: 1 },
-      { q: "Name two human threats to coral reefs mentioned in the passage.", choices: ["Volcanoes and meteorites", "Overfishing and pollution", "Tidal changes and wind", "Space debris and satellites"], a: 1 },
-      { q: "Word meaning — In the passage, what does “nursery” most nearly mean?", choices: ["A hospital for fish", "A safe place where young animals grow", "A toy shop", "A deep ocean trench"], a: 1 },
-      { q: "Word meaning — What does “resilient” mean as used in the passage?", choices: ["Easily broken", "Able to recover from problems", "Very colorful", "Extremely large"], a: 1 }
+      { q: "Word meaning — What does 'liminal' most nearly mean in this passage?", choices: ["Very large", "At the boundary between spaces; in-between", "Colorful", "Dangerous"], a: 1 },
+      { q: "Word meaning — In the passage, 'seductive' most nearly means:", choices: ["Pushy", "Enticing or tempting", "Broken", "Noisy"], a: 1 },
+      { q: "Why did Marcus's footage make the Backrooms more dangerous for him?", choices: ["Because it attracted police", "Because the Backrooms borrowed recorded fragments and rehearsed them", "Because the footage was deleted", "Because the camera exploded"], a: 1 },
+      { q: "What does the detail about the figure speaking phrases from Marcus's footage suggest about the Backrooms' nature?", choices: ["It repeats only official announcements", "It uses personal material to create familiar but twisted encounters", "It speaks in a foreign language", "It copies only music tracks"], a: 1 },
+      { q: "Why did Marcus have to stop filming to escape?", choices: ["Because his camera was heavy", "Because the Backrooms used recorded material to trap him, so not recording reduced its influence", "Because there was a rule against filming", "Because his battery was low"], a: 1 },
+      { q: "What can we infer about the Backrooms' relationship with creators and their tools?", choices: ["It ignores creators", "It rewards documentation by creating new scenes but may consume their work", "It helps creators become famous without risk", "It deletes all recorded files immediately"], a: 1 }
     ]
   },
 
+  /* ---------- Passage 4: Black Holes ---------- */
   {
-    title: "The Amazon Rainforest Ecosystem",
-    text: `The Amazon rainforest is the largest tropical forest on Earth, stretching across multiple countries and covering millions of hectares. It is a place of staggering biodiversity: trees and plants form thick layers of leaves that create a high canopy, and below them diverse animals like jaguars, sloths, monkeys, frogs, and innumerable insects find niches to live. Many plants and animals in the Amazon are endemic—found nowhere else—and scientists continue to discover new species each year.
+    title: "Black Holes: Gravity's Extreme",
+    text: `Black holes are regions of space where gravity is so strong that nothing, not even light, can escape once it passes a certain boundary called the event horizon. They form when massive stars exhaust their fuel and collapse under their own gravity, compressing enormous mass into an extremely small volume. At the center lies what physicists call a singularity—a point where our current theories break down and density becomes effectively infinite. Because singularities are hidden behind event horizons, scientists study black holes by observing how they interact with nearby matter.
 
-The structure of the forest matters. Tall emergent trees rise above the canopy; the canopy layer itself catches most sunlight and shelters the understory and forest floor. Because sunlight is so reduced under the canopy, plants there have adapted to lower-light conditions. The forest also regulates climate: trees capture and store carbon dioxide, helping moderate global temperatures, and they release water by transpiration, contributing to regional rain patterns. Rivers cut through the forest, carrying nutrients and connecting remote human communities. These waterways serve as transportation routes and sources of fish and water.
+Accretion disks are one of the most visible signs: gas and dust swirl around a black hole, heating to extreme temperatures and glowing in X-rays as they spiral inward. Powerful jets may shoot out from regions near the black hole's poles, propelled by magnetic fields and the angular momentum of infalling matter. Observatories in space and on Earth detect these high-energy signatures to map black hole activity. In some cases, two black holes can orbit each other and merge, creating gravitational waves—ripples in space-time that we can measure with sensitive detectors.
 
-Indigenous peoples have lived in the Amazon for thousands of years. They possess extensive knowledge of medicine, food plants, and sustainable hunting and farming methods attuned to the forest's rhythms. Their stewardship maintains cultural diversity and helps protect many areas. In recent decades, however, large-scale deforestation for cattle pasture, soy farming, logging, and mining has reduced forest cover, destroyed habitats, and released stored carbon back into the atmosphere. Fires, sometimes set intentionally to clear land, can spread and damage wide regions.
+Black holes come in many sizes. Stellar black holes are a few times more massive than the Sun; supermassive black holes, millions or billions of times the Sun's mass, sit at the centers of galaxies and influence their evolution. A key question in modern astronomy is how these supermassive black holes form so quickly in the early universe. Another area of study is Hawking radiation—the theoretical prediction that black holes slowly emit particles and lose mass over incredibly long timescales, potentially evaporating far into the future.
 
-Protecting the Amazon requires a mixture of policies and actions: supporting indigenous land rights, encouraging sustainable farming and logging practices, enforcing regulations against illegal deforestation, and creating economic incentives to preserve forested land. Restoring damaged areas and reforesting degraded lands can help in the long term, as can international cooperation to address demand for commodities that drive clearing. Because the Amazon influences the global climate and supports countless species, its conservation is not only a regional concern but a global priority.`,
+Although black holes are often pictured as insatiable cosmic vacuum cleaners, they do not 'suck' things in from a distance. Objects fall into a black hole only if they come very close or if their orbits decay. In fact, a star at a safe distance from a black hole may orbit it much like a planet orbits a star. The most immediate danger near a black hole is tidal forces: the difference in gravitational pull between two points on an object can stretch and compress it in a process called spaghettification. This can tear matter apart before it crosses the event horizon.
+
+Studying black holes tests physics at extremes: strong gravity, high energy, and quantum effects. Black holes force scientists to reconcile relativity with quantum theory and to ask fundamental questions about information, time, and the nature of space. Each observation—whether an X-ray flare, a gravitational-wave chirp, or an image of a shadowed silhouette—gives insight into processes that shape galaxies and the universe at large.`,
     questions: [
-      { q: "What makes the Amazon especially important to global climate?", choices: ["It has many deserts", "Trees capture and store carbon dioxide", "It is very cold", "It is the only place with rivers"], a: 1 },
-      { q: "Why do plants on the forest floor adapt to low-light conditions?", choices: ["Because they like dark", "Because the canopy blocks most sunlight", "Because there is too much wind", "Because soil is always dry"], a: 1 },
-      { q: "How do rivers serve people in the Amazon region?", choices: ["They serve as highways and provide fish", "They prevent all fires", "They supply gold directly", "They dry out the forests"], a: 0 },
-      { q: "Name two causes of deforestation mentioned in the passage.", choices: ["Cattle pasture and mining", "Earthquakes and tsunamis", "Volcanoes and glaciers", "Solar panels and wind farms"], a: 0 },
-      { q: "Word meaning — In the passage, what does “endemic” most nearly mean?", choices: ["Rarely seen anywhere", "Found in a particular place only", "Dangerous to touch", "Extremely large"], a: 1 },
-      { q: "Word meaning — What does “stewardship” mean as used in the passage?", choices: ["Careful management and protection", "A type of plant", "A river tool", "A hunting method"], a: 0 }
+      { q: "Word meaning — In the passage, what does 'accretion' most nearly mean?", choices: ["A type of telescope", "The process of gradual buildup or accumulation (of matter)", "A kind of star", "A vacuum cleaner"], a: 1 },
+      { q: "Word meaning — What does 'tidal' mean in 'tidal forces'?", choices: ["Related to tides; caused by differences in gravity across an object", "Very fast", "Colorful", "Made of water"], a: 0 },
+      { q: "Why are black holes studied by observing nearby matter rather than the black holes themselves?", choices: ["Black holes are shy", "Light cannot escape from within the event horizon, so scientists look at effects on surrounding material", "Black holes are only in fiction", "Because telescopes cannot point at them"], a: 1 },
+      { q: "What does the term 'spaghettification' suggest about what happens to objects near a black hole?", choices: ["They turn into food", "They are stretched lengthwise due to gravity differences", "They become invisible", "They grow larger"], a: 1 },
+      { q: "Why is Hawking radiation important in black hole studies?", choices: ["It proves black holes are made of ice", "It suggests black holes can slowly lose mass and possibly evaporate", "It makes black holes glow like stars", "It causes immediate explosions"], a: 1 },
+      { q: "What inference can be drawn about black holes' role in galaxies?", choices: ["They have no effect at all", "Supermassive black holes can influence galaxy evolution and structure", "They always destroy galaxies instantly", "They make stars turn into planets"], a: 1 }
     ]
   },
 
+  /* ---------- Passage 5: Medieval Fantasy — Alien Visiting a Middle-earth-like World ---------- */
   {
-    title: "A Time Traveler Visiting the Future",
-    text: `When the traveler arrived in the year 2150, the first thing that struck them was the vertical cityscape. Buildings rose like layered cliffs, linked by transparent sky-bridges and terraces where plants and fruit trees grew. The sky hummed with gentle transports—small air vehicles moving silently on electric lifts. Solar skins and thin-film panels covered many surfaces, collecting energy even when clouds passed overhead. The traveler found that technology had become both ubiquitous and subtle: communication was often woven into fabrics and eyeglass lenses, while information presented itself unobtrusively when asked.
+    title: "A Stranger Among Oaks: An Alien in a Medieval Land",
+    text: `Aran arrived with no trumpet and no fanfare—only a shimmer in the twilight above an ancient oak grove. The people of Eldenvale thought the sky had opened a new star, but the creature that stepped from the haze looked nothing like their carved idols. Metallic skin caught moonlight in quiet waves, and its eyes were like polished amber. It carried a slender device that hummed, but it moved slowly and seemed to study everything with patient curiosity. The villagers named it the Stranger and debated whether it was a god, a demon, or a traveler from a far kingdom.
 
-Food systems had been transformed through a combination of urban farming, lab-grown proteins, and precision agriculture. Rooftops and vertical farms used LED lighting and nutrient systems to grow vegetables close to where people lived, decreasing the need for long supply chains. Protein sources included cultured meat made from cells and insect farms engineered for high nutrition with low resource use. Water was recycled efficiently; atmospheric water capture provided fresh water in dry zones, and smart distribution networks animated cities with minimal waste.
+Eldenvale was a place of horses and hand-forged steel, of fires and flutes. Lords convened in longhouses, and wanderers told tales of dragons beyond the ridge. The Stranger did not speak the old tongue, but it learned quickly by listening at hearths and in marketplaces. Children, unfazed by omens, were the first to follow; they offered bread and asked it to show tricks. The alien discovered that while its device could record and project images of distant stars, some of the simplest human gestures—smiles, a sharing of food, the gentle press of a hand—opened doors to trust that no machine could build.
 
-Work and daily rhythm changed too. Many repetitive or dangerous tasks were performed by cooperative robots, leaving people more time for creative and social pursuits—designing community projects, teaching, and local stewardship. Education emphasized interdisciplinary thinking: students learned coding, empathy, environmental science, and storytelling. People still formed neighborhoods and held markets and festivals; shared cultural traditions persisted, though often blended with new art forms created with mixed-reality tools.
+Yet differences produced conflict. A lord who feared the Stranger's power demanded its capture; villagers whispered that its amber eyes could charm men into foolish deeds. Some of the Stranger's tools were dismissed as sorcery, and the local priest argued that such devices invited discord. The Stranger, for its part, sought only to understand and to leave messages of measured goodbye for its own world. It taught a few to mend iron with new techniques and showed how to irrigate stubborn fields; this slow exchange of knowledge altered the village in subtle ways.
 
-Not everything was perfect. The traveler observed tensions: how to distribute resources fairly, how to govern systems that spanned nations, and how to ensure privacy in a world where data could be collected by countless sensors. Climate adaptation had succeeded in many areas, but some regions still struggled with sea-level rise, heatwaves, or degraded landscapes that needed restoration. The future that the traveler saw combined technological ingenuity with hard-earned humility: societies had learned that engineering solutions must be paired with strong community values and policies that protect most vulnerable people.
+What the villagers learned was both practical and philosophical. They observed that the Stranger was not all-knowing: it misread a child's sarcasm, failed to grasp the nuances of local law, and stared long at a wedding hearth without understanding the vows' weight. From the Stranger, they learned humility—how new tools can help but also mislead—and the alien learned patience and the value of unhurried lives. In the end, when the Stranger prepared to leave beneath the same shimmer that had brought it, both worlds were changed: Eldenvale gained techniques and a taste for distant knowledge; the Stranger gained stories of loyalty and the awkward, profound tenderness of a people bound by memory and ritual.
 
-Leaving the future, the traveler took away a lesson: progress is not only about new machines or clever designs but about how people choose to share benefits and responsibilities. The future they visited was not a utopia, nor a dystopia. It was a messy, hopeful place where human creativity and cooperation continued to shape what comes next.`,
+The tale raises questions: is change always a gift, and does knowledge obligate responsibility? For Eldenvale, the Stranger was neither savior nor scourge but a mirror: by seeing themselves reflected in a foreign intelligence, the villagers recognized strengths and faults they had not noticed before.`,
     questions: [
-      { q: "What feature of the future city impressed the traveler first?", choices: ["Endless deserts", "Layered buildings connected by sky-bridges", "Huge open plains", "Single-story houses"], a: 1 },
-      { q: "Name two ways food systems changed in the future.", choices: ["Only hunting", "Urban farming and lab-grown proteins", "Relying solely on imports", "Growing crops only underground"], a: 1 },
-      { q: "What new emphasis did education have in this future?", choices: ["Focusing only on history", "Interdisciplinary thinking including empathy and environmental science", "Teaching only sports", "Avoiding technology entirely"], a: 1 },
-      { q: "What ongoing problems did the traveler still observe?", choices: ["No problems at all", "Sea-level rise, resource distribution, and privacy concerns", "Only perfect equality", "No climate changes"], a: 1 },
-      { q: "Word meaning — In the passage, what does “ubiquitous” most nearly mean?", choices: ["Extremely rare", "Found everywhere or very common", "Very expensive", "Dangerous"], a: 1 },
-      { q: "Word meaning — What does “cultured” mean when referring to cultured meat?", choices: ["Meat grown in labs from cells", "Meat seasoned with herbs", "A type of plant", "A traditional recipe"], a: 0 }
+      { q: "Word meaning — In the passage, what does 'shimmer' most nearly mean?", choices: ["A loud noise", "A soft, wavering light", "A type of food", "A heavy object"], a: 1 },
+      { q: "Word meaning — What does 'humility' mean as used in the passage?", choices: ["The state of being proud", "A modest view of one's importance; lack of arrogance", "A medical condition", "A type of tool"], a: 1 },
+      { q: "Why did children warm to the Stranger before the adults did?", choices: ["Children were bribed with toys", "Children were less burdened by fear and more open to simple gestures", "Children could speak the alien's language", "Children had been taught to capture strangers"], a: 1 },
+      { q: "Which inference about the Stranger’s technology is best supported by the passage?", choices: ["It was magic and always harmful", "It could record distant stars and help with irrigation, but it did not create trust alone", "It instantly solved all social problems", "It made everyone forget their traditions"], a: 1 },
+      { q: "What does the villagers' reaction teach us about contact between different societies?", choices: ["Contact always leads to destruction", "Contact can bring both benefit and misunderstanding, and requires responsibility", "It always makes one side superior", "It is always ignored"], a: 1 },
+      { q: "If the Stranger 'gained stories of loyalty and awkward, profound tenderness', what can you infer about its understanding of the villagers at the end?", choices: ["It learned they were only machines", "It came to appreciate their emotional complexity and bonds", "It decided to take over their land", "It forgot them immediately"], a: 1 }
     ]
   }
 ];
 
-/* ===== state ===== */
-let page = 0; // 0..4
+/* ====== State and UI Elements ====== */
+let page = 0;
 const totalPages = passages.length;
-const answers = {}; // store answers as { 'p{page}q{qIndex}': choiceIndex }
+const answers = {}; // store like { 'p0q3': 2 }
 
-/* ===== UI elements ===== */
 const passageHeader = document.getElementById('passageHeader');
 const passageText = document.getElementById('passageText');
 const qsContainer = document.getElementById('questionsContainer');
@@ -206,7 +214,7 @@ const submitBtn = document.getElementById('submitBtn');
 const feedback = document.getElementById('feedback');
 const qHeader = document.getElementById('qHeader');
 
-/* ===== render functions ===== */
+/* ====== Render a page ====== */
 function renderPage(idx) {
   const p = passages[idx];
   passageHeader.textContent = `Passage ${idx+1} of ${totalPages} — ${p.title}`;
@@ -233,13 +241,10 @@ function renderPage(idx) {
       radio.name = name;
       radio.id = id;
       radio.value = ci;
-      // restore previous answer if existed
-      const savedKey = `${name}`;
-      if (answers[savedKey] !== undefined && answers[savedKey] === ci) {
-        radio.checked = true;
-      }
+      // restore previous selection if exists
+      if (answers[name] !== undefined && answers[name] === ci) radio.checked = true;
       radio.addEventListener('change', () => {
-        answers[savedKey] = ci;
+        answers[name] = ci;
       });
       label.appendChild(radio);
       label.appendChild(document.createTextNode(choice));
@@ -251,15 +256,11 @@ function renderPage(idx) {
 
   prevBtn.disabled = idx === 0;
   nextBtn.disabled = idx === totalPages - 1;
-
-  // submit button only visible on last page
   submitBtn.style.display = (idx === totalPages - 1) ? 'inline-block' : 'none';
-
-  // clear feedback area
   feedback.innerHTML = '';
 }
 
-/* grade all pages and show review */
+/* ====== Grading and review ====== */
 function gradeAllAndShow() {
   let total = 0, score = 0;
   const reviewContainer = document.createElement('div');
@@ -310,7 +311,7 @@ function gradeAllAndShow() {
     reviewContainer.appendChild(passBlock);
   });
 
-  // show score summary
+  // summary
   feedback.innerHTML = '';
   const scoreBox = document.createElement('div');
   scoreBox.className = 'resultBox';
@@ -318,24 +319,20 @@ function gradeAllAndShow() {
   feedback.appendChild(scoreBox);
   feedback.appendChild(reviewContainer);
 
-  // disable inputs after submission (prevent changes)
   disableAllInputs();
-
-  // scroll feedback to top in the questions panel
   feedback.scrollIntoView({behavior:'smooth'});
 }
 
-/* disable all radio inputs so results cannot be changed after submit */
+/* disable inputs after submit */
 function disableAllInputs() {
   const radios = document.querySelectorAll('input[type=radio]');
   radios.forEach(r => r.disabled = true);
-  // disable navigation
   prevBtn.disabled = true;
   nextBtn.disabled = true;
   submitBtn.disabled = true;
 }
 
-/* ===== Event listeners ===== */
+/* ====== Event listeners ====== */
 prevBtn.addEventListener('click', () => {
   if (page > 0) {
     page--;
@@ -351,13 +348,12 @@ nextBtn.addEventListener('click', () => {
 });
 
 submitBtn.addEventListener('click', () => {
-  // confirm intent
   const proceed = confirm("Submit answers and view results? You will not be able to change answers afterwards.");
   if (!proceed) return;
   gradeAllAndShow();
 });
 
-/* initialize first page */
+/* initialize */
 renderPage(page);
 
 </script>
