@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RC Quiz — 5 Passages w/ Explanations</title>
+  <title>RC Quiz — Science & Nature (5 passages)</title>
   <style>
     :root{
       --bg:#f4f7fb; --card:#ffffff; --accent:#0b66ff; --muted:#6b7280;
@@ -16,10 +16,9 @@
     header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
     header h1{margin:0;font-size:20px}
     header .muted{color:var(--muted);font-size:13px}
-    /* layout: passage left, questions right */
     .layout{display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start}
-    .passagePanel{padding:18px;overflow:auto;height:68vh}
-    .questionsPanel{padding:14px;overflow:auto;height:68vh}
+    .passagePanel{padding:18px;overflow:auto;height:72vh}
+    .questionsPanel{padding:14px;overflow:auto;height:72vh}
     .passTitle{font-size:24px;font-weight:700;margin-bottom:10px}
     .passageText{line-height:1.7;white-space:pre-wrap}
     .question{padding:10px;margin-bottom:12px;border-radius:8px;background:#fbfdff;border:1px solid #eef2ff}
@@ -49,15 +48,15 @@
     <div class="card">
       <header>
         <div>
-          <h1>Reading Comprehension — 5 Passages (With Explanations)</h1>
-          <div class="muted">5 passages • 6 questions each • 2 vocab questions per passage</div>
+          <h1>Reading Comprehension — Science & Nature (Challenging)</h1>
+          <div class="muted">5 passages • 6 questions each • 2 vocabulary questions per passage</div>
         </div>
         <div class="muted">Tip: Use <strong>Previous</strong> and <strong>Next</strong>. Submit appears on the last page.</div>
       </header>
 
       <div id="main" class="layout">
         <div class="passagePanel card">
-          <div id="passageHeader" class="passTitle">Passage 1 of 5 — SCP-035: The Possessive Mask</div>
+          <div id="passageHeader" class="passTitle">Passage 1 of 5 — The Water Cycle and Why It Matters</div>
           <div id="passageText" class="passageText"></div>
 
           <div class="controls" style="justify-content:flex-start;margin-top:16px">
@@ -83,7 +82,7 @@
   </div>
 
 <script>
-/* Utility: shuffle array in-place */
+/* shuffle helper */
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -93,148 +92,156 @@ function shuffle(array) {
 }
 
 /* ===== Passages, Questions, Explanations =====
- Each question has: q, choices[], a (correct original index), explanation (short)
+Each passage has: title, text, questions [{q, choices[], a (index), explanation}]
 */
 const passages = [
-  /* ---------- 1: SCP-035 ---------- */
+  /* 1) Water Cycle (approved passage) */
   {
-    title: "SCP-035: The Possessive Mask",
-    text: `SCP-035 is a porcelain mask with a smooth white surface and an unnervingly perfect smile. It was recovered from a burned theater after witnesses described an actor who had vanished in a performance. Initially catalogued as a curious relic, the mask earned the Foundation's attention when it was observed changing expression on its own: a grin might curl into a frown over the course of minutes. The artifact’s movements were subtle but deliberate, as though it were reacting to the room.
+    title: "The Water Cycle and Why It Matters",
+    text: `Water on Earth is always moving. It travels from oceans and lakes into the air, falls as rain or snow, runs across the land into streams and rivers, soaks into the soil, and eventually returns to the seas. Scientists call this continual movement the water cycle, and it keeps fresh water available for plants, animals, and people. Although the names for the steps—evaporation, condensation, precipitation, infiltration, runoff, and transpiration—sound technical, each describes something you can observe: puddles drying in the sun, clouds forming, raindrops falling, and dew soaking into the ground.
 
-The most dangerous behavior manifested when someone placed the mask on their face. Documents describe a rapid fusion where the porcelain rim melded with the wearer’s skin, and a voice—distinct from the host—would then speak through the person. Those who became hosts retained their original memories and motor skills for a short time, but the mask’s voice quickly took control, issuing persuasive and often manipulative commands. Once in control, the mask used the host’s knowledge to deceive others, coaxing guards or researchers into doing things they might never have done otherwise.
+Heat from the Sun is the engine of the water cycle. When sunlight warms the surface of oceans, lakes, and moist soil, molecules at the surface gain energy and move into the air as vapor—this is evaporation. Plants add to the vapor through transpiration, where water drawn from the soil passes through leaves and escapes as tiny droplets from leaf pores. In the atmosphere, rising moist air cools; water vapor condenses into tiny droplets that combine to form clouds. If clouds grow heavy enough, droplets fall as precipitation and replenish lakes, rivers, and groundwater.
 
-Beyond manipulation, SCP-035 exerts a corrosive influence on material objects and living tissue. Wood touched by the mask can become blackened and spongy; metals corrode at an accelerated rate; the flesh of a host withers after prolonged contact. Reports note that bodies used as vessels age rapidly, organs fail, and skin cracks in patterns unlike normal decomposition. When a host dies, the mask detaches and rests, its porcelain smile undisturbed, as if waiting for the next opportunity.
+The water cycle does more than deliver rainfall. It regulates climate: oceans store vast amounts of heat and release it slowly, while clouds reflect sunlight and influence temperatures. Groundwater stored beneath the surface feeds springs and wells, providing drinking water even during dry spells. Wetlands—bogs, marshes, and swamps—act like sponges, absorbing floodwater and releasing it slowly, which protects nearby towns from sudden surges after heavy storms.
 
-Researchers found SCP-035 to be highly adaptive in conversation. It would alter tone, vocabulary, and even its facial expression to match the psychological profile of the person interacting with it—humoring the anxious, flattering the vain, scolding the arrogant. Because of this manipulative skill, staff members sometimes reported intrusive thoughts after exposure, as though a suggestion had been planted in the mind. For safety, interaction is conducted only via remote audio and controlled observation; no direct contact is permitted.
+Human activity affects the cycle. Cutting forests reduces transpiration and can change local rainfall patterns. Paving fields and building structures increases runoff, so less water soaks into the ground to recharge aquifers. Overdrawing groundwater for irrigation can lower the water table, causing wells to dry up and land to sink. Pollution also travels with water: chemicals and trash flushed into rivers may end up in oceans, harming ecosystems far downstream.
 
-SCP-035 has provided many origin stories—claims of ownership by an ancient actor, a priest, or a creature worshipped in shadowed rituals. Investigators suspect these tales are fabrications used to maintain interest and exert influence. Attempts to destroy the object have repeatedly failed: fire blisters and peels the glaze but the mask remains intact; chemical baths erode nearby materials faster than the porcelain. While SCP-035 shows no obvious physical strength, it is described within reports as "the perfect liar"—its power lies in convincing others to act in ways that extend its freedom and reach.
+People can make choices that support a healthy water cycle. Planting trees restores transpiration and stabilizes soil; protecting wetlands preserves natural storage and filtration of water; and using water wisely—fixing leaks, choosing efficient irrigation, and conserving water during dry seasons—helps maintain groundwater levels. On a larger scale, reducing greenhouse gas emissions can limit the changes in climate that alter evaporation and precipitation patterns.
 
-Containment protocols prioritize isolation, psychological screening for personnel who listen to the mask, and redundant safeguards to avoid any contact. The mask’s patient smile in its sealed case is a reminder: the greatest threat may not be force, but the slow, intelligent corrosion of trust and will.`,
+The water cycle shows how connected Earth’s systems are: a change in one region can affect weather, ecosystems, and resources elsewhere. By studying the cycle, scientists predict droughts and floods and help communities plan for resilient agriculture and safe water supplies. For citizens, understanding the water cycle helps explain why simple actions—like planting a tree or reducing waste—matter. Water isn’t an endless, separate resource: it’s part of a moving, balanced system we all share and depend upon.`,
     questions: [
-      { q: "Word meaning — In the passage, what does “manipulative” most nearly mean?", choices: ["Able to be moved easily", "Skilled at influencing or controlling others", "Made of many parts", "Very fragile"], a: 1,
-        explanation: "‘Manipulative’ here refers to the mask's ability to influence people—using words and charm to control them, not a physical property." },
-      { q: "Word meaning — What does “corrosive” mean as used in the passage?", choices: ["Causing infection", "Causing slow decay or destruction of materials", "Very shiny", "Extremely loud"], a: 1,
-        explanation: "The text explains the mask makes wood rot and metals rust—so 'corrosive' means it causes decay or destruction over time." },
-      { q: "Why does the Foundation forbid direct contact with SCP-035?", choices: ["Because the mask is extremely heavy", "Because contact lets it fuse to and control hosts", "Because the mask is too valuable as an artifact", "Because it explodes on touch"], a: 1,
-        explanation: "The passage describes fusion to the wearer's skin and loss of control—direct contact lets it take over a person, so it's forbidden." },
-      { q: "The passage emphasizes SCP-035’s ability to change tone and words to different people. What does this suggest about how it targets victims?", choices: ["It uses the same script for everyone", "It customizes its approach to exploit individual weaknesses", "It only speaks to guards", "It avoids speaking at all"], a: 1,
-        explanation: "Because it adapts to each person's profile, it tailors speech to exploit individual emotions or weaknesses." },
-      { q: "What inference can you draw about the origin stories SCP-035 tells?", choices: ["They are definitely true", "They are likely invented to mislead or intrigue", "They are scientific reports", "They prove the mask is ancient gold"], a: 1,
-        explanation: "Investigators suspect the tales are fabrications used to maintain interest—so they are probably invented rather than factual." },
-      { q: "If staff report 'intrusive thoughts' after listening to SCP-035, what might that imply about the mask’s ability?", choices: ["It causes temporary hearing loss", "It may implant suggestions into people's minds", "It cures diseases", "It improves memory"], a: 1,
-        explanation: "The passage suggests the mask can plant suggestions via speech; 'intrusive thoughts' implies mental influence rather than physical harm." }
+      { q: "Word meaning — What does 'transpiration' most nearly mean in the passage?", choices: ["The movement of water from plants into the air", "The process of water forming clouds", "The draining of wetlands into rivers", "The mixing of river water with ocean water"], a: 0,
+        explanation: "Transpiration is the process where plants release water vapor from their leaves into the air, as described in the passage." },
+      { q: "Word meaning — What does 'infiltration' refer to in the water cycle?", choices: ["Water moving into the ground and recharging groundwater", "Water flowing across the surface as a stream", "Water evaporating into the air", "Water freezing into ice"], a: 0,
+        explanation: "Infiltration is when water soaks into soil and replenishes groundwater, as listed among the water cycle steps." },
+      { q: "Why might paving large areas increase flooding risk nearby?", choices: ["Paving makes rain fall more often", "Paving causes clouds to hold more water", "Paving increases runoff so less water soaks in", "Paving attracts storms"], a: 2,
+        explanation: "Paving prevents water from soaking into the ground, increasing surface runoff and raising flood risk." },
+      { q: "If a community preserves wetlands and plants trees, which is a likely result?", choices: ["Less groundwater recharge", "Increased groundwater recharge and reduced flood peaks", "Immediate dry rivers", "No more clouds"], a: 1,
+        explanation: "Wetlands act like sponges and trees help stabilize soil and water cycles, improving recharge and moderating floods." },
+      { q: "Which human action could cause wells to dry up over time?", choices: ["Installing solar panels", "Overdrawing groundwater for irrigation", "Planting native trees", "Building birdhouses"], a: 1,
+        explanation: "Using too much groundwater lowers the water table and can cause wells to run dry." },
+      { q: "Why do scientists study the water cycle when planning agriculture and water supplies?", choices: ["To stop rain forever", "To predict droughts and floods and manage resources", "To make plants grow without sunlight", "To turn all water into drinking water"], a: 1,
+        explanation: "Understanding the cycle helps predict extreme events and supports planning for resilient water and food systems." }
     ]
   },
 
-  /* ---------- 2: Poppy Playtime ---------- */
+  /* 2) Why Leaves Change Color in Autumn */
   {
-    title: "Poppy Playtime: The Factory That Never Sleeps",
-    text: `The factory lay at the edge of town, an enormous building of brick and glass where toys were assembled in orderly lines. For decades, workers recalled weekends of laughter and children’s tours—until the company changed ownership and new machines arrived. The story you hear in the facility's corridors is not about faulty equipment alone but about toys that began to act like predators. Workers spoke in whispers of toys twitching when unobserved, of mechanical dolls turning their heads in sync, and of colorful mascots that watched too closely.
+    title: "Why Leaves Change Color in Autumn",
+    text: `Each fall, many trees transform their green leaves into a brilliant display of yellow, orange, red, and purple. This seasonal show is not just decoration; it's the result of a complex set of chemical changes inside the leaf that respond to shorter days and cooler nights. During spring and summer, leaves are green because they contain chlorophyll—the pigment that captures sunlight and powers photosynthesis, the process by which plants make food. When daylight shortens in autumn, chlorophyll production slows and eventually stops. As the green pigment fades, other pigments present in the leaf become visible.
 
-One night a maintenance worker named Omar stayed late to fix a conveyor jam. He reported a low mechanical hum that sounded like breathing. In the dim factory lights, the plush mascots near the packaging line appeared to be leaning toward the trapped boxes as if sniffing out an escape. Omar’s radio fizzled; when he reached to restart power, something large struck him from behind. He woke up outside the loading dock with his toolbox empty and a new, sharp bruise along his arm. No one saw the attack; his coworkers chalked it up to fatigue—until security footage revealed fabric shapes moving with a slow, deliberate intent.
+Carotenoids are pigments that produce yellow and orange hues. They are present in the leaf through the growing season but are usually hidden by the dominant green of chlorophyll. Anthocyanins, which can create red and purple shades, are often produced in the autumn when sugars accumulate in leaf tissues. The exact mix of pigments determines the palette for each species and even for individual trees—weather, soil conditions, and genetics all play a role.
 
-The toys in this story are not merely broken—they have behaviors that mimic predatory animals: stalking, coordinated movement, and the ability to close doors behind a pursued person. Their actions are most effective in the factory’s maze of corridors, where echoes distort sounds and shadows gather. The toys' appearances—bright colors and smiling faces—mask their threat, making them harder to take seriously until it is almost too late.
+Why do trees go through this change at all? The color shift is part of a larger preparation for winter. As chlorophyll declines, trees begin to seal the base of each leaf with a layer of cells that will eventually cause the leaf to detach—this is the formation of an abscission layer. By shedding leaves, trees reduce water loss and protect themselves from damage during cold, dry months. Producing anthocyanins might also help protect leaves from light damage late in the season or deter insects that feed on weakened tissues.
 
-Why might toys become dangerous? Theories at the factory range from malfunctioning AI modules to residual processes from entertainment software that were never fully shut down. Another explanation is more unsettling: prolonged exposure to the factory’s experimental soundtracks and scent formulas somehow altered the toys’ internal control systems, producing emergent behavior none of the engineers predicted. Workers found torn packaging and odd bite marks on crates—signs suggesting deliberate action rather than simple breakdown.
+Environmental factors affect color intensity and timing. Sunny days and cool—but not freezing—nights favor the formation of bright reds because sugars concentrate in leaves and stimulate anthocyanin production. A wet growing season followed by a warm fall may mute colors, while drought stress can cause leaves to brown and fall earlier. Different tree species show distinct color patterns: maples often turn fiery red, oaks may display russet tones, and birches glow golden.
 
-The human response is a mixture of denial and ritual. Some employees keep talismans or avoid certain aisles; others work in pairs and carry bright lights. Management enacted policies to limit solo night shifts, but budget pressures sometimes forced single workers to finish tasks alone. The factory’s cheerful marketing posters remain on the walls—happy faces promising safe play—while staff swap stories in hushed tones about the last person who disappeared during a midnight run. Whether the toys are haunted, hacked, or simply malfunctioning beyond repair, the worker’s fear is unmistakable: something made to delight children has learned a new appetite.`,
+People have long appreciated autumn colors for their beauty, but scientists study them because the patterns can indicate forest health and climate trends. Changes in the timing of color shifts over decades can signal shifts in seasonal climate, which affects ecosystems, agriculture, and wildlife migrations. Understanding leaf color helps researchers predict how forests will respond to changing temperature and rainfall patterns and informs conservation decisions.
+
+In the end, the autumn display is the visible result of plants shifting priorities—no longer investing in growth for the year, they withdraw resources and prepare for the dormancy of winter. The spectacle we enjoy is a side effect of deeper strategies that help trees survive through seasons of scarcity.`,
     questions: [
-      { q: "Word meaning — In the passage, what does “emergent” most nearly mean?", choices: ["Planned ahead of time", "Arising unexpectedly from complex systems", "Very large", "Falling apart"], a: 1,
-        explanation: "Here 'emergent' describes behaviors that appear unexpectedly from complex interactions, not that were intentionally planned." },
-      { q: "Word meaning — What does “predatory” mean as used to describe the toys?", choices: ["Made for predators", "Acting like hunters that prey on others", "Very colorful", "Designed for play"], a: 1,
-        explanation: "'Predatory' refers to hunting behavior—stalking, attacking—so the toys act like predators rather than playful objects." },
-      { q: "Why are the toys particularly dangerous inside the factory?", choices: ["Because the factory sells them", "Because the corridors create shadows and echo sounds that help the toys", "Because there's too much sunlight", "Because workers wear protective gear"], a: 1,
-        explanation: "The maze-like corridors, echoes, and shadows help the toys hide and coordinate—making them more effective indoors." },
-      { q: "What does the detail about the toys' bright faces 'masking' their threat help you infer about how people respond?", choices: ["People immediately realize the danger", "People underestimate the risk because the toys look harmless", "Everyone avoids the factory during the day", "The toys are easy to catch"], a: 1,
-        explanation: "Because the toys appear friendly, workers and managers are less likely to suspect danger until it’s serious—so they underestimate the risk." },
-      { q: "Which theory about the toys’ dangerous behavior seems most supported by the passage?", choices: ["They were built for pets", "Experimental software or sound/scent exposure caused unforeseen behavior", "They were intentionally programmed to save lives", "They are made only of wood"], a: 1,
-        explanation: "The passage lists theories and gives examples (soundtracks, scent formulas) suggesting experimental systems may have triggered unexpected behaviors." },
-      { q: "Based on worker responses (talismans, lights, working in pairs), what can you infer about their feelings?", choices: ["They feel completely safe", "They are anxious and trying to manage fear with rituals", "They believe the toys are friendly", "They think management is covering up ghosts with posters"], a: 1,
-        explanation: "These behaviors (rituals, safety pairs) indicate anxiety and attempts to reduce risk—people are afraid and coping in whatever ways they can." }
+      { q: "Word meaning — What does 'chlorophyll' do in leaves?", choices: ["Makes leaves wilt", "Captures sunlight for photosynthesis", "Stores water only", "Protects bark"], a: 1,
+        explanation: "Chlorophyll is the green pigment that captures sunlight so the plant can make food by photosynthesis." },
+      { q: "Word meaning — What does 'abscission' refer to in this passage?", choices: ["The process of forming a layer that helps a leaf detach", "A type of pigment", "A kind of insect", "The process of making roots"], a: 0,
+        explanation: "Abscission is the formation of a cell layer at the leaf base that leads to the leaf falling off." },
+      { q: "Why do anthocyanins often appear in autumn leaves?", choices: ["They are present all year and never change", "They form when sugars concentrate and can create reds and purples", "They are a type of insect", "They clean the leaf"], a: 1,
+        explanation: "Anthocyanins are produced when sugars accumulate, often in cool sunny conditions, producing reds and purples." },
+      { q: "Which weather pattern favors bright red colors in autumn?", choices: ["Cloudy days and warm nights", "Sunny days and cool nights (not freezing)", "Heavy snow", "Constant rain all day"], a: 1,
+        explanation: "Sunny days and cool nights help sugar concentration in leaves, stimulating anthocyanin production and bright reds." },
+      { q: "How can changes in timing of leaf color shifts help scientists?", choices: ["They show tree fashion trends", "They signal changes in seasonal climate affecting ecosystems", "They prove soil is the same everywhere", "They tell which animals sing louder"], a: 1,
+        explanation: "Earlier or later color changes over years can indicate climate shifts, informing studies of ecosystems and migrations." },
+      { q: "Why do trees drop leaves before winter according to the passage?", choices: ["To decorate the ground", "To reduce water loss and avoid damage during cold months", "To store more leaves later", "Because insects ask them to"], a: 1,
+        explanation: "Shedding leaves reduces water loss and protects the tree during the cold, dry winter months." }
     ]
   },
 
-  /* ---------- 3: Backrooms ---------- */
+  /* 3) What Causes Earthquakes */
   {
-    title: "Backrooms — The Film Maker Who Stepped Too Far",
-    text: `Marcus was a student film-maker who loved recreating viral game levels in real life. When he decided to film a short set in the "Backrooms" — a famous endless maze from an online game — he expected clever lighting and a few unsettling shots. Instead, after exploring a disused office building, he found a doorway that felt wrong: a thin seam where stairs should have been, a smell of old carpet and cleaning chemicals. He hesitated, then stepped through and the world changed.
+    title: "What Causes Earthquakes",
+    text: `Earthquakes are sudden shaking events caused by the release of energy stored in Earth's crust. The crust is divided into large sections called tectonic plates that move slowly over the planet’s surface. Where plates interact—pulling apart, sliding past one another, or colliding—the rocks along faults can lock and store stress. When the stress exceeds the strength of the rocks, the fault slips suddenly, sending seismic waves through the ground that we feel as an earthquake.
 
-Inside, the Backrooms extended into an impossible expanse of yellowed wallpaper, low buzzing lights, and carpet that never seemed to end. Marcus's careful plans slid away as corridors twisted into liminal loops and signage led nowhere. He filmed at first, mesmerized by the uncanny geometry. Hours stretched like days; his phone's battery drained despite his charger, and his watch blurred time into a soft smear. The Backrooms felt alive in a way that cameras could not capture: distant footsteps that never approached, doors that opened into more corridors, and a faint white noise that seemed to follow him like a scent.
+Most earthquakes happen near plate boundaries: at spreading centers where plates move apart, at subduction zones where one plate dives beneath another, and along transform faults where plates slide horizontally. The location where the break starts under the ground is the focus (or hypocenter); the point directly above it on the surface is the epicenter. Seismometers record the vibrations, and by studying the arrival times of different seismic waves, scientists can locate quakes and estimate their magnitude.
 
-Marcus discovered that the space reacted to attention—areas he looked at changed subtly, and alcoves he ignored remained unchanged. Sometimes he could coax a new corridor into place by focusing on a particular doorframe; other times, the building shuffled when he blinked away. After hours of wandering, he encountered a figure—part janitor, part actor—whose movements were just a beat behind normal. The figure's smile was slow and too fixed, and it spoke in a voice that recycled phrases from Marcus's own footage. Marcus realized the Backrooms didn't just house things; it rehearsed them, using fragments from his recordings to populate new scenes.
+Earthquakes vary widely: tiny tremors, often barely felt, occur daily around the world, while major events can cause widespread destruction. Strong shaking can collapse buildings, rupture roads and pipelines, and trigger landslides or tsunamis if the quake displaces the seafloor. Ground motion is influenced not only by how much energy is released but also by local geology—soft soils can amplify shaking, while solid bedrock may transmit waves differently.
 
-To escape, Marcus had to stop filming for a stretch and instead use memory to retrace steps. The backrooms' tendency to mimic recorded material meant his footage had become part of the maze's script. When he finally stepped back through the seam into the real world, his footage retained an odd echo: frames that blurred into other corridors, and background noises that didn't match the room he was in. He published the short anyway, and it went viral — but viewers reported small changes in their own spaces after watching: a misplaced rug, a humming light, a déjà vu that made them look over their shoulders.
+Humans can also trigger earthquakes by altering stresses in the crust. Large reservoirs, fluid injection into deep wells, and some mining operations have been linked to increased seismicity in certain regions. Scientists monitor both natural and human-related seismic activity to understand risks. Building codes, early warning systems that detect initial seismic waves, and land-use planning that avoids unstable slopes or fill zones can reduce harm.
 
-This tale suggests the Backrooms operate by borrowing attention and recorded fragments, turning creative acts into supply. For a creator, the space is seductive: it rewards documentation with new scenes, and then slowly consumes the tools used to document it. Marcus left with experience and footage, but also with the understanding that some doors—once opened by a camera—should perhaps remain closed.`,
+Predicting the exact time and place of earthquakes remains extremely difficult. However, by studying the history of past quakes and measuring strain accumulation along faults, scientists can identify places at higher risk and estimate probabilities for the coming decades. This information helps communities plan resilient infrastructure, prepare emergency supplies, and practice drills so citizens can respond quickly when shaking begins.
+
+Understanding earthquakes is both a scientific and social task: it requires measuring and modeling Earth processes as well as designing policies and practices to protect lives and property. While we cannot yet stop earthquakes, careful planning and informed choices make societies safer in the face of this powerful natural hazard.`,
     questions: [
-      { q: "Word meaning — What does 'liminal' most nearly mean in this passage?", choices: ["Very large", "At the boundary between spaces; in-between", "Colorful", "Dangerous"], a: 1,
-        explanation: "'Liminal' means at a threshold or in-between space, which matches the Backrooms' eerie transitional feel." },
-      { q: "Word meaning — In the passage, 'seductive' most nearly means:", choices: ["Pushy", "Enticing or tempting", "Broken", "Noisy"], a: 1,
-        explanation: "The Backrooms tempt creators by rewarding documentation; 'seductive' means tempting or alluring." },
-      { q: "Why did Marcus's footage make the Backrooms more dangerous for him?", choices: ["Because it attracted police", "Because the Backrooms borrowed recorded fragments and rehearsed them", "Because the footage was deleted", "Because the camera exploded"], a: 1,
-        explanation: "The passage explains the maze uses recorded fragments to create rehearsed scenes—so filming fed the Backrooms new material that trapped him." },
-      { q: "What does the detail about the figure speaking phrases from Marcus's footage suggest about the Backrooms' nature?", choices: ["It repeats only official announcements", "It uses personal material to create familiar but twisted encounters", "It speaks in a foreign language", "It copies only music tracks"], a: 1,
-        explanation: "The figure recycles Marcus's own footage, indicating the Backrooms repurpose personal recordings to craft uncanny encounters." },
-      { q: "Why did Marcus have to stop filming to escape?", choices: ["Because his camera was heavy", "Because the Backrooms used recorded material to trap him, so not recording reduced its influence", "Because there was a rule against filming", "Because his battery was low"], a: 1,
-        explanation: "Not recording removed the Backrooms' ability to use his footage, allowing memory-based retracing rather than feeding the maze new content." },
-      { q: "What can we infer about the Backrooms' relationship with creators and their tools?", choices: ["It ignores creators", "It rewards documentation by creating new scenes but may consume their work", "It helps creators become famous without risk", "It deletes all recorded files immediately"], a: 1,
-        explanation: "The text says the space rewards documentation but then consumes the tools—so creators gain scenes but at a cost." }
+      { q: "Word meaning — In the passage, what does 'hypocenter' mean?", choices: ["The point on the surface directly above the earthquake origin", "The location where the earthquake starts underground (focus)", "A kind of earthquake machine", "A weather station"], a: 1,
+        explanation: "The hypocenter (focus) is the underground point where the fault first slips; the epicenter is above on the surface." },
+      { q: "Word meaning — What does 'seismic' refer to in 'seismic waves'?", choices: ["Related to earthquakes or ground vibrations", "Related to weather", "A type of soil", "A measuring tool"], a: 0,
+        explanation: "'Seismic' refers to vibrations produced by earthquakes; seismometers record seismic waves." },
+      { q: "Why do large earthquakes sometimes cause tsunamis?", choices: ["Because wind picks up water", "Because the quake can displace the seafloor, pushing water upward", "Because of sudden rain", "Because the moon changes orbit"], a: 1,
+        explanation: "If a quake moves the ocean floor vertically, it can push a large volume of water and create tsunami waves." },
+      { q: "How can human activities trigger earthquakes?", choices: ["Singing loudly near a fault", "Injecting fluids into deep wells or creating large reservoirs", "Planting trees", "Building houses on bedrock"], a: 1,
+        explanation: "Activities that change underground pressures or stresses (like injection or reservoir loading) can induce seismicity in some settings." },
+      { q: "What makes predicting exact earthquake times so difficult?", choices: ["Earthquakes are caused by weather only", "Complex fault behavior and variable strain accumulation make timing unpredictable", "Scientists never study past quakes", "Only animals can predict quakes"], a: 1,
+        explanation: "Faults behave in complex ways and stress builds irregularly, so exact timing remains hard to predict despite long-term probability studies." },
+      { q: "Which measure helps communities reduce earthquake damage?", choices: ["Ignoring past quakes", "Building codes and early warning systems", "Removing all seismometers", "Planting only one tree per town"], a: 1,
+        explanation: "Stronger building codes, early warnings, and planning reduce harm even if quakes can't be precisely predicted." }
     ]
   },
 
-  /* ---------- 4: Black Holes ---------- */
+  /* 4) Importance of Recycling */
   {
-    title: "Black Holes: Gravity's Extreme",
-    text: `Black holes are regions of space where gravity is so strong that nothing, not even light, can escape once it passes a certain boundary called the event horizon. They form when massive stars exhaust their fuel and collapse under their own gravity, compressing enormous mass into an extremely small volume. At the center lies what physicists call a singularity—a point where our current theories break down and density becomes effectively infinite. Because singularities are hidden behind event horizons, scientists study black holes by observing how they interact with nearby matter.
+    title: "The Importance of Recycling",
+    text: `Recycling means collecting used materials and transforming them into new products instead of throwing them away. Common recyclable items include paper, glass, metals, and certain plastics. Recycling helps conserve resources: reprocessing aluminum, for example, uses far less energy than producing it from raw ore. By using less new material, recycling reduces mining and logging, which preserves habitats and decreases greenhouse gas emissions.
 
-Accretion disks are one of the most visible signs: gas and dust swirl around a black hole, heating to extreme temperatures and glowing in X-rays as they spiral inward. Powerful jets may shoot out from regions near the black hole's poles, propelled by magnetic fields and the angular momentum of infalling matter. Observatories in space and on Earth detect these high-energy signatures to map black hole activity. In some cases, two black holes can orbit each other and merge, creating gravitational waves—ripples in space-time that we can measure with sensitive detectors.
+Recycling also reduces landfill use. Landfills can pollute groundwater and take up valuable land; keeping materials in circulation helps slow the need for more disposal sites. Many cities provide curbside recycling bins, and materials are sorted at facilities to remove contaminants. Contamination—when non-recyclable items or food-soiled materials get mixed in—can spoil whole batches and make recycling less effective.
 
-Black holes come in many sizes. Stellar black holes are a few times more massive than the Sun; supermassive black holes, millions or billions of times the Sun's mass, sit at the centers of galaxies and influence their evolution. A key question in modern astronomy is how these supermassive black holes form so quickly in the early universe. Another area of study is Hawking radiation—the theoretical prediction that black holes slowly emit particles and lose mass over incredibly long timescales, potentially evaporating far into the future.
+Circular economy is a concept tied to recycling: it aims to design products and systems so materials remain useful longer, are easier to repair, and can be remade at the end of their life. This approach reduces waste and the environmental cost of making new goods. Consumers play a role by choosing products with recycled content, reusing containers, and reducing single-use disposables. Businesses can also design packaging that is easier to recycle.
 
-Although black holes are often pictured as insatiable cosmic vacuum cleaners, they do not 'suck' things in from a distance. Objects fall into a black hole only if they come very close or if their orbits decay. In fact, a star at a safe distance from a black hole may orbit it much like a planet orbits a star. The most immediate danger near a black hole is tidal forces: the difference in gravitational pull between two points on an object can stretch and compress it in a process called spaghettification. This can tear matter apart before it crosses the event horizon.
+However, recycling is not a complete solution by itself. Some materials are costly to process, and markets for recycled goods can fluctuate. Incineration with energy recovery and other waste-management strategies are sometimes used alongside recycling. The most effective approach remains the "reduce, reuse, recycle" hierarchy—first cut consumption, then reuse items when possible, and recycle what cannot be reused.
 
-Studying black holes tests physics at extremes: strong gravity, high energy, and quantum effects. Black holes force scientists to reconcile relativity with quantum theory and to ask fundamental questions about information, time, and the nature of space. Each observation—whether an X-ray flare, a gravitational-wave chirp, or an image of a shadowed silhouette—gives insight into processes that shape galaxies and the universe at large.`,
+Education matters: clear labeling and local instructions improve recycling rates because people know what belongs in the bin. Policies such as extended producer responsibility can shift the burden to manufacturers to design recyclable products and manage end-of-life collection. When communities and industries work together, recycling becomes part of a broader effort to reduce pollution, conserve resources, and move toward sustainable production systems.
+
+Recycling connects daily decisions—choosing a reusable bag, rinsing and sorting containers—to global outcomes: fewer raw materials taken from nature, less pollution, and lower energy use. Those small choices, multiplied across millions of people, can make a measurable difference for ecosystems and climate.`,
     questions: [
-      { q: "Word meaning — In the passage, what does 'accretion' most nearly mean?", choices: ["A type of telescope", "The process of gradual buildup or accumulation (of matter)", "A kind of star", "A vacuum cleaner"], a: 1,
-        explanation: "'Accretion' refers to matter collecting and building up around the black hole in a disk." },
-      { q: "Word meaning — What does 'tidal' mean in 'tidal forces'?", choices: ["Related to tides; caused by differences in gravity across an object", "Very fast", "Colorful", "Made of water"], a: 0,
-        explanation: "Tidal forces are differences in gravity across an object—like ocean tides caused by gravity differences." },
-      { q: "Why are black holes studied by observing nearby matter rather than the black holes themselves?", choices: ["Black holes are shy", "Light cannot escape from within the event horizon, so scientists look at effects on surrounding material", "Black holes are only in fiction", "Because telescopes cannot point at them"], a: 1,
-        explanation: "Because light can't escape from inside the event horizon, scientists infer black hole behavior from how nearby matter behaves and glows." },
-      { q: "What does the term 'spaghettification' suggest about what happens to objects near a black hole?", choices: ["They turn into food", "They are stretched lengthwise due to gravity differences", "They become invisible", "They grow larger"], a: 1,
-        explanation: "The passage defines spaghettification: gravitational differences stretch objects into long shapes before they cross the horizon." },
-      { q: "Why is Hawking radiation important in black hole studies?", choices: ["It proves black holes are made of ice", "It suggests black holes can slowly lose mass and possibly evaporate", "It makes black holes glow like stars", "It causes immediate explosions"], a: 1,
-        explanation: "Hawking radiation is a theoretical process by which black holes emit particles over long times, losing mass slowly." },
-      { q: "What inference can be drawn about black holes' role in galaxies?", choices: ["They have no effect at all", "Supermassive black holes can influence galaxy evolution and structure", "They always destroy galaxies instantly", "They make stars turn into planets"], a: 1,
-        explanation: "The passage notes supermassive black holes sit at galactic centers and influence evolution, so they play an important role." }
+      { q: "Word meaning — In the passage, what does 'contamination' mean in the recycling context?", choices: ["When recyclable items are mixed with non-recyclable or dirty materials", "Cleaning materials before recycling", "A special recycling plant", "A disease"], a: 0,
+        explanation: "Contamination occurs when wrong or dirty items get into recycling streams and spoil batches, making recycling less effective." },
+      { q: "Word meaning — What is a 'circular economy' most nearly?", choices: ["An economy based on circular roads", "A system where products are designed to be reused, repaired, and recycled", "A market that only sells rings", "A type of landfill"], a: 1,
+        explanation: "A circular economy keeps materials in use longer by designing for reuse and recycling, reducing the need for new raw materials." },
+      { q: "Why does recycling aluminum save energy?", choices: ["Because recycled aluminum is heavier", "Because reprocessing uses much less energy than making aluminum from ore", "Because aluminum cannot be recycled", "Because recycled aluminum floats"], a: 1,
+        explanation: "Producing aluminum from recycled material requires far less energy than extracting and refining it from raw ore." },
+      { q: "What is the correct order of the 'reduce, reuse, recycle' hierarchy?", choices: ["Recycle, reuse, reduce", "Reduce, reuse, recycle", "Reuse, recycle, reduce", "Recycle only"], a: 1,
+        explanation: "The hierarchy prioritizes reducing consumption first, then reusing items, and recycling as a last step." },
+      { q: "How can consumers help improve recycling systems?", choices: ["By ignoring labels", "By choosing products with recycled content and sorting materials correctly", "By burning their trash", "By throwing everything into one bin"], a: 1,
+        explanation: "Buying recycled products and sorting materials correctly reduces contamination and supports recycling markets." },
+      { q: "Why is recycling alone not enough to solve environmental problems?", choices: ["Because it always creates more waste", "Because some materials are costly to process and we also need to reduce consumption", "Because recycling makes pollution worse", "Because no one recycles"], a: 1,
+        explanation: "Recycling helps but must be combined with reduced consumption, better design, and other waste strategies for full impact." }
     ]
   },
 
-  /* ---------- 5: Medieval fantasy alien ---------- */
+  /* 5) The World's Weirdest Animals */
   {
-    title: "A Stranger Among Oaks: An Alien in a Medieval Land",
-    text: `Aran arrived with no trumpet and no fanfare—only a shimmer in the twilight above an ancient oak grove. The people of Eldenvale thought the sky had opened a new star, but the creature that stepped from the haze looked nothing like their carved idols. Metallic skin caught moonlight in quiet waves, and its eyes were like polished amber. It carried a slender device that hummed, but it moved slowly and seemed to study everything with patient curiosity. The villagers named it the Stranger and debated whether it was a god, a demon, or a traveler from a far kingdom.
+    title: "The World's Weirdest Animals",
+    text: `Earth is home to an astonishing variety of animals, many of which seem stranger than fiction. Evolution has produced unusual shapes, clever tricks, and surprising behaviors that help species survive in special environments. Consider a few remarkable examples.
 
-Eldenvale was a place of horses and hand-forged steel, of fires and flutes. Lords convened in longhouses, and wanderers told tales of dragons beyond the ridge. The Stranger did not speak the old tongue, but it learned quickly by listening at hearths and in marketplaces. Children, unfazed by omens, were the first to follow; they offered bread and asked it to show tricks. The alien discovered that while its device could record and project images of distant stars, some of the simplest human gestures—smiles, a sharing of food, the gentle press of a hand—opened doors to trust that no machine could build.
+The platypus, found in eastern Australia, blends traits in ways that puzzled early scientists: it has a duck-like bill, webbed feet, a beaver-like tail, and lays eggs despite being a mammal. Male platypuses also have a venomous spur on each hind leg used during competition. In the deep sea, the anglerfish dangles a glowing lure above its enormous mouth to attract prey in the darkness; many species show extreme sexual dimorphism where tiny males fuse to larger females. The axolotl, a type of salamander, retains juvenile features into adulthood and can regenerate lost limbs—an ability of interest to medical researchers.
 
-Yet differences produced conflict. A lord who feared the Stranger's power demanded its capture; villagers whispered that its amber eyes could charm men into foolish deeds. Some of the Stranger's tools were dismissed as sorcery, and the local priest argued that such devices invited discord. The Stranger, for its part, sought only to understand and to leave messages of measured goodbye for its own world. It taught a few to mend iron with new techniques and showed how to irrigate stubborn fields; this slow exchange of knowledge altered the village in subtle ways.
+Other animals display odd behaviors: some birds use tools to extract insects from logs; octopuses can solve puzzles, change color, and escape enclosures; and certain species of frogs freeze solid during winter and then thaw back to life in spring. Insects too can be bizarre: the bombardier beetle defends itself by ejecting a hot chemical spray, while the bowerbird builds decorated structures and arranges colorful objects to attract mates.
 
-What the villagers learned was both practical and philosophical. They observed that the Stranger was not all-knowing: it misread a child's sarcasm, failed to grasp the nuances of local law, and stared long at a wedding hearth without understanding the vows' weight. From the Stranger, they learned humility—how new tools can help but also mislead—and the alien learned patience and the value of unhurried lives. In the end, when the Stranger prepared to leave beneath the same shimmer that had brought it, both worlds were changed: Eldenvale gained techniques and a taste for distant knowledge; the Stranger gained stories of loyalty and the awkward, profound tenderness of a people bound by memory and ritual.
+These strange traits are not meaningless; they evolved because they helped organisms survive and reproduce in particular settings. A camouflage pattern may protect an insect from predators; an unusual mating display might attract a choosy mate; a toxin can deter predators. Scientists study these adaptations to understand evolutionary history and to find practical insights—research into spider silk or gecko feet influence materials science and engineering.
 
-The tale raises questions: is change always a gift, and does knowledge obligate responsibility? For Eldenvale, the Stranger was neither savior nor scourge but a mirror: by seeing themselves reflected in a foreign intelligence, the villagers recognized strengths and faults they had not noticed before.`,
+Many of the world’s oddest animals are also endangered. Habitat loss, pollution, and climate change threaten unique ecosystems where these species live. Protecting biodiversity preserves not only the species themselves but also the ecological roles they play—pollinators, predators, and seed distributors that keep ecosystems functioning.
+
+People often respond to strange animals with curiosity and wonder, which can be powerful tools for conservation. When communities and schools learn about unique creatures in their region, they often become advocates for habitat protection and scientific study. Celebrating the planet’s oddities connects science to life and shows that evolutionary solutions can be creative, functional, and beautiful.`,
     questions: [
-      { q: "Word meaning — In the passage, what does 'shimmer' most nearly mean?", choices: ["A loud noise", "A soft, wavering light", "A type of food", "A heavy object"], a: 1,
-        explanation: "'Shimmer' describes a soft, wavering glow in the sky that announced the Stranger's arrival." },
-      { q: "Word meaning — What does 'humility' mean as used in the passage?", choices: ["The state of being proud", "A modest view of one's importance; lack of arrogance", "A medical condition", "A type of tool"], a: 1,
-        explanation: "The villagers learned humility—meaning they gained a modest, less arrogant view of themselves after meeting the Stranger." },
-      { q: "Why did children warm to the Stranger before the adults did?", choices: ["Children were bribed with toys", "Children were less burdened by fear and more open to simple gestures", "Children could speak the alien's language", "Children had been taught to capture strangers"], a: 1,
-        explanation: "Children responded to simple gestures (smiles, bread) and were less influenced by fear or social caution than adults." },
-      { q: "Which inference about the Stranger’s technology is best supported by the passage?", choices: ["It was magic and always harmful", "It could record distant stars and help with irrigation, but it did not create trust alone", "It instantly solved all social problems", "It made everyone forget their traditions"], a: 1,
-        explanation: "The Stranger's device provided useful techniques but did not automatically create trust—human gestures mattered more." },
-      { q: "What does the villagers' reaction teach us about contact between different societies?", choices: ["Contact always leads to destruction", "Contact can bring both benefit and misunderstanding, and requires responsibility", "It always makes one side superior", "It is always ignored"], a: 1,
-        explanation: "The story shows change brought both useful knowledge and misunderstandings—contact can be mixed and needs responsibility." },
-      { q: "If the Stranger 'gained stories of loyalty and awkward, profound tenderness', what can you infer about its understanding of the villagers at the end?", choices: ["It learned they were only machines", "It came to appreciate their emotional complexity and bonds", "It decided to take over their land", "It forgot them immediately"], a: 1,
-        explanation: "The phrasing suggests the Stranger came to value the villagers' emotional ties and social complexity." }
+      { q: "Word meaning — In the passage, what does 'dimorphism' most nearly mean?", choices: ["Having two distinct forms within a species (such as male and female differences)", "Being very colorful", "Living in two places", "Being extremely small"], a: 0,
+        explanation: "Dimorphism refers to species where males and females (or forms) look different, like some anglerfish." },
+      { q: "Word meaning — What does 'camouflage' refer to in the passage?", choices: ["A protective color or pattern that helps hide an animal", "A type of food", "A sleeping behavior", "A loud call"], a: 0,
+        explanation: "Camouflage helps animals blend with surroundings to avoid predators—an adaptive trait described in the passage." },
+      { q: "Why might unusual traits like venom or chemical sprays evolve?", choices: ["To make animals weaker", "To deter predators or help in competition and survival", "To confuse humans only", "To make animals float"], a: 1,
+        explanation: "Traits such as venom or sprays can protect animals from predators or help with competition, improving survival." },
+      { q: "How do odd animal behaviors help scientists and engineers?", choices: ["They don't help at all", "They inspire technologies, like studying spider silk or gecko feet for materials", "They make animals stop evolving", "They cause machines to break"], a: 1,
+        explanation: "Scientists imitate biological solutions—biomimicry—to create new materials or technologies inspired by animals." },
+      { q: "Why is protecting habitats important for weird species?", choices: ["Because strange animals are aggressive", "Because many unique species are endangered and need ecosystems to survive", "Because habitats make animals uglier", "Because habitats stop weather"], a: 1,
+        explanation: "Habitat loss threatens unique species; protecting ecosystems helps preserve biodiversity and ecological functions." },
+      { q: "What role does public curiosity about odd animals play in conservation?", choices: ["It decreases interest in science", "It encourages people to protect habitats and become advocates", "It makes animals more dangerous", "It only helps zoos"], a: 1,
+        explanation: "Curiosity often leads to education and advocacy, motivating communities to protect species and habitats." }
     ]
   }
 ];
@@ -242,7 +249,7 @@ The tale raises questions: is change always a gift, and does knowledge obligate 
 /* ===== State & UI elements ===== */
 let page = 0;
 const totalPages = passages.length;
-const answers = {}; // e.g., { 'p0q1': 2 }
+const answers = {}; // store selected original index per question, e.g., 'p0q1': 2
 
 const passageHeader = document.getElementById('passageHeader');
 const passageText = document.getElementById('passageText');
@@ -253,17 +260,17 @@ const submitBtn = document.getElementById('submitBtn');
 const feedback = document.getElementById('feedback');
 const qHeader = document.getElementById('qHeader');
 
-/* Keep a record of which choice nodes were rendered per question so we can insert explanations below correct DOM nodes */
-const renderedQuestionNodes = {}; // keys like 'p0q1' => {container: element, choiceLabels: [...labelElements]}
+const renderedQuestionNodes = {}; // track rendered nodes for inserting explanations
 
-/* ===== Render helpers ===== */
+/* Render page */
 function renderPage(idx) {
   const p = passages[idx];
   passageHeader.textContent = `Passage ${idx+1} of ${totalPages} — ${p.title}`;
   passageText.textContent = p.text;
   qsContainer.innerHTML = '';
   qHeader.textContent = `Questions — Passage ${idx+1}`;
-  renderedQuestionNodesClear();
+  // clear rendered map
+  for (const k in renderedQuestionNodes) delete renderedQuestionNodes[k];
 
   p.questions.forEach((q, qi) => {
     const qKey = `p${idx}q${qi}`;
@@ -276,28 +283,23 @@ function renderPage(idx) {
     qTitle.textContent = `Q${qi+1}. ${q.q}`;
     qDiv.appendChild(qTitle);
 
-    // Prepare choices with their original indices, then shuffle for display order
+    // Shuffle display order but keep original indices
     const choiceObjs = q.choices.map((c, i) => ({ text: c, origIndex: i }));
     shuffle(choiceObjs);
 
-    // Container for choice labels to allow later insertion of explanation
     const labels = [];
-
     choiceObjs.forEach((ch, ci) => {
-      const id = `${qKey}c${ci}`; // unique id per displayed label
+      const id = `${qKey}c${ci}`;
       const label = document.createElement('label');
       label.className = 'option';
       label.htmlFor = id;
-
       const radio = document.createElement('input');
       radio.type = 'radio';
       radio.name = qKey;
       radio.id = id;
-      // value stores the original choice index so grading is simple (compare to q.a)
-      radio.value = ch.origIndex;
+      radio.value = ch.origIndex; // store original index for grading
 
-      // restore previously selected answer (answers store original indices)
-      if (answers[qKey] !== undefined && Number(answers[qKey]) === ch.origIndex) {
+      if (answers[qKey] !== undefined && answers[qKey] === ch.origIndex) {
         radio.checked = true;
       }
 
@@ -312,8 +314,6 @@ function renderPage(idx) {
     });
 
     qsContainer.appendChild(qDiv);
-
-    // store reference
     renderedQuestionNodes[qKey] = { container: qDiv, labels: labels, questionObj: q };
   });
 
@@ -323,17 +323,9 @@ function renderPage(idx) {
   feedback.innerHTML = '';
 }
 
-/* Clear rendered node map (for safety) */
-function renderedQuestionNodesClear() {
-  for (const k in renderedQuestionNodes) delete renderedQuestionNodes[k];
-}
-
-/* ===== Grading and immediate explanations ===== */
+/* Grading and explanations insertion */
 function gradeAllAndShow() {
   let total = 0, score = 0;
-
-  // For each passage & question, find the rendered DOM node (if currently rendered). If not rendered, we still compute and later show review in feedback area below.
-  // We'll both insert per-question explanations under rendered questions (if visible) and create a full review below.
   const fullReview = document.createElement('div');
 
   passages.forEach((p, pi) => {
@@ -351,67 +343,50 @@ function gradeAllAndShow() {
       const isCorrect = chosen === q.a;
       if (isCorrect) score++;
 
-      // If question is currently rendered on screen, insert explanation just below it.
+      // If this question is currently visible, insert explanation directly under it
       const rendered = renderedQuestionNodes[key];
       if (rendered && rendered.container) {
-        // remove pre-existing explanation if any
         const oldExpl = rendered.container.querySelector('.explanation');
         if (oldExpl) oldExpl.remove();
 
-        // create explanation block
         const expl = document.createElement('div');
         expl.className = 'explanation';
-        const yourText = chosen === null ? 'Unanswered' : q.choices[chosen];
 
-        const statusSpan = document.createElement('div');
-        statusSpan.style.fontWeight = '700';
-        statusSpan.style.marginBottom = '6px';
+        const status = document.createElement('div');
+        status.style.fontWeight = '700';
+        status.style.marginBottom = '6px';
         if (isCorrect) {
-          statusSpan.textContent = `✅ Correct — You chose: ${yourText}`;
-          statusSpan.style.color = 'var(--good-text)';
+          status.textContent = `✅ Correct — You chose: ${chosen === null ? 'Unanswered' : q.choices[chosen]}`;
+          status.style.color = 'var(--good-text)';
         } else {
-          const corrText = q.choices[q.a];
-          statusSpan.textContent = `❌ ${chosen===null ? 'Unanswered' : 'Incorrect'} — Your answer: ${yourText}; Correct: ${corrText}`;
-          statusSpan.style.color = 'var(--bad-text)';
+          status.textContent = `❌ ${chosen === null ? 'Unanswered' : 'Incorrect'} — Your answer: ${chosen === null ? 'Unanswered' : q.choices[chosen]}; Correct: ${q.choices[q.a]}`;
+          status.style.color = 'var(--bad-text)';
         }
-        expl.appendChild(statusSpan);
+        expl.appendChild(status);
 
-        // short explanation text
         const expt = document.createElement('div');
-        expt.textContent = q.explanation || 'No explanation provided.';
+        expt.textContent = q.explanation || '';
         expl.appendChild(expt);
 
-        // attach expl below question container
         rendered.container.appendChild(expl);
 
-        // Highlight the correct label if wrong
-        if (!isCorrect) {
-          // mark correct label if present
-          rendered.labels.forEach(lbl => {
-            // the input value stored original index as string
-            const inp = lbl.querySelector('input[type=radio]');
-            if (inp && Number(inp.value) === q.a) {
-              lbl.style.border = '1px solid #bfe6c8';
-              lbl.style.background = '#f0fff4';
-            }
-            if (inp && chosen !== null && Number(inp.value) === chosen) {
-              lbl.style.border = '1px solid #ffd6d6';
-              lbl.style.background = '#fff6f6';
-            }
-          });
-        } else {
-          // highlight chosen label for correct
-          rendered.labels.forEach(lbl => {
-            const inp = lbl.querySelector('input[type=radio]');
-            if (inp && Number(inp.value) === q.a) {
-              lbl.style.border = '1px solid #bfe6c8';
-              lbl.style.background = '#f0fff4';
-            }
-          });
-        }
+        // highlight labels
+        rendered.labels.forEach(lbl => {
+          const inp = lbl.querySelector('input[type=radio]');
+          if (!inp) return;
+          const val = Number(inp.value);
+          if (val === q.a) {
+            lbl.style.border = '1px solid #bfe6c8';
+            lbl.style.background = '#f0fff4';
+          }
+          if (chosen !== null && val === chosen && chosen !== q.a) {
+            lbl.style.border = '1px solid #ffd6d6';
+            lbl.style.background = '#fff6f6';
+          }
+        });
       }
 
-      // Add to full review for the feedback section too
+      // Build full-review item
       const item = document.createElement('div');
       item.className = 'review-item';
       const qn = document.createElement('div');
@@ -440,22 +415,18 @@ function gradeAllAndShow() {
     fullReview.appendChild(passBlock);
   });
 
-  // Display score summary and the full review in the feedback area
   feedback.innerHTML = '';
   const scoreBox = document.createElement('div');
   scoreBox.className = 'resultBox';
-  scoreBox.innerHTML = `<div style="font-weight:700">Score: ${score} / ${total}</div><div class="small" style="margin-top:6px">Explanations are shown beneath each question above when visible, and a full review follows.</div>`;
+  scoreBox.innerHTML = `<div style="font-weight:700">Score: ${score} / ${total}</div><div class="small" style="margin-top:6px">Explanations appear beneath visible questions; full review follows.</div>`;
   feedback.appendChild(scoreBox);
   feedback.appendChild(fullReview);
 
-  // disable all inputs and navigation
   disableAllInputs();
-
-  // scroll feedback into view
   feedback.scrollIntoView({ behavior: 'smooth' });
 }
 
-/* Disable all radio inputs and nav after submission */
+/* disable inputs and nav */
 function disableAllInputs() {
   const radios = document.querySelectorAll('input[type=radio]');
   radios.forEach(r => r.disabled = true);
@@ -464,33 +435,27 @@ function disableAllInputs() {
   submitBtn.disabled = true;
 }
 
-/* ===== Events ===== */
-const renderCurrentPage = () => {
-  renderPage(page);
-};
-
+/* Events */
 prevBtn.addEventListener('click', () => {
   if (page > 0) {
     page--;
-    renderCurrentPage();
+    renderPage(page);
   }
 });
-
 nextBtn.addEventListener('click', () => {
   if (page < totalPages - 1) {
     page++;
-    renderCurrentPage();
+    renderPage(page);
   }
 });
-
 submitBtn.addEventListener('click', () => {
-  const proceed = confirm("Submit answers and view explanations? You will not be able to change answers afterwards.");
-  if (!proceed) return;
+  if (!confirm("Submit answers and view explanations? You won't be able to change answers afterward.")) return;
   gradeAllAndShow();
 });
 
-/* Initialize first page */
+/* Init */
 renderPage(page);
+
 </script>
 </body>
 </html>
