@@ -95,153 +95,362 @@ function shuffle(array) {
 Each passage has: title, text, questions [{q, choices[], a (index), explanation}]
 */
 const passages = [
-  /* 1) Water Cycle (approved passage) */
   {
-    title: "The Water Cycle and Why It Matters",
-    text: `Water on Earth is always moving. It travels from oceans and lakes into the air, falls as rain or snow, runs across the land into streams and rivers, soaks into the soil, and eventually returns to the seas. Scientists call this continual movement the water cycle, and it keeps fresh water available for plants, animals, and people. Although the names for the steps—evaporation, condensation, precipitation, infiltration, runoff, and transpiration—sound technical, each describes something you can observe: puddles drying in the sun, clouds forming, raindrops falling, and dew soaking into the ground.
+    title: "The world’s weirdest animals",
+    text: `The natural world is filled with amazing creatures, but some animals are truly weird and wonderful. For example, the axolotl, a kind of salamander, can regrow its limbs, its heart, and even parts of its brain! This remarkable ability means that if an axolotl loses a leg, it can grow a new one — something very rare in the animal kingdom. Another strange creature is the narwhal, often called the unicorn of the sea, due to the long, spiral tusk that protrudes from its head. These tusks can grow up to 10 feet long and are actually elongated teeth. Then there's the platypus, a unique mammal that lays eggs like a bird but feeds its young milk like other mammals. It also has a bill like a duck and webbed feet, making it look like a combination of many different animals.
 
-Heat from the Sun is the engine of the water cycle. When sunlight warms the surface of oceans, lakes, and moist soil, molecules at the surface gain energy and move into the air as vapor—this is evaporation. Plants add to the vapor through transpiration, where water drawn from the soil passes through leaves and escapes as tiny droplets from leaf pores. In the atmosphere, rising moist air cools; water vapor condenses into tiny droplets that combine to form clouds. If clouds grow heavy enough, droplets fall as precipitation and replenish lakes, rivers, and groundwater.
-
-The water cycle does more than deliver rainfall. It regulates climate: oceans store vast amounts of heat and release it slowly, while clouds reflect sunlight and influence temperatures. Groundwater stored beneath the surface feeds springs and wells, providing drinking water even during dry spells. Wetlands—bogs, marshes, and swamps—act like sponges, absorbing floodwater and releasing it slowly, which protects nearby towns from sudden surges after heavy storms.
-
-Human activity affects the cycle. Cutting forests reduces transpiration and can change local rainfall patterns. Paving fields and building structures increases runoff, so less water soaks into the ground to recharge aquifers. Overdrawing groundwater for irrigation can lower the water table, causing wells to dry up and land to sink. Pollution also travels with water: chemicals and trash flushed into rivers may end up in oceans, harming ecosystems far downstream.
-
-People can make choices that support a healthy water cycle. Planting trees restores transpiration and stabilizes soil; protecting wetlands preserves natural storage and filtration of water; and using water wisely—fixing leaks, choosing efficient irrigation, and conserving water during dry seasons—helps maintain groundwater levels. On a larger scale, reducing greenhouse gas emissions can limit the changes in climate that alter evaporation and precipitation patterns.
-
-The water cycle shows how connected Earth’s systems are: a change in one region can affect weather, ecosystems, and resources elsewhere. By studying the cycle, scientists predict droughts and floods and help communities plan for resilient agriculture and safe water supplies. For citizens, understanding the water cycle helps explain why simple actions—like planting a tree or reducing waste—matter. Water isn’t an endless, separate resource: it’s part of a moving, balanced system we all share and depend upon.`,
+Despite their odd appearances and abilities, these animals have adapted perfectly to their environments. The axolotl lives mostly underwater in lakes in Mexico and can breathe through its skin. The narwhal swims in the cold Arctic waters, using its tusk possibly for sensing its environment. The platypus is found in rivers and lakes of Australia and uses electroreception to hunt for food underwater. These examples show just how diverse and fascinating life on Earth can be, and how evolution can create some of the most unexpected creatures.`,
     questions: [
-      { q: "Word meaning — What does 'transpiration' most nearly mean in the passage?", choices: ["The movement of water from plants into the air", "The process of water forming clouds", "The draining of wetlands into rivers", "The mixing of river water with ocean water"], a: 0,
-        explanation: "Transpiration is the process where plants release water vapor from their leaves into the air, as described in the passage." },
-      { q: "Word meaning — What does 'infiltration' refer to in the water cycle?", choices: ["Water moving into the ground and recharging groundwater", "Water flowing across the surface as a stream", "Water evaporating into the air", "Water freezing into ice"], a: 0,
-        explanation: "Infiltration is when water soaks into soil and replenishes groundwater, as listed among the water cycle steps." },
-      { q: "Why might paving large areas increase flooding risk nearby?", choices: ["Paving makes rain fall more often", "Paving causes clouds to hold more water", "Paving increases runoff so less water soaks in", "Paving attracts storms"], a: 2,
-        explanation: "Paving prevents water from soaking into the ground, increasing surface runoff and raising flood risk." },
-      { q: "If a community preserves wetlands and plants trees, which is a likely result?", choices: ["Less groundwater recharge", "Increased groundwater recharge and reduced flood peaks", "Immediate dry rivers", "No more clouds"], a: 1,
-        explanation: "Wetlands act like sponges and trees help stabilize soil and water cycles, improving recharge and moderating floods." },
-      { q: "Which human action could cause wells to dry up over time?", choices: ["Installing solar panels", "Overdrawing groundwater for irrigation", "Planting native trees", "Building birdhouses"], a: 1,
-        explanation: "Using too much groundwater lowers the water table and can cause wells to run dry." },
-      { q: "Why do scientists study the water cycle when planning agriculture and water supplies?", choices: ["To stop rain forever", "To predict droughts and floods and manage resources", "To make plants grow without sunlight", "To turn all water into drinking water"], a: 1,
-        explanation: "Understanding the cycle helps predict extreme events and supports planning for resilient water and food systems." }
+      {
+        q: "Word meaning — What does 'regrow' most nearly mean in the passage?",
+        choices: ["To lose something", "To grow again", "To change shape", "To disappear"],
+        a: 1,
+        explanation: "'Regrow' means to grow something again after losing it."
+      },
+      {
+        q: "Word meaning — What does 'elongated' mean as used to describe the narwhal's tusk?",
+        choices: ["Short and round", "Long and stretched out", "Broken", "Curved inward"],
+        a: 1,
+        explanation: "'Elongated' means something that is longer than usual or stretched out."
+      },
+      {
+        q: "Why is the axolotl's ability to regrow limbs important?",
+        choices: [
+          "It helps the axolotl survive injuries.",
+          "It makes the axolotl faster.",
+          "It lets the axolotl change colors.",
+          "It helps the axolotl fly."
+        ],
+        a: 0,
+        explanation: "Regrowing limbs allows the axolotl to recover from harm and live longer."
+      },
+      {
+        q: "What can we infer about the narwhal’s tusk?",
+        choices: [
+          "It is used for defense or sensing the environment.",
+          "It helps the narwhal fly.",
+          "It is a fake tusk.",
+          "It helps the narwhal swim faster."
+        ],
+        a: 0,
+        explanation: "The passage suggests the tusk might help the narwhal sense its surroundings."
+      },
+      {
+        q: "What is the main idea of the passage?",
+        choices: [
+          "Some animals have unusual features that help them survive.",
+          "All animals live underwater.",
+          "Animals can change their colors.",
+          "Animals with strange features are dangerous."
+        ],
+        a: 0,
+        explanation: "The passage describes weird animals and their unique adaptations."
+      }
     ]
   },
-
-  /* 2) Why Leaves Change Color in Autumn */
   {
-    title: "Why Leaves Change Color in Autumn",
-    text: `Each fall, many trees transform their green leaves into a brilliant display of yellow, orange, red, and purple. This seasonal show is not just decoration; it's the result of a complex set of chemical changes inside the leaf that respond to shorter days and cooler nights. During spring and summer, leaves are green because they contain chlorophyll—the pigment that captures sunlight and powers photosynthesis, the process by which plants make food. When daylight shortens in autumn, chlorophyll production slows and eventually stops. As the green pigment fades, other pigments present in the leaf become visible.
+    title: "The importance of recycling",
+    text: `Recycling is the process of turning used materials into new products instead of throwing them away. It helps reduce waste, save natural resources, and prevent pollution. When we recycle paper, plastic, metal, and glass, fewer trees need to be cut down, less energy is used to make new products, and less garbage goes to landfills. Recycling also reduces greenhouse gases that cause climate change. By sorting our trash properly and recycling whenever possible, everyone can help protect the planet for future generations.
 
-Carotenoids are pigments that produce yellow and orange hues. They are present in the leaf through the growing season but are usually hidden by the dominant green of chlorophyll. Anthocyanins, which can create red and purple shades, are often produced in the autumn when sugars accumulate in leaf tissues. The exact mix of pigments determines the palette for each species and even for individual trees—weather, soil conditions, and genetics all play a role.
-
-Why do trees go through this change at all? The color shift is part of a larger preparation for winter. As chlorophyll declines, trees begin to seal the base of each leaf with a layer of cells that will eventually cause the leaf to detach—this is the formation of an abscission layer. By shedding leaves, trees reduce water loss and protect themselves from damage during cold, dry months. Producing anthocyanins might also help protect leaves from light damage late in the season or deter insects that feed on weakened tissues.
-
-Environmental factors affect color intensity and timing. Sunny days and cool—but not freezing—nights favor the formation of bright reds because sugars concentrate in leaves and stimulate anthocyanin production. A wet growing season followed by a warm fall may mute colors, while drought stress can cause leaves to brown and fall earlier. Different tree species show distinct color patterns: maples often turn fiery red, oaks may display russet tones, and birches glow golden.
-
-People have long appreciated autumn colors for their beauty, but scientists study them because the patterns can indicate forest health and climate trends. Changes in the timing of color shifts over decades can signal shifts in seasonal climate, which affects ecosystems, agriculture, and wildlife migrations. Understanding leaf color helps researchers predict how forests will respond to changing temperature and rainfall patterns and informs conservation decisions.
-
-In the end, the autumn display is the visible result of plants shifting priorities—no longer investing in growth for the year, they withdraw resources and prepare for the dormancy of winter. The spectacle we enjoy is a side effect of deeper strategies that help trees survive through seasons of scarcity.`,
+Many cities have special bins for recycling and encourage residents to separate their waste. Not recycling can lead to overflowing landfills, harmful pollution, and loss of valuable resources. It also increases the amount of energy needed to produce new materials, which can hurt the environment. Recycling is a simple way to make a big difference and helps keep the Earth cleaner and healthier.`,
     questions: [
-      { q: "Word meaning — What does 'chlorophyll' do in leaves?", choices: ["Makes leaves wilt", "Captures sunlight for photosynthesis", "Stores water only", "Protects bark"], a: 1,
-        explanation: "Chlorophyll is the green pigment that captures sunlight so the plant can make food by photosynthesis." },
-      { q: "Word meaning — What does 'abscission' refer to in this passage?", choices: ["The process of forming a layer that helps a leaf detach", "A type of pigment", "A kind of insect", "The process of making roots"], a: 0,
-        explanation: "Abscission is the formation of a cell layer at the leaf base that leads to the leaf falling off." },
-      { q: "Why do anthocyanins often appear in autumn leaves?", choices: ["They are present all year and never change", "They form when sugars concentrate and can create reds and purples", "They are a type of insect", "They clean the leaf"], a: 1,
-        explanation: "Anthocyanins are produced when sugars accumulate, often in cool sunny conditions, producing reds and purples." },
-      { q: "Which weather pattern favors bright red colors in autumn?", choices: ["Cloudy days and warm nights", "Sunny days and cool nights (not freezing)", "Heavy snow", "Constant rain all day"], a: 1,
-        explanation: "Sunny days and cool nights help sugar concentration in leaves, stimulating anthocyanin production and bright reds." },
-      { q: "How can changes in timing of leaf color shifts help scientists?", choices: ["They show tree fashion trends", "They signal changes in seasonal climate affecting ecosystems", "They prove soil is the same everywhere", "They tell which animals sing louder"], a: 1,
-        explanation: "Earlier or later color changes over years can indicate climate shifts, informing studies of ecosystems and migrations." },
-      { q: "Why do trees drop leaves before winter according to the passage?", choices: ["To decorate the ground", "To reduce water loss and avoid damage during cold months", "To store more leaves later", "Because insects ask them to"], a: 1,
-        explanation: "Shedding leaves reduces water loss and protects the tree during the cold, dry winter months." }
+      {
+        q: "Word meaning — What does the word 'landfills' mean in the passage?",
+        choices: ["Places to grow plants", "Places to throw trash", "Factories that recycle", "Parks for animals"],
+        a: 1,
+        explanation: "'Landfills' are places where garbage is buried or dumped."
+      },
+      {
+        q: "Word meaning — What does 'greenhouse gases' refer to here?",
+        choices: ["Gases that help plants grow", "Gases that trap heat and cause climate change", "Gases in the ocean", "Gases used in recycling"],
+        a: 1,
+        explanation: "'Greenhouse gases' trap heat in the atmosphere, causing global warming."
+      },
+      {
+        q: "Why is recycling important according to the passage?",
+        choices: [
+          "It helps make more trash.",
+          "It wastes natural resources.",
+          "It saves resources and reduces pollution.",
+          "It makes products more expensive."
+        ],
+        a: 2,
+        explanation: "Recycling reduces waste and saves natural resources."
+      },
+      {
+        q: "What can we infer happens if people don’t recycle?",
+        choices: [
+          "More trees will be cut down.",
+          "There will be less trash.",
+          "Energy will be saved.",
+          "Pollution will decrease."
+        ],
+        a: 0,
+        explanation: "Without recycling, new materials require cutting down more trees."
+      },
+      {
+        q: "What is the author’s main purpose in this passage?",
+        choices: [
+          "To explain how recycling helps the planet.",
+          "To tell how to plant trees.",
+          "To describe how to make plastic.",
+          "To explain why we shouldn’t recycle."
+        ],
+        a: 0,
+        explanation: "The passage encourages recycling by explaining its benefits."
+      }
     ]
   },
-
-  /* 3) What Causes Earthquakes */
   {
-    title: "What Causes Earthquakes",
-    text: `Earthquakes are sudden shaking events caused by the release of energy stored in Earth's crust. The crust is divided into large sections called tectonic plates that move slowly over the planet’s surface. Where plates interact—pulling apart, sliding past one another, or colliding—the rocks along faults can lock and store stress. When the stress exceeds the strength of the rocks, the fault slips suddenly, sending seismic waves through the ground that we feel as an earthquake.
+    title: "Why leaves change color in autumn",
+    text: `During autumn, many trees' leaves change color from green to bright reds, oranges, and yellows. This happens because trees prepare for winter by stopping the production of chlorophyll, the green pigment that helps leaves make food from sunlight. As the green fades, other pigments like carotenoids and anthocyanins become visible, giving the leaves their beautiful colors. Carotenoids produce yellows and oranges, while anthocyanins cause reds and purples.
 
-Most earthquakes happen near plate boundaries: at spreading centers where plates move apart, at subduction zones where one plate dives beneath another, and along transform faults where plates slide horizontally. The location where the break starts under the ground is the focus (or hypocenter); the point directly above it on the surface is the epicenter. Seismometers record the vibrations, and by studying the arrival times of different seismic waves, scientists can locate quakes and estimate their magnitude.
-
-Earthquakes vary widely: tiny tremors, often barely felt, occur daily around the world, while major events can cause widespread destruction. Strong shaking can collapse buildings, rupture roads and pipelines, and trigger landslides or tsunamis if the quake displaces the seafloor. Ground motion is influenced not only by how much energy is released but also by local geology—soft soils can amplify shaking, while solid bedrock may transmit waves differently.
-
-Humans can also trigger earthquakes by altering stresses in the crust. Large reservoirs, fluid injection into deep wells, and some mining operations have been linked to increased seismicity in certain regions. Scientists monitor both natural and human-related seismic activity to understand risks. Building codes, early warning systems that detect initial seismic waves, and land-use planning that avoids unstable slopes or fill zones can reduce harm.
-
-Predicting the exact time and place of earthquakes remains extremely difficult. However, by studying the history of past quakes and measuring strain accumulation along faults, scientists can identify places at higher risk and estimate probabilities for the coming decades. This information helps communities plan resilient infrastructure, prepare emergency supplies, and practice drills so citizens can respond quickly when shaking begins.
-
-Understanding earthquakes is both a scientific and social task: it requires measuring and modeling Earth processes as well as designing policies and practices to protect lives and property. While we cannot yet stop earthquakes, careful planning and informed choices make societies safer in the face of this powerful natural hazard.`,
+This color change is more than just pretty; it helps trees conserve water and energy during the cold months when it’s harder to survive. When chlorophyll disappears, the tree reabsorbs valuable nutrients from the leaves before they fall off. The process also helps protect the tree from damage caused by frost or freezing temperatures. So, the bright autumn leaves we enjoy each year are part of the tree’s survival strategy.`,
     questions: [
-      { q: "Word meaning — In the passage, what does 'hypocenter' mean?", choices: ["The point on the surface directly above the earthquake origin", "The location where the earthquake starts underground (focus)", "A kind of earthquake machine", "A weather station"], a: 1,
-        explanation: "The hypocenter (focus) is the underground point where the fault first slips; the epicenter is above on the surface." },
-      { q: "Word meaning — What does 'seismic' refer to in 'seismic waves'?", choices: ["Related to earthquakes or ground vibrations", "Related to weather", "A type of soil", "A measuring tool"], a: 0,
-        explanation: "'Seismic' refers to vibrations produced by earthquakes; seismometers record seismic waves." },
-      { q: "Why do large earthquakes sometimes cause tsunamis?", choices: ["Because wind picks up water", "Because the quake can displace the seafloor, pushing water upward", "Because of sudden rain", "Because the moon changes orbit"], a: 1,
-        explanation: "If a quake moves the ocean floor vertically, it can push a large volume of water and create tsunami waves." },
-      { q: "How can human activities trigger earthquakes?", choices: ["Singing loudly near a fault", "Injecting fluids into deep wells or creating large reservoirs", "Planting trees", "Building houses on bedrock"], a: 1,
-        explanation: "Activities that change underground pressures or stresses (like injection or reservoir loading) can induce seismicity in some settings." },
-      { q: "What makes predicting exact earthquake times so difficult?", choices: ["Earthquakes are caused by weather only", "Complex fault behavior and variable strain accumulation make timing unpredictable", "Scientists never study past quakes", "Only animals can predict quakes"], a: 1,
-        explanation: "Faults behave in complex ways and stress builds irregularly, so exact timing remains hard to predict despite long-term probability studies." },
-      { q: "Which measure helps communities reduce earthquake damage?", choices: ["Ignoring past quakes", "Building codes and early warning systems", "Removing all seismometers", "Planting only one tree per town"], a: 1,
-        explanation: "Stronger building codes, early warnings, and planning reduce harm even if quakes can't be precisely predicted." }
+      {
+        q: "Word meaning — What does 'chlorophyll' mean in this passage?",
+        choices: [
+          "A green pigment in leaves that helps make food",
+          "A type of animal",
+          "A kind of soil",
+          "A type of tree root"
+        ],
+        a: 0,
+        explanation: "'Chlorophyll' is the green substance in leaves used to make food from sunlight."
+      },
+      {
+        q: "Word meaning — What does 'pigments' most likely mean?",
+        choices: [
+          "Colors or substances that give color",
+          "Types of animals",
+          "Parts of roots",
+          "Tools used by trees"
+        ],
+        a: 0,
+        explanation: "'Pigments' are natural substances that give plants their colors."
+      },
+      {
+        q: "Why do leaves change color in autumn?",
+        choices: [
+          "Because trees stop making chlorophyll",
+          "Because leaves die immediately",
+          "Because of animals eating leaves",
+          "Because trees grow faster"
+        ],
+        a: 0,
+        explanation: "Trees stop producing chlorophyll, revealing other pigments."
+      },
+      {
+        q: "What can we infer about why trees conserve water and energy in autumn?",
+        choices: [
+          "Because water is scarce and survival is harder in winter",
+          "Because leaves need more water",
+          "Because it rains a lot in autumn",
+          "Because animals drink the water"
+        ],
+        a: 0,
+        explanation: "Trees prepare for tough winter conditions by conserving resources."
+      },
+      {
+        q: "What is the main idea of the passage?",
+        choices: [
+          "Leaves change color to help trees survive winter.",
+          "Leaves always stay green.",
+          "Animals cause leaves to change color.",
+          "Trees grow new leaves in autumn."
+        ],
+        a: 0,
+        explanation: "The passage explains the reason and process of leaf color change."
+      }
     ]
   },
-
-  /* 4) Importance of Recycling */
   {
-    title: "The Importance of Recycling",
-    text: `Recycling means collecting used materials and transforming them into new products instead of throwing them away. Common recyclable items include paper, glass, metals, and certain plastics. Recycling helps conserve resources: reprocessing aluminum, for example, uses far less energy than producing it from raw ore. By using less new material, recycling reduces mining and logging, which preserves habitats and decreases greenhouse gas emissions.
+    title: "Ocean currents and their impact on weather",
+    text: `Ocean currents are like giant rivers flowing through the sea, moving warm and cold water across the globe. These currents affect the weather by warming or cooling nearby lands. For example, the Gulf Stream carries warm water from the Gulf of Mexico to northern Europe, making places like the UK warmer than other regions at similar latitudes. This is why the UK has milder winters compared to parts of Canada, even though they are at similar distances from the equator.
 
-Recycling also reduces landfill use. Landfills can pollute groundwater and take up valuable land; keeping materials in circulation helps slow the need for more disposal sites. Many cities provide curbside recycling bins, and materials are sorted at facilities to remove contaminants. Contamination—when non-recyclable items or food-soiled materials get mixed in—can spoil whole batches and make recycling less effective.
-
-Circular economy is a concept tied to recycling: it aims to design products and systems so materials remain useful longer, are easier to repair, and can be remade at the end of their life. This approach reduces waste and the environmental cost of making new goods. Consumers play a role by choosing products with recycled content, reusing containers, and reducing single-use disposables. Businesses can also design packaging that is easier to recycle.
-
-However, recycling is not a complete solution by itself. Some materials are costly to process, and markets for recycled goods can fluctuate. Incineration with energy recovery and other waste-management strategies are sometimes used alongside recycling. The most effective approach remains the "reduce, reuse, recycle" hierarchy—first cut consumption, then reuse items when possible, and recycle what cannot be reused.
-
-Education matters: clear labeling and local instructions improve recycling rates because people know what belongs in the bin. Policies such as extended producer responsibility can shift the burden to manufacturers to design recyclable products and manage end-of-life collection. When communities and industries work together, recycling becomes part of a broader effort to reduce pollution, conserve resources, and move toward sustainable production systems.
-
-Recycling connects daily decisions—choosing a reusable bag, rinsing and sorting containers—to global outcomes: fewer raw materials taken from nature, less pollution, and lower energy use. Those small choices, multiplied across millions of people, can make a measurable difference for ecosystems and climate.`,
+Ocean currents also influence storms and rainfall patterns. Warm currents can increase the chance of storms by heating the air above them. Cold currents can cool the air and reduce rainfall. These currents affect marine life too, bringing nutrients that support fish and other sea creatures. Understanding ocean currents is important because they play a big role in the Earth's climate system and help predict weather changes that affect people everywhere.`,
     questions: [
-      { q: "Word meaning — In the passage, what does 'contamination' mean in the recycling context?", choices: ["When recyclable items are mixed with non-recyclable or dirty materials", "Cleaning materials before recycling", "A special recycling plant", "A disease"], a: 0,
-        explanation: "Contamination occurs when wrong or dirty items get into recycling streams and spoil batches, making recycling less effective." },
-      { q: "Word meaning — What is a 'circular economy' most nearly?", choices: ["An economy based on circular roads", "A system where products are designed to be reused, repaired, and recycled", "A market that only sells rings", "A type of landfill"], a: 1,
-        explanation: "A circular economy keeps materials in use longer by designing for reuse and recycling, reducing the need for new raw materials." },
-      { q: "Why does recycling aluminum save energy?", choices: ["Because recycled aluminum is heavier", "Because reprocessing uses much less energy than making aluminum from ore", "Because aluminum cannot be recycled", "Because recycled aluminum floats"], a: 1,
-        explanation: "Producing aluminum from recycled material requires far less energy than extracting and refining it from raw ore." },
-      { q: "What is the correct order of the 'reduce, reuse, recycle' hierarchy?", choices: ["Recycle, reuse, reduce", "Reduce, reuse, recycle", "Reuse, recycle, reduce", "Recycle only"], a: 1,
-        explanation: "The hierarchy prioritizes reducing consumption first, then reusing items, and recycling as a last step." },
-      { q: "How can consumers help improve recycling systems?", choices: ["By ignoring labels", "By choosing products with recycled content and sorting materials correctly", "By burning their trash", "By throwing everything into one bin"], a: 1,
-        explanation: "Buying recycled products and sorting materials correctly reduces contamination and supports recycling markets." },
-      { q: "Why is recycling alone not enough to solve environmental problems?", choices: ["Because it always creates more waste", "Because some materials are costly to process and we also need to reduce consumption", "Because recycling makes pollution worse", "Because no one recycles"], a: 1,
-        explanation: "Recycling helps but must be combined with reduced consumption, better design, and other waste strategies for full impact." }
+      {
+        q: "Word meaning — What are 'ocean currents'?",
+        choices: [
+          "Small fish in the sea",
+          "Giant rivers of moving water in the ocean",
+          "Waves that hit the shore",
+          "Underwater mountains"
+        ],
+        a: 1,
+        explanation: "Ocean currents are large streams of moving water within the ocean."
+      },
+      {
+        q: "Word meaning — What does 'latitude' mean in this passage?",
+        choices: [
+          "The distance north or south of the equator",
+          "The height of mountains",
+          "The depth of the ocean",
+          "The speed of the wind"
+        ],
+        a: 0,
+        explanation: "'Latitude' refers to how far north or south a place is from the equator."
+      },
+      {
+        q: "How does the Gulf Stream affect northern Europe?",
+        choices: [
+          "By making it colder than usual",
+          "By bringing warm water and warming the region",
+          "By causing heavy snowfall",
+          "By making the sea very salty"
+        ],
+        a: 1,
+        explanation: "The Gulf Stream moves warm water that keeps northern Europe warmer."
+      },
+      {
+        q: "What can we infer about the importance of ocean currents?",
+        choices: [
+          "They only affect fish",
+          "They influence weather and marine life",
+          "They make the ocean shallow",
+          "They stop storms from forming"
+        ],
+        a: 1,
+        explanation: "Ocean currents impact both climate and sea creatures."
+      },
+      {
+        q: "Why is understanding ocean currents important?",
+        choices: [
+          "To predict weather and protect communities",
+          "To find treasure",
+          "To build boats",
+          "To stop fish from moving"
+        ],
+        a: 0,
+        explanation: "Knowing about currents helps forecast weather changes that affect people."
+      }
     ]
   },
-
-  /* 5) The World's Weirdest Animals */
   {
-    title: "The World's Weirdest Animals",
-    text: `Earth is home to an astonishing variety of animals, many of which seem stranger than fiction. Evolution has produced unusual shapes, clever tricks, and surprising behaviors that help species survive in special environments. Consider a few remarkable examples.
+    title: "The water cycle and why it matters",
+    text: `The water cycle is the journey water takes as it moves from the earth to the sky and back again. It is essential for all life on Earth because it helps distribute fresh water. The cycle starts when the sun heats water in oceans, rivers, or lakes, causing it to evaporate and turn into vapor. This vapor rises into the air, where it cools and forms clouds in a process called condensation. When the clouds become heavy, water falls back to the earth as precipitation — rain, snow, sleet, or hail.
 
-The platypus, found in eastern Australia, blends traits in ways that puzzled early scientists: it has a duck-like bill, webbed feet, a beaver-like tail, and lays eggs despite being a mammal. Male platypuses also have a venomous spur on each hind leg used during competition. In the deep sea, the anglerfish dangles a glowing lure above its enormous mouth to attract prey in the darkness; many species show extreme sexual dimorphism where tiny males fuse to larger females. The axolotl, a type of salamander, retains juvenile features into adulthood and can regenerate lost limbs—an ability of interest to medical researchers.
-
-Other animals display odd behaviors: some birds use tools to extract insects from logs; octopuses can solve puzzles, change color, and escape enclosures; and certain species of frogs freeze solid during winter and then thaw back to life in spring. Insects too can be bizarre: the bombardier beetle defends itself by ejecting a hot chemical spray, while the bowerbird builds decorated structures and arranges colorful objects to attract mates.
-
-These strange traits are not meaningless; they evolved because they helped organisms survive and reproduce in particular settings. A camouflage pattern may protect an insect from predators; an unusual mating display might attract a choosy mate; a toxin can deter predators. Scientists study these adaptations to understand evolutionary history and to find practical insights—research into spider silk or gecko feet influence materials science and engineering.
-
-Many of the world’s oddest animals are also endangered. Habitat loss, pollution, and climate change threaten unique ecosystems where these species live. Protecting biodiversity preserves not only the species themselves but also the ecological roles they play—pollinators, predators, and seed distributors that keep ecosystems functioning.
-
-People often respond to strange animals with curiosity and wonder, which can be powerful tools for conservation. When communities and schools learn about unique creatures in their region, they often become advocates for habitat protection and scientific study. Celebrating the planet’s oddities connects science to life and shows that evolutionary solutions can be creative, functional, and beautiful.`,
+Once the water reaches the ground, it may soak into the soil and become groundwater or run off into rivers and lakes. Plants also play a role by releasing water vapor into the air through transpiration. This continuous cycle moves water through different states and locations, supporting plants, animals, and humans. Without the water cycle, fresh water would not be recycled, and life on Earth would struggle to survive.`,
     questions: [
-      { q: "Word meaning — In the passage, what does 'dimorphism' most nearly mean?", choices: ["Having two distinct forms within a species (such as male and female differences)", "Being very colorful", "Living in two places", "Being extremely small"], a: 0,
-        explanation: "Dimorphism refers to species where males and females (or forms) look different, like some anglerfish." },
-      { q: "Word meaning — What does 'camouflage' refer to in the passage?", choices: ["A protective color or pattern that helps hide an animal", "A type of food", "A sleeping behavior", "A loud call"], a: 0,
-        explanation: "Camouflage helps animals blend with surroundings to avoid predators—an adaptive trait described in the passage." },
-      { q: "Why might unusual traits like venom or chemical sprays evolve?", choices: ["To make animals weaker", "To deter predators or help in competition and survival", "To confuse humans only", "To make animals float"], a: 1,
-        explanation: "Traits such as venom or sprays can protect animals from predators or help with competition, improving survival." },
-      { q: "How do odd animal behaviors help scientists and engineers?", choices: ["They don't help at all", "They inspire technologies, like studying spider silk or gecko feet for materials", "They make animals stop evolving", "They cause machines to break"], a: 1,
-        explanation: "Scientists imitate biological solutions—biomimicry—to create new materials or technologies inspired by animals." },
-      { q: "Why is protecting habitats important for weird species?", choices: ["Because strange animals are aggressive", "Because many unique species are endangered and need ecosystems to survive", "Because habitats make animals uglier", "Because habitats stop weather"], a: 1,
-        explanation: "Habitat loss threatens unique species; protecting ecosystems helps preserve biodiversity and ecological functions." },
-      { q: "What role does public curiosity about odd animals play in conservation?", choices: ["It decreases interest in science", "It encourages people to protect habitats and become advocates", "It makes animals more dangerous", "It only helps zoos"], a: 1,
-        explanation: "Curiosity often leads to education and advocacy, motivating communities to protect species and habitats." }
+      {
+        q: "Word meaning — What does 'evaporate' mean in the passage?",
+        choices: [
+          "To turn from liquid into vapor",
+          "To freeze into ice",
+          "To fall as rain",
+          "To soak into the ground"
+        ],
+        a: 0,
+        explanation: "'Evaporate' means water changes from liquid to gas and rises into the air."
+      },
+      {
+        q: "Word meaning — What is 'condensation'?",
+        choices: [
+          "Water vapor cooling and forming clouds",
+          "Water falling as rain",
+          "Water soaking into soil",
+          "Plants drinking water"
+        ],
+        a: 0,
+        explanation: "'Condensation' is when vapor cools and becomes liquid droplets in clouds."
+      },
+      {
+        q: "Why is the water cycle important?",
+        choices: [
+          "It recycles fresh water essential for life.",
+          "It makes rivers disappear.",
+          "It stops rain from falling.",
+          "It makes the ocean salty."
+        ],
+        a: 0,
+        explanation: "The water cycle ensures fresh water is reused and distributed."
+      },
+      {
+        q: "What role do plants have in the water cycle?",
+        choices: [
+          "They release water vapor into the air through transpiration.",
+          "They block rain from falling.",
+          "They make water salty.",
+          "They stop evaporation."
+        ],
+        a: 0,
+        explanation: "Plants release water vapor which helps continue the water cycle."
+      },
+      {
+        q: "What can we infer happens if the water cycle stopped?",
+        choices: [
+          "Fresh water would become scarce and life would suffer.",
+          "It would rain nonstop.",
+          "The oceans would dry up.",
+          "Clouds would get bigger."
+        ],
+        a: 0,
+        explanation: "Without the water cycle, fresh water wouldn't recycle, hurting living things."
+      }
+    ]
+  },
+  {
+    title: "The invention of the printing press",
+    text: `Before the invention of the printing press in the 15th century, books were copied by hand, which was slow and expensive. Johannes Gutenberg invented the first movable type printing press around 1440 in Germany, which revolutionized how information was shared. This invention allowed for many copies of books to be made quickly and cheaply, making books more available to ordinary people, not just the wealthy or clergy.
+
+The printing press played a key role in spreading knowledge, ideas, and literacy throughout Europe and eventually the world. It helped fuel the Renaissance, the Reformation, and the Scientific Revolution by allowing thinkers to share their discoveries widely. Newspapers, pamphlets, and books could be produced on a large scale, changing society forever. The printing press is often called one of the most important inventions in human history because it made knowledge more democratic and accessible.`,
+    questions: [
+      {
+        q: "Word meaning — What does 'movable type' mean in the passage?",
+        choices: [
+          "Letters that can be arranged and reused for printing",
+          "Books that move",
+          "Handwritten books",
+          "Paper that changes size"
+        ],
+        a: 0,
+        explanation: "'Movable type' are individual letters that can be moved to print many pages."
+      },
+      {
+        q: "Word meaning — What does 'revolutionized' mean here?",
+        choices: [
+          "Changed something completely",
+          "Made things worse",
+          "Stopped printing",
+          "Copied by hand"
+        ],
+        a: 0,
+        explanation: "'Revolutionized' means it caused a big, important change."
+      },
+      {
+        q: "Why was the printing press important?",
+        choices: [
+          "It made books cheaper and more available.",
+          "It made books harder to get.",
+          "It stopped people from reading.",
+          "It only printed pictures."
+        ],
+        a: 0,
+        explanation: "The press allowed many books to be made fast and cheaply."
+      },
+      {
+        q: "What can we infer about the impact of the printing press on society?",
+        choices: [
+          "It helped spread knowledge and ideas widely.",
+          "It made people less educated.",
+          "It was only useful for artists.",
+          "It slowed down the sharing of ideas."
+        ],
+        a: 0,
+        explanation: "The press allowed important ideas to reach more people quickly."
+      },
+      {
+        q: "What does the passage suggest about books before the printing press?",
+        choices: [
+          "They were copied slowly by hand and expensive.",
+          "They were printed quickly and cheaply.",
+          "Everyone could easily get books.",
+          "Books did not exist."
+        ],
+        a: 0,
+        explanation: "Before the press, books were made by hand, which took a long time and cost much."
+      }
     ]
   }
 ];
